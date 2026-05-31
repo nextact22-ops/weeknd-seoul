@@ -1468,14 +1468,14 @@ renderQuiz();
 // ─── DISCOGRAPHY ──────────────────────────────────────────────
 const albums = [
   {
-    img:'https://i.scdn.co/image/ab67616d0000b273ea2cf218d061be959dc51967', emoji:'🖤', title:'Kiss Land', year:2013, tracks:9, color:'#1a0a1a',
+    img:'https://i.scdn.co/image/ab67616d0000b273ea2cf218d061be959dc51967', emoji:'🖤', title:'Kiss Land', year:2013, tracks:10, color:'#1a0a1a',
     desc:'데뷔 정규앨범. 공포영화 같은 다크 R&B. 성, 마약, 명성의 어두운 이면.',
-    tracklist:['Professional','The Morning','Adaptation','The Town','Wanderlust','Kiss Land','Pretty','Belong to the World','Live For (feat. Drake)']
+    tracklist:['Professional','The Town','Adaptation','Love In The Sky','Belong To The World','Live For (feat. Drake)','Wanderlust','Kiss Land','Pretty','Tears In The Rain']
   },
   {
     img:'https://i.scdn.co/image/ab67616d0000b2737fcead687e99583072cc217b', emoji:'🌹', title:'Beauty Behind the Madness', year:2015, tracks:14, color:'#1a0a0a',
     desc:'메인스트림 첫 돌풍. Can\'t Feel My Face, The Hills, Earned It 수록.',
-    tracklist:['Real Life','Losers (feat. Labrinth)','Tell Your Friends','Often','The Hills','Acquainted','Can\'t Feel My Face','Shameless','Earned It','In the Night','Same Old Song (feat. Future & Kanye West)','Angel','Dark Times (feat. Ed Sheeran)','Prisoner (feat. Lana Del Rey)']
+    tracklist:['Real Life','Losers (feat. Labrinth)','Tell Your Friends','Often','The Hills','Acquainted','Can\'t Feel My Face','Shameless','Earned It (Fifty Shades of Grey)','In The Night','As You Are','Dark Times (feat. Ed Sheeran)','Prisoner (feat. Lana Del Rey)','Angel']
   },
   {
     img:'https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452', emoji:'⭐', title:'Starboy', year:2016, tracks:18, color:'#0a0a1a',
@@ -1490,12 +1490,12 @@ const albums = [
   {
     img:'https://i.scdn.co/image/ab67616d0000b2734ab2520c2c77a1d66b9ee21d', emoji:'📻', title:'Dawn FM', year:2022, tracks:16, color:'#050a1a',
     desc:'80년대 신스팝 컨셉. 라디오 스테이션 세계관. Tyler, Lil Wayne 협업.',
-    tracklist:['Dawn FM (Intro)','Gasoline','How Do I Make You Love Me?','Take My Breath','Sacrifice','A Tale by Quincy','Out of Time','Here We Go... Again (feat. Tyler, the Creator)','Best Friends','Is There Someone Else?','Stargazing','Every Angel Is Terrifying','Don\'t Break My Heart','I Heard You\'re Married (feat. Lil Wayne)','Less Than Zero','Phantom Regret by Jim (Outro)']
+    tracklist:['Dawn FM (Intro)','Gasoline','How Do I Make You Love Me?','Take My Breath','Sacrifice','A Tale by Quincy','Out of Time','Here We Go... Again (feat. Tyler, the Creator)','Best Friends','Is There Someone Else?','Starry Eyes','Every Angel Is Terrifying','Don\'t Break My Heart','I Heard You\'re Married (feat. Lil Wayne)','Less Than Zero','Phantom Regret by Jim (Outro)']
   },
   {
     img:'https://i.scdn.co/image/ab67616d0000b273de79f330bc297af3fae736da', emoji:'🌅', title:'Hurry Up Tomorrow', year:2025, tracks:22, color:'#0a0808',
     desc:'6번째 정규앨범. 위켄드 마지막 앨범 선언. Playboi Carti, Anitta, Lana Del Rey 협업.',
-    tracklist:['São Paulo (feat. Playboi Carti & Anitta)','Baptized in Fear','Cry for Me','Timeless (feat. Playboi Carti)','Enjoy the Show','Wake Me Up','Sinner','Give Me Back My Heart','Without a Warning','The Abyss','Big Sleep (feat. Future & Metro Boomin)','Reflections (feat. Lana Del Rey)','Hurry Up Tomorrow','I Can\'t Wait','Both Ways (feat. Travis Scott)','Nirvana','São Paulo (Reprise)','Truth or Dare (feat. Playboi Carti)','One of the Girls (feat. Jennie & Lily-Rose Depp)','Dancing in the Flames',"I'm a Virgin",'Live Again']
+    tracklist:['Wake Me Up (feat. Justice)','Cry For Me','I Can\'t Fucking Sing','São Paulo (feat. Anitta)','Until We\'re Skin & Bones','Baptized In Fear','Open Hearts','Opening Night','Reflections Laughing (feat. Travis Scott & Florence + The Machine)','Enjoy The Show (feat. Future)','Given Up On Me','I Can\'t Wait To Get There','Timeless (feat. Playboi Carti)','Niagara Falls','Take Me Back To LA','Big Sleep (feat. Giorgio Moroder)','Give Me Mercy','Drive','The Abyss (feat. Lana Del Rey)','Red Terror','Without a Warning','Hurry Up Tomorrow']
   },
 ];
 
@@ -1518,12 +1518,12 @@ const mixtapes = [
   {
     img:'https://i.scdn.co/image/ab67616d0000b273e01c2631218e2de27765b7d5', emoji:'🕯', title:'Thursday', year:2011, tracks:9, color:'#0d0d0d',
     desc:'두 번째 믹스테이프. Drake 피쳐링 수록.',
-    tracklist:['Intro','Montreal','The Birds Pt. 1','The Birds Pt. 2','Gone','Rolling Stone','Heaven or Las Vegas','Thursday','Life of the Party (feat. Drake)']
+    tracklist:['Lonely Star','Life Of The Party','Thursday','The Zone (feat. Drake)','The Birds Pt. 1','The Birds Pt. 2','Gone','Rolling Stone','Heaven Or Las Vegas']
   },
   {
     img:'https://i.scdn.co/image/ab67616d0000b27336fb79728dbb379579cef97e', emoji:'🎧', title:'Echoes of Silence', year:2011, tracks:9, color:'#111',
     desc:'세 번째 믹스테이프. Michael Jackson 오마주 트랙(D.D.) 포함.',
-    tracklist:['D.D.','High for This','What You Need','Initiation','Same Old Song','The Fall','Next','Echoes of Silence','Outside']
+    tracklist:['D.D.','Montreal','Outside','XO / The Host','Initiation','Same Old Song (feat. Juicy J)','The Fall','Next','Echoes Of Silence']
   },
 ];
 
@@ -1847,7 +1847,7 @@ var lyricsData = [
   {
     title: 'Sao Paulo', album: 'Hurry Up Tomorrow · 2025',
     youtube: 'https://www.youtube.com/watch?v=bQHFwvFY4Y0',
-    spotify: 'https://open.spotify.com/track/7qiZfU4dY1lWllzX7mPBI3',
+    spotify: 'https://open.spotify.com/track/2Ghp894n1laIf2w98VeAOJ',
     sections: [
       { label: 'Chorus',
         en: "Sao Paulo, take me in\nSao Paulo, where do I begin?\nI left everything behind\nJust to lose my mind\nSao Paulo, let me breathe again",
@@ -1874,7 +1874,7 @@ var lyricsData = [
   {
     title: 'Baptized in Fear', album: 'Hurry Up Tomorrow · 2025',
     youtube: 'https://www.youtube.com/watch?v=8zHWTsdnC7A',
-    spotify: 'https://open.spotify.com/track/6UelLqGlWMcVH1E5c4H7lQ',
+    spotify: 'https://open.spotify.com/track/2vgUijXOTRMnWXDtvgMp2b',
     sections: [
       { label: 'Verse 1',
         en: "I was born into the darkness\nI was raised on fear and pain\nEvery time I thought I'd made it\nSomething pulled me back again\nI was baptized in the shadows\nAnd the scars they left upon me\nTell the story of my soul",
@@ -1902,7 +1902,7 @@ var lyricsData = [
   {
     title: 'Take My Breath', album: 'Dawn FM · 2022',
     youtube: 'https://www.youtube.com/watch?v=R8nDxmB5Tgc',
-    spotify: 'https://open.spotify.com/track/0lGf2GJsHMFO3Lr8JjCy0T',
+    spotify: 'https://open.spotify.com/track/1nH2PkJL1XoUq8oE6tBZoU',
     sections: [
       { label: 'Chorus',
         en: "Take my breath away\nNever let me go\nDon't stop, don't stop\nTake my breath away",
@@ -2010,7 +2010,7 @@ var lyricsData = [
   {
     title: 'Is There Someone Else?', album: 'Dawn FM · 2022',
     youtube: 'https://www.youtube.com/watch?v=jJWDTTD3MaU',
-    spotify: 'https://open.spotify.com/track/2j8T4xbEOaJAt6oZ2fWGgo',
+    spotify: 'https://open.spotify.com/track/2SLwbpExuoBDZBpjfefCtV',
     sections: [
       { label: 'Verse 1',
         en: "I see that you've been busy\nYou've been changing your routine\nYou look happier, I noticed\nAnd I'm trying not to read between the lines",
@@ -2037,7 +2037,7 @@ var lyricsData = [
   {
     title: 'Less Than Zero', album: 'Dawn FM · 2022',
     youtube: 'https://www.youtube.com/watch?v=8BNssKkIbXk',
-    spotify: 'https://open.spotify.com/track/4tHQbsqLHhqj9Jg3RzmpTW',
+    spotify: 'https://open.spotify.com/track/0mL82sxCRjrs3br407IdJh',
     sections: [
       { label: 'Verse 1',
         en: "I had it all right in my hands\nThen I let it slip away\nNow I'm standing all alone\nWith nothing left to say\nI gave my everything to you\nAnd you gave nothing back\nNow I'm picking up the pieces\nOn a dead end track",
@@ -2065,7 +2065,7 @@ var lyricsData = [
   {
     title: 'Heartless', album: 'After Hours · 2020',
     youtube: 'https://www.youtube.com/watch?v=kHRZRZfZnXE',
-    spotify: 'https://open.spotify.com/track/6SEqQbIVA9MbkidM3WJQMS',
+    spotify: 'https://open.spotify.com/track/2D4dV2KXDTszzJ3p3cFqhA',
     sections: [
       { label: 'Chorus',
         en: "I'm heartless\nAnd I'm back in the city\nI'm heartless\nNever thought I'd be this way\nBut I'm heartless",
@@ -2174,7 +2174,7 @@ var lyricsData = [
   {
     title: 'Often', album: 'Beauty Behind the Madness · 2015',
     youtube: 'https://www.youtube.com/watch?v=fMlWjfxEUBo',
-    spotify: 'https://open.spotify.com/track/3B4qeqIBmhXajBKwIhY4lj',
+    spotify: 'https://open.spotify.com/track/6bnF93Rx87YqUBLSgjiMU8',
     sections: [
       { label: 'Chorus',
         en: "I do this often\nI do this often\nDo you want me?\nI do this often",
@@ -2191,7 +2191,7 @@ var lyricsData = [
   {
     title: "Can't Feel My Face", album: 'Beauty Behind the Madness · 2015',
     youtube: 'https://www.youtube.com/watch?v=KEI4qSrkPAs',
-    spotify: 'https://open.spotify.com/track/6nR51DlJPvN1B6eFw8BcaC',
+    spotify: 'https://open.spotify.com/track/3orEOtd8CPL8GFlpRpKuoE',
     sections: [
       { label: 'Verse 1',
         en: "I know she'll be the death of me\nAt least we'll both be numb\nAnd she'll always get the best of me\nThe worst is yet to come",
@@ -2235,7 +2235,7 @@ var lyricsData = [
   {
     title: 'Party Monster', album: 'Starboy · 2016',
     youtube: 'https://www.youtube.com/watch?v=svCHMkA1Fwo',
-    spotify: 'https://open.spotify.com/track/4QiCr4dHfFKEBMqhGdB7Gh',
+    spotify: 'https://open.spotify.com/track/4F7A0DXBrmUAkp32uenhZt',
     sections: [
       { label: 'Verse 1',
         en: "She says she's gonna study art in Sorbonne\nShe's twenty-one and she's having fun\nMy little Paris girlfriend\nI'm a mother***ing party monster",
@@ -2343,7 +2343,7 @@ var lyricsData = [
   {
     title: 'I Was Never There', album: 'My Dear Melancholy, · 2018',
     youtube: 'https://www.youtube.com/watch?v=6bRpRbZrfJo',
-    spotify: 'https://open.spotify.com/track/5SaHt8IFdezOeCwxeV22h3',
+    spotify: 'https://open.spotify.com/track/1cKHdTo9u0ZymJdPGSh6nq',
     sections: [
       { label: 'Chorus',
         en: "I was never there\nMaybe I was never there\nFor you the way you needed me to be",
@@ -2370,7 +2370,7 @@ var lyricsData = [
   {
     title: 'Kiss Land', album: 'Kiss Land · 2013',
     youtube: 'https://www.youtube.com/watch?v=GCOaTS3KHXQ',
-    spotify: 'https://open.spotify.com/track/5yBXEKEOBGQCSwZ2BNZWQN',
+    spotify: 'https://open.spotify.com/track/00aqkszH1FdUiJJWvX6iEl',
     sections: [
       { label: 'Verse 1',
         en: "This ain't nothing to relate to\nExpected more from this place\nIt's like the more success I see\nThe more I'm just a lonely face\nBeing here don't feel the same\nI'm caught between the fame and feeling",
@@ -2397,7 +2397,7 @@ var lyricsData = [
   {
     title: 'House of Balloons', album: 'Trilogy · 2012',
     youtube: 'https://www.youtube.com/watch?v=AqoD5CQFmGM',
-    spotify: 'https://open.spotify.com/track/3yJ5mPkh6JH6sD5Hv0xHu9',
+    spotify: 'https://open.spotify.com/track/2Ch7LmS7r2Gy2kc64wv3Bz',
     sections: [
       { label: 'Verse 1',
         en: "I need someone who can help me\nHelp soothe my mind\nAnd girl your love ain't quite enough\nLet me blow your mind\nI got the remedy\nI got it on me\nLet's have a good time",
@@ -2612,7 +2612,7 @@ var lyricsData = [
   {
     title: 'I Feel It Coming', album: 'Starboy · 2016',
     youtube: 'https://www.youtube.com/watch?v=qFLhGq0060w',
-    spotify: 'https://open.spotify.com/track/6ADqCNHwKhSSjFalFkfVfd',
+    spotify: 'https://open.spotify.com/track/3dhjNA0jGA8vHBQ1VdD6vV',
     sections: [
       { label: 'Verse 1',
         en: "Tell me what you really like\nBaby I can take my time\nWe don't ever have to fight\nJust take it step by step\nI can see it in your eyes\n'Cause they never tell me lies\nI can feel that body shake\nAnd the heat between the legs",
@@ -2639,7 +2639,7 @@ var lyricsData = [
   {
     title: 'Stargirl Interlude', album: 'Starboy · 2016',
     youtube: 'https://www.youtube.com/watch?v=7yAzVumJRo8',
-    spotify: 'https://open.spotify.com/track/0ObMzsGz0gX7lB7Ky5FqBh',
+    spotify: 'https://open.spotify.com/track/4EDijkJdHBZZ0GwJ12iTAj',
     sections: [
       { label: 'Full',
         en: "She's nothing like a girl you've ever seen before\nNothing you can compare to your neighborhood whore\nI'm tryna put her in a video\nShe's a stargirl",
@@ -2685,7 +2685,7 @@ var lyricsData = [
   {
     title: 'The Morning', album: 'Trilogy · 2012',
     youtube: 'https://www.youtube.com/watch?v=O3MvRHPMRdk',
-    spotify: 'https://open.spotify.com/track/7GZpA6LoAjEBpkuY7IAVGM',
+    spotify: 'https://open.spotify.com/track/4jBfUB4kQJCWOrjGLQqhO0',
     sections: [
       { label: 'Verse 1',
         en: "When the morning comes\nAnd the sun hits the water\nI'll be there with the drugs\nI'll be there with your daughter\nEvery night's a different girl\nEvery morning's the same\nI just can't find what I need\nSo I numb all the pain",

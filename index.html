@@ -951,6 +951,13 @@
     }
     .ad-slot ins {
       display: block;
+      min-height: 0;
+    }
+    /* 광고 미로드 시 공백 제거 */
+    .ad-slot:empty,
+    .ad-slot ins:not([data-ad-status]) {
+      padding: 0;
+      margin: 0;
     }
     @media (max-width: 768px) {
       .ad-slot { padding: 0 16px 36px; }
@@ -1000,7 +1007,7 @@
   <ins class="adsbygoogle"
     style="display:block"
     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-    data-ad-slot="SLOT01XXXXXXXX"
+    data-ad-slot="SLOT01XXXXXXXX" style="min-height:0"
     data-ad-format="horizontal"
     data-full-width-responsive="true">
   </ins>
@@ -1239,7 +1246,7 @@
   <ins class="adsbygoogle"
     style="display:block"
     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-    data-ad-slot="SLOT03XXXXXXXX"
+    data-ad-slot="SLOT03XXXXXXXX" style="min-height:0"
     data-ad-format="auto"
     data-full-width-responsive="true">
   </ins>
@@ -3056,6 +3063,19 @@ function shareLyricsCard() {
 
 pickLyricsCard();
 
+
+// ─── AD SLOT CLEANUP ──────────────────────────────────────────
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    document.querySelectorAll('.ad-slot').forEach(function(slot) {
+      var ins = slot.querySelector('ins');
+      if (ins && (!ins.getAttribute('data-ad-status') || ins.offsetHeight === 0)) {
+        slot.style.padding = '0';
+        slot.style.margin = '0';
+      }
+    });
+  }, 2000);
+});
 
 initTypeTest();
 

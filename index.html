@@ -312,67 +312,6 @@
     .check-text { font-size: 0.9rem; }
     .check-item.done .check-text { text-decoration: line-through; color: var(--light-gray); }
 
-    /* ── SETLIST VOTE ── */
-    .vote-grid {
-      display: grid;
-      gap: 10px;
-    }
-
-    .vote-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 14px 20px;
-      background: var(--dark3);
-      border: 1px solid var(--gray);
-      cursor: pointer;
-      transition: all 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .vote-item:hover { border-color: var(--neon-red); }
-    .vote-item.voted { border-color: var(--neon-red); }
-
-    .vote-fill {
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      background: rgba(255,36,66,0.12);
-      transition: width 0.6s cubic-bezier(.4,0,.2,1);
-      pointer-events: none;
-    }
-
-    .vote-rank {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.2rem;
-      color: var(--gray);
-      width: 28px;
-      flex-shrink: 0;
-    }
-
-    .vote-item.voted .vote-rank, .vote-item:nth-child(1) .vote-rank { color: var(--gold); }
-
-    .vote-song { flex: 1; font-size: 0.9rem; position: relative; z-index: 1; }
-    .vote-album { font-size: 0.7rem; color: var(--light-gray); margin-top: 2px; }
-    .vote-count {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.1rem;
-      color: var(--neon-red);
-      position: relative; z-index: 1;
-    }
-    .vote-pct {
-      font-size: 0.75rem;
-      color: var(--light-gray);
-      position: relative; z-index: 1;
-    }
-
-    .vote-tip {
-      text-align: center;
-      font-size: 0.75rem;
-      color: var(--light-gray);
-      margin-top: 16px;
-      letter-spacing: 0.1em;
-    }
 
     /* ── QUIZ ── */
     .quiz-card {
@@ -895,11 +834,6 @@
       .feat-artist { font-size: 0.68rem; }
       .feat-year { font-size: 0.85rem; }
 
-      /* Vote */
-      .vote-item { padding: 10px 14px; gap: 10px; }
-      .vote-count { font-size: 0.95rem; }
-      .vote-pct { font-size: 0.68rem; }
-
       /* Quiz */
       .quiz-card { padding: 24px 18px; }
       .quiz-question { font-size: 1.1rem; }
@@ -964,10 +898,6 @@
       .album-meta { font-size: 0.65rem; }
       .album-cover-inner { font-size: 3.5rem; }
 
-      /* Vote */
-      .vote-pct { display: none; }
-      .vote-rank { font-size: 1rem; width: 22px; }
-
       /* Setlist */
       .setlist-notes-title { font-size: 0.9rem; }
       .act-song { flex-wrap: wrap; gap: 4px; }
@@ -1002,18 +932,33 @@
     /* ── Touch improvements ── */
     @media (hover: none) {
       .album-card:hover { transform: none; }
-      .vote-item:hover { border-color: var(--gray); }
       .check-item:hover { border-color: var(--gray); }
       .lyric-pick-btn:hover { border-color: var(--gray); color: var(--light-gray); background: none; }
       .album-card:active { border-color: var(--neon-red); transform: scale(0.98); }
-      .vote-item:active { border-color: var(--neon-red); }
       .check-item:active { border-color: var(--neon-red); }
       .lyric-pick-btn:active { border-color: var(--neon-red); color: var(--neon-red); background: rgba(255,36,66,0.1); }
       .nav-btn:active { background: rgba(255,36,66,0.15); color: var(--white); }
       .quiz-opt:active { border-color: var(--neon-red); background: rgba(255,36,66,0.1); }
     }
 
-</style>
+
+    /* ── AD SLOTS ── */
+    .ad-slot {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 48px;
+      text-align: center;
+    }
+    .ad-slot ins {
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .ad-slot { padding: 0 16px 36px; }
+    }
+
+  </style>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -1050,6 +995,18 @@
   <button class="nav-btn" onclick="goTo('guide', this)">공연 가이드</button>
   <button class="nav-btn" onclick="goTo('type-test', this)">유형 테스트</button>
 </nav>
+
+<div class="ad-slot">
+  <ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+    data-ad-slot="SLOT01XXXXXXXX"
+    data-ad-format="horizontal"
+    data-full-width-responsive="true">
+  </ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
 <section id="dday">
   <div class="section-header">
     <span class="section-tag">🔴 Countdown</span>
@@ -1128,16 +1085,7 @@
     <div class="setlist-notes" id="setlistNotes"></div>
   </div>
 
-  <!-- 투표 -->
-  <div style="border-top:1px solid var(--gray);padding-top:48px;margin-top:48px">
-    <div style="font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--neon-red);margin-bottom:12px">🗳️ VOTE</div>
-    <h3 style="font-family:Oswald,sans-serif;font-size:1.8rem;text-transform:uppercase;margin-bottom:32px">오늘 이 곡이<br>나올 것 같아?</h3>
-    <div class="vote-grid" id="voteGrid"></div>
-    <p class="vote-tip">* 최대 5곡 선택 가능 · 세션 내 저장</p>
-  </div>
 </section>
-
-<div class="divider"></div>
 
 <div class="divider"></div>
 
@@ -1147,16 +1095,9 @@
     <span class="section-tag">🎵 Lyrics</span>
     <h2 class="section-title">가사 &<br>한국어 해석</h2>
   </div>
-
   <div class="lyrics-picker" id="lyricsPicker"></div>
   <div class="lyric-card" id="lyricCard"></div>
 </section>
-
-<div class="divider"></div>
-
-<!-- PHOTO MAKER -->
-
-<div class="divider"></div>
 
 <div class="divider"></div>
 
@@ -1171,12 +1112,6 @@
 
 <div class="divider"></div>
 
-<!-- DISCOGRAPHY -->
-
-<div class="divider"></div>
-
-<div class="divider"></div>
-
 <!-- LYRICS CARD -->
 <section id="lyrics-card">
   <div class="section-header">
@@ -1187,9 +1122,6 @@
   <div id="lyricsCardArea"></div>
 </section>
 
-<!-- FOOTER -->
-
-
 <div class="divider"></div>
 
 <!-- TOUR GUIDE -->
@@ -1199,7 +1131,6 @@
     <h2 class="section-title">공연장 가이드<br>& XO 문화</h2>
   </div>
 
-  <!-- Tabs -->
   <div class="disco-tabs">
     <button class="disco-tab active" onclick="switchGuideTab('goods', this)">공식 굿즈</button>
     <button class="disco-tab" onclick="switchGuideTab('tips', this)">현장 팁</button>
@@ -1207,50 +1138,46 @@
     <button class="disco-tab" onclick="switchGuideTab('rumors', this)">소식 & 루머</button>
   </div>
 
-  <!-- 굿즈 -->
   <div class="disco-panel active" id="guide-goods">
     <div style="display:grid;gap:16px">
       <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
         <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:12px">🧢 OFFICIAL TOUR MERCH</div>
         <div style="display:grid;gap:12px">
-          <div class="feat-item"><div class="feat-emoji">👕</div><div class="feat-body"><div class="feat-song">Tour Jersey (Black)</div><div class="feat-artist">XO After Hours Til Dawn · 2025 버전 / 공연장 현장 판매 예정</div></div><div class="feat-year">$120</div></div>
+          <div class="feat-item"><div class="feat-emoji">👕</div><div class="feat-body"><div class="feat-song">Tour Jersey (Black)</div><div class="feat-artist">XO After Hours Til Dawn · 공연장 현장 판매 예정</div></div><div class="feat-year">$120</div></div>
           <div class="feat-item"><div class="feat-emoji">🧥</div><div class="feat-body"><div class="feat-song">Tour Hoodie</div><div class="feat-artist">블랙 베이스 · 투어 그래픽 · 한정 수량</div></div><div class="feat-year">$95</div></div>
           <div class="feat-item"><div class="feat-emoji">👒</div><div class="feat-body"><div class="feat-song">XO Snapback / Hat</div><div class="feat-artist">After Hours Til Dawn 2026 Edition</div></div><div class="feat-year">$45</div></div>
-          <div class="feat-item"><div class="feat-emoji">📿</div><div class="feat-body"><div class="feat-song">PixMob LED 리스트밴드</div><div class="feat-artist">입장 시 무료 배포 — 공연과 블루투스 동기화, 관중이 조명의 일부가 됨</div></div><div class="feat-year">무료</div></div>
+          <div class="feat-item"><div class="feat-emoji">📿</div><div class="feat-body"><div class="feat-song">PixMob LED 리스트밴드</div><div class="feat-artist">입장 시 무료 배포 — 공연과 블루투스 동기화</div></div><div class="feat-year">무료</div></div>
           <div class="feat-item"><div class="feat-emoji">📸</div><div class="feat-body"><div class="feat-song">포토북 / 포스터</div><div class="feat-artist">현장 부스 한정 · 수량 미정</div></div><div class="feat-year">미정</div></div>
         </div>
         <div style="margin-top:20px;padding:14px 18px;background:rgba(255,36,66,0.08);border-left:3px solid var(--neon-red);font-size:0.82rem;line-height:1.7;color:rgba(240,236,230,0.8)">
-          💡 <strong>굿즈 팁:</strong> 공식 굿즈는 공연 시작 3~4시간 전부터 현장 부스에서 판매 시작. 인기 아이템(저지, 후디)은 공연 전에 매진되는 경우가 많아요. 가격은 현장에서 변동될 수 있어요.
+          💡 <strong>굿즈 팁:</strong> 공식 굿즈는 공연 시작 3~4시간 전부터 현장 부스에서 판매 시작. 인기 아이템은 공연 전 매진 경우 多.
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 현장 팁 -->
   <div class="disco-panel" id="guide-tips">
     <div style="display:grid;gap:14px">
-      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)">⏰ <strong>언제 도착?</strong> 굿즈 구매 목적이라면 공연 3~4시간 전. 자리 잡기만 할 거라면 1~2시간 전. 오프닝(Creepy Nuts 18:45) 보려면 18:00 이전 입장 권장.</div>
-      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)">🎽 <strong>복장:</strong> 스탠딩이면 운동화 필수. 10월 고양 야외는 저녁에 쌀쌀 — 겉옷 챙기기. 코트류는 짐이 돼서 가볍게 입는 게 좋음.</div>
+      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)">⏰ <strong>언제 도착?</strong> 굿즈 구매라면 3~4시간 전. 자리만 잡을 거라면 1~2시간 전. 오프닝 보려면 18:00 이전 입장 권장.</div>
+      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)">🎽 <strong>복장:</strong> 스탠딩이면 운동화 필수. 10월 고양 야외는 저녁에 쌀쌀 — 겉옷 챙기기.</div>
       <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)">📱 <strong>폰 배터리:</strong> 2시간 30분 논스톱 공연. 보조배터리 필수. NOL 티켓 앱도 켜둬야 하니까 충전 100%로 시작.</div>
-      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)">💡 <strong>PixMob 리스트밴드:</strong> 입장 시 배포되는 LED 팔찌. 절대 버리지 마세요. 공연 중 블루투스로 제어돼서 스타디움 전체가 한 개의 조명이 됨. Blinding Lights 구간에서 가장 화려해요.</div>
-      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)">🚇 <strong>교통:</strong> 10만 명 규모 — 차는 포기. 3호선 대화역에서 셔틀 or 택시. 공연 후 30~40분 대기 예상이니 여유롭게 계획.</div>
-      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)">🪪 <strong>신분증:</strong> 만 19세 이상 공연. 실물 신분증 필수. 모바일 신분증은 인정 안 될 수 있음.</div>
-      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)">📷 <strong>카메라:</strong> 렌즈 교환식 카메라, 삼각대, 셀카봉 반입 금지. 스마트폰은 OK. 공연 영상 촬영은 보통 허용되나 Moth to a Flame 클로저에서 폰 내려놓고 그냥 경험하는 것 추천.</div>
+      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)">💡 <strong>PixMob 리스트밴드:</strong> 입장 시 배포되는 LED 팔찌. 절대 버리지 마세요. Blinding Lights 구간에서 가장 화려해요.</div>
+      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)">🚇 <strong>교통:</strong> 3호선 대화역에서 셔틀 or 택시. 공연 후 30~40분 대기 예상.</div>
+      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)">🪪 <strong>신분증:</strong> 만 19세 이상 공연. 실물 신분증 필수.</div>
+      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)">📷 <strong>카메라:</strong> 렌즈 교환식 카메라, 삼각대 반입 금지. 스마트폰은 OK.</div>
     </div>
   </div>
 
-  <!-- XO 문화 -->
   <div class="disco-panel" id="guide-culture">
     <div style="display:grid;gap:20px">
       <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
         <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">XO란?</div>
-        <p style="font-size:0.88rem;line-height:1.9;color:rgba(240,236,230,0.85)">XO는 위켄드의 레이블이자 팬덤의 이름. 'X'는 ecstasy(엑스터시), 'O'는 oxycontin(옥시콘틴) — 약물 용어이기도 하고 사랑을 나타내는 "Kiss & Hug"이기도 하다. 위켄드는 XO를 통해 수익 일부를 UN 세계식량계획(WFP)에 기부하는 인도주의 활동도 이어가고 있다.</p>
+        <p style="font-size:0.88rem;line-height:1.9;color:rgba(240,236,230,0.85)">XO는 위켄드의 레이블이자 팬덤의 이름. 'X'는 ecstasy, 'O'는 oxycontin — 약물 용어이기도 하고 사랑을 나타내는 "Kiss & Hug"이기도 하다. 위켄드는 XO를 통해 수익 일부를 UN 세계식량계획(WFP)에 기부하는 인도주의 활동도 이어가고 있다.</p>
       </div>
       <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
         <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">공연장 분위기</div>
         <div style="display:grid;gap:10px;font-size:0.85rem;line-height:1.8;color:rgba(240,236,230,0.8)">
-          <div>• 위켄드 공연은 전 세계적으로 "떼창"이 가장 조용한 공연 중 하나. 노래에 몰입해서 같이 부르는 구간(Blinding Lights, Starboy)과 완전히 침묵하는 구간(Call Out My Name, I Was Never There)이 공존.</div>
-          <div>• 스탠딩은 공연 중 앞자리 경쟁이 치열. 위험하지 않게 즐기는 게 우선. 뒤에서도 LED 팔찌로 일체감을 느낄 수 있음.</div>
+          <div>• 위켄드 공연은 "떼창"이 가장 조용한 공연 중 하나. Blinding Lights, Starboy 구간과 Call Out My Name 같은 침묵 구간이 공존.</div>
           <div>• 한국 관중 특유의 "조용하지만 집중적인" 감상 문화가 위켄드 공연과 특히 잘 맞는다는 해외 팬들 후기 多.</div>
           <div>• The Hills, Die For You 구간은 한국 팬덤 특성상 떼창 강도 최상 예측.</div>
         </div>
@@ -1258,28 +1185,19 @@
     </div>
   </div>
 
-  <!-- 루머 & 소식 -->
   <div class="disco-panel" id="guide-rumors">
     <div style="display:grid;gap:16px">
       <div style="background:var(--dark3);border:1px solid var(--neon-red);padding:24px 28px;position:relative">
         <div style="position:absolute;top:16px;right:20px;font-size:0.65rem;letter-spacing:0.15em;color:var(--neon-red)">🔴 HOT</div>
         <div style="font-size:0.85rem;font-weight:700;margin-bottom:8px">이번 서울이 "The Weeknd" 이름으로 마지막 공연?</div>
-        <p style="font-size:0.82rem;line-height:1.8;color:rgba(240,236,230,0.75)">위켄드는 Hurry Up Tomorrow를 "The Weeknd"라는 이름으로 내는 마지막 앨범이라고 공식 선언했다. 이후 본명 Abel Makkonen Tesfaye로 활동 전환 가능성. 서울 공연이 "The Weeknd"로 보는 마지막 공연이 될 수도 있다는 것.</p>
-      </div>
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.85rem;font-weight:700;margin-bottom:8px">셋리스트 변동 가능성</div>
-        <p style="font-size:0.82rem;line-height:1.8;color:rgba(240,236,230,0.75)">서울 공연이 투어 막바지 일정. 앞선 공연들의 셋리스트를 보면 후반부로 갈수록 곡 구성이 달라지는 경향. Hurry Up Tomorrow 신곡 비중이 더 늘어날 가능성 있음. The Weeknd 마지막 투어라는 명분으로 깜짝 셋리스트 가능성도.</p>
-      </div>
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.85rem;font-weight:700;margin-bottom:8px">현대카드 슈퍼콘서트 역대 최대 규모</div>
-        <p style="font-size:0.82rem;line-height:1.8;color:rgba(240,236,230,0.75)">10만 명 규모는 현대카드 슈퍼콘서트 역사상 세 번째. 스타디움 무대 제작에 보통 2~3일 걸리는데 이번 무대 규모가 역대급이라는 제작사 측 언급 있었음. 피날레 Moth to a Flame 구간 특수효과가 압도적일 것으로 예상.</p>
+        <p style="font-size:0.82rem;line-height:1.8;color:rgba(240,236,230,0.75)">위켄드는 Hurry Up Tomorrow를 "The Weeknd"라는 이름으로 내는 마지막 앨범이라고 공식 선언했다. 서울 공연이 "The Weeknd"로 보는 마지막 공연이 될 수도 있다는 것.</p>
       </div>
       <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
         <div style="font-size:0.85rem;font-weight:700;margin-bottom:8px">8년 만의 내한 — 2018년 공연과 비교</div>
-        <p style="font-size:0.82rem;line-height:1.8;color:rgba(240,236,230,0.75)">2018년 첫 내한은 올림픽공원 올림픽홀에서 5천 명 규모였다. 이번엔 10만 명. 8년 사이 위켄드의 위상이 20배로 커진 셈. 2018년 내한 당시 Call Out My Name, The Hills, Starboy 등을 불렀었음.</p>
+        <p style="font-size:0.82rem;line-height:1.8;color:rgba(240,236,230,0.75)">2018년 첫 내한은 올림픽공원 올림픽홀에서 5천 명 규모였다. 이번엔 10만 명. 8년 사이 위켄드의 위상이 20배로 커진 셈.</p>
       </div>
       <div style="padding:12px 18px;font-size:0.72rem;color:var(--light-gray);border:1px dashed var(--gray)">
-        ⚠️ 루머 및 소식은 팬 커뮤니티와 언론 보도 기반이며 공식 확인되지 않은 내용 포함. 공식 발표 시 업데이트 예정.
+        ⚠️ 루머 및 소식은 팬 커뮤니티와 언론 보도 기반이며 공식 확인되지 않은 내용 포함.
       </div>
     </div>
   </div>
@@ -1312,18 +1230,21 @@
   <div id="typeTestArea"></div>
 </section>
 
-<!-- AD SLOT 1 -->
-<div style="max-width:900px;margin:0 auto;padding:0 24px 40px">
-  <div style="background:var(--dark3);border:1px dashed var(--gray);padding:20px;text-align:center;color:var(--light-gray);font-size:0.75rem;letter-spacing:0.1em">
-    <!-- Google AdSense 광고 슬롯 -->
-    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="XXXXXXXX" data-ad-format="auto"></ins>
-    (adsbygoogle = window.adsbygoogle || []).push({}); --> 
-    AD SPACE · 광고 문의: your@email.com
-  </div>
 </div>
 
 
+
+
+<div class="ad-slot">
+  <ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+    data-ad-slot="SLOT03XXXXXXXX"
+    data-ad-format="auto"
+    data-full-width-responsive="true">
+  </ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
 
 <footer>
   <div class="footer-title">THE WEEKND SEOUL 🔴</div>
@@ -1419,108 +1340,6 @@ function toggleCheck(key, el) {
 
 renderChecklist();
 
-// ─── SETLIST VOTE ─────────────────────────────────────────────
-const songs = [
-  { title: 'The Abyss', album: 'Hurry Up Tomorrow' },
-  { title: 'Wake Me Up', album: 'Hurry Up Tomorrow' },
-  { title: 'Baptized in Fear', album: 'Hurry Up Tomorrow' },
-  { title: 'Cry for Me', album: 'Hurry Up Tomorrow' },
-  { title: 'Sao Paulo', album: 'Hurry Up Tomorrow' },
-  { title: 'Without a Warning', album: 'Hurry Up Tomorrow' },
-  { title: 'Open Hearts', album: 'Hurry Up Tomorrow' },
-  { title: 'Take My Breath', album: 'Dawn FM' },
-  { title: 'Sacrifice', album: 'Dawn FM' },
-  { title: 'How Do I Make You Love Me?', album: 'Dawn FM' },
-  { title: 'Out of Time', album: 'Dawn FM' },
-  { title: 'Is There Someone Else?', album: 'Dawn FM' },
-  { title: 'Less Than Zero', album: 'Dawn FM' },
-  { title: 'One of the Girls', album: 'Dawn FM / The Idol' },
-  { title: 'Heartless', album: 'After Hours' },
-  { title: 'Faith', album: 'After Hours' },
-  { title: 'After Hours', album: 'After Hours' },
-  { title: 'Save Your Tears', album: 'After Hours' },
-  { title: 'Hurricane', album: 'Donda (Ye)' },
-  { title: 'Lost in the Fire', album: 'Gesaffelstein' },
-  { title: "Can't Feel My Face", album: 'Beauty Behind the Madness' },
-  { title: 'The Hills', album: 'Beauty Behind the Madness' },
-  { title: 'Often', album: 'Beauty Behind the Madness' },
-  { title: 'Party Monster', album: 'Starboy' },
-  { title: 'Starboy', album: 'Starboy' },
-  { title: 'I Feel It Coming', album: 'Starboy' },
-  { title: 'Die For You', album: 'Starboy' },
-  { title: 'Stargirl Interlude', album: 'Starboy' },
-  { title: 'Call Out My Name', album: 'My Dear Melancholy,' },
-  { title: 'I Was Never There', album: 'My Dear Melancholy,' },
-  { title: "Creepin'", album: 'Metro Boomin' },
-  { title: 'Crew Love', album: 'Drake' },
-  { title: 'Kiss Land', album: 'Kiss Land' },
-  { title: 'House of Balloons', album: 'Trilogy' },
-  { title: 'Wicked Games', album: 'Trilogy' },
-  { title: 'The Morning', album: 'Trilogy' },
-  { title: 'Blinding Lights', album: 'After Hours' },
-  { title: 'Moth to a Flame', album: 'Swedish House Mafia' },
-];
-
-let votes = JSON.parse(sessionStorage.getItem('votes') || '{}');
-let myVotes = JSON.parse(sessionStorage.getItem('myVotes') || '[]');
-const MAX_VOTES = 5;
-
-function totalVotes() {
-  return Object.values(votes).reduce((a, b) => a + b, 0);
-}
-
-function renderVotes() {
-  const sorted = [...songs].sort((a, b) => (votes[b.title] || 0) - (votes[a.title] || 0));
-  const total = totalVotes() || 1;
-  const el = document.getElementById('voteGrid');
-  el.innerHTML = sorted.map((s, i) => {
-    const v = votes[s.title] || 0;
-    const pct = Math.round(v / total * 100);
-    const isMine = myVotes.includes(s.title);
-    return `
-      <div class="vote-item ${isMine ? 'voted' : ''}" onclick="castVote('${s.title}')">
-        <div class="vote-fill" style="width:${pct}%"><\/div>
-        <div class="vote-rank">${i + 1}<\/div>
-        <div class="vote-song">
-          <div>${s.title}<\/div>
-          <div class="vote-album">${s.album}<\/div>
-        <\/div>
-        <div style="text-align:right">
-          <div class="vote-count">${v}<\/div>
-          <div class="vote-pct">${pct}%<\/div>
-        <\/div>
-      <\/div>
-    `;
-  }).join('');
-}
-
-function castVote(title) {
-  const idx = myVotes.indexOf(title);
-  if (idx > -1) {
-    // unvote
-    myVotes.splice(idx, 1);
-    votes[title] = Math.max(0, (votes[title] || 0) - 1);
-  } else {
-    if (myVotes.length >= MAX_VOTES) {
-      alert(`최대 ${MAX_VOTES}곡까지 선택할 수 있어요!`);
-      return;
-    }
-    myVotes.push(title);
-    votes[title] = (votes[title] || 0) + 1;
-  }
-  sessionStorage.setItem('votes', JSON.stringify(votes));
-  sessionStorage.setItem('myVotes', JSON.stringify(myVotes));
-  renderVotes();
-}
-
-// seed some votes for visual interest
-if (Object.keys(votes).length === 0) {
-  var seedNums = [98,92,85,88,82,70,65,90,86,78,72,68,60,55,75,70,68,80,62,58,74,84,70,60,94,66,78,52,67,62,50,45,54,50,48,42,92,96];
-  songs.forEach(function(s,i){ votes[s.title] = seedNums[i] || 10; });
-  sessionStorage.setItem('votes', JSON.stringify(votes));
-}
-
-renderVotes();
 
 // ─── QUIZ ─────────────────────────────────────────────────────
 const quizData = [

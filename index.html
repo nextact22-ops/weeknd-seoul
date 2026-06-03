@@ -183,39 +183,111 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(10,10,10,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,36,66,0.2);
-      display: flex;
-      justify-content: center;
-      gap: 4px;
-      padding: 12px 20px;
-      flex-wrap: wrap;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
+      background: rgba(8,8,8,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,36,66,0.25);
     }
-    nav::-webkit-scrollbar { display: none; }
 
-    .nav-btn {
+    .nav-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px 6px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav-brand {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--neon-red);
+      text-transform: uppercase;
+    }
+
+    .nav-brand span {
+      color: rgba(255,255,255,0.35);
+      margin: 0 6px;
+    }
+
+    .nav-lang {
+      display: flex;
+      gap: 0;
+      border: 1px solid rgba(255,36,66,0.35);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .lang-btn {
+      padding: 4px 10px;
       background: none;
       border: none;
       color: var(--light-gray);
       font-family: 'Oswald', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 8px 16px;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
       cursor: pointer;
-      transition: color 0.2s;
-      border-radius: 2px;
-      white-space: nowrap;
-      flex-shrink: 0;
+      transition: all 0.15s;
     }
 
-    .nav-btn:hover, .nav-btn.active {
+    .lang-btn.active {
+      background: var(--neon-red);
+      color: #000;
+      font-weight: 600;
+    }
+
+    .nav-scroll-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 0 8px;
+    }
+    .nav-scroll-wrap::-webkit-scrollbar { display: none; }
+
+    .nav-items {
+      display: inline-flex;
+      gap: 0;
+      min-width: 100%;
+      justify-content: center;
+    }
+
+    @media (max-width: 700px) {
+      .nav-items {
+        justify-content: flex-start;
+        min-width: unset;
+      }
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.45);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 9px 13px;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .nav-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%; right: 50%;
+      height: 2px;
+      background: var(--neon-red);
+      transition: left 0.2s, right 0.2s;
+    }
+
+    .nav-btn:hover { color: var(--white); }
+    .nav-btn.active {
       color: var(--white);
-      background: rgba(255,36,66,0.15);
+    }
+    .nav-btn.active::after {
+      left: 0; right: 0;
     }
 
     /* ── SECTIONS ── */
@@ -246,6 +318,70 @@
       line-height: 1;
     }
 
+    /* ── FAN SITE EXTRAS ── */
+    /* Grain overlay for raw/underground feel */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.35;
+    }
+
+    /* Ticker tape */
+    .ticker-wrap {
+      background: var(--neon-red);
+      overflow: hidden;
+      padding: 5px 0;
+      position: relative;
+    }
+    .ticker {
+      display: flex;
+      width: max-content;
+      animation: ticker-scroll 30s linear infinite;
+      gap: 0;
+    }
+    .ticker-item {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: #000;
+      padding: 0 32px;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+    .ticker-item::before { content: '✦  '; }
+    @keyframes ticker-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Hero fan-style tweaks */
+    .hero-title .red { 
+      text-shadow: 0 0 40px rgba(255,36,66,0.5);
+      -webkit-text-stroke: 0px;
+    }
+    .hero-date-badge {
+      display: inline-block;
+      border: 1px solid rgba(255,36,66,0.5);
+      background: rgba(255,36,66,0.08);
+      padding: 6px 20px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.3em;
+      color: var(--white);
+      margin-top: 20px;
+    }
+
+    /* Section headers — more raw */
+    .section-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+    }
+
+    /* D-DAY ── */
     /* ── D-DAY ── */
     .dday-grid {
       display: grid;
@@ -704,31 +840,189 @@
     }
 
     /* ── LYRICS ── */
-    .lyrics-picker {
+    .lyrics-act-group { margin-bottom: 28px; }
+
+    .lyrics-act-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      padding: 0 0 10px;
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lyrics-act-label::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+
+    .lyrics-act-songs {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 32px;
+      gap: 6px;
     }
 
     .lyric-pick-btn {
-      padding: 8px 18px;
-      background: var(--dark3);
+      padding: 7px 16px;
+      background: none;
       border: 1px solid var(--gray);
       color: var(--light-gray);
       font-family: 'Noto Sans KR', sans-serif;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       cursor: pointer;
       transition: all 0.2s;
+      border-radius: 2px;
+      position: relative;
     }
 
-    .lyric-pick-btn:hover { border-color: var(--neon-red); color: var(--white); }
-    .lyric-pick-btn.active { border-color: var(--neon-red); color: var(--neon-red); background: rgba(255,36,66,0.1); }
+    .lyric-pick-btn:hover { border-color: rgba(255,36,66,0.5); color: var(--white); background: rgba(255,36,66,0.04); }
+    .lyric-pick-btn.active {
+      border-color: var(--neon-red);
+      color: var(--white);
+      background: rgba(255,36,66,0.12);
+    }
 
-    .lyric-card {
-      background: var(--dark3);
+    /* lyric card */
+    .lyric-card { overflow: hidden; }
+
+    .lc-header {
+      background: linear-gradient(135deg, rgba(255,36,66,0.08) 0%, rgba(10,10,10,0) 60%);
+      border-bottom: 1px solid rgba(255,36,66,0.2);
+      padding: 20px 24px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .lc-act-badge {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      border: 1px solid rgba(201,168,76,0.35);
+      padding: 3px 10px;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .lc-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .lc-album {
+      font-size: 0.68rem;
+      color: var(--neon-red);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .lc-links { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+
+    .lc-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 13px;
+      font-size: 0.7rem;
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      border-radius: 2px;
+    }
+
+    /* lyric section tabs (mobile) */
+    .lc-tabs {
+      display: none;
+      border-bottom: 1px solid var(--gray);
+      background: var(--dark2);
+    }
+
+    .lc-tab-btn {
+      flex: 1;
+      padding: 10px 0;
+      background: none;
+      border: none;
+      color: var(--light-gray);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+    }
+
+    .lc-tab-btn.active { color: var(--white); border-bottom-color: var(--neon-red); }
+
+    .lc-section { border: 1px solid var(--gray); border-top: none; margin-bottom: 20px; }
+
+    .lc-section-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--neon-red);
+      padding: 14px 24px 0;
+    }
+
+    .lc-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .lc-col {
+      padding: 16px 24px 20px;
+    }
+
+    .lc-col:first-child { border-right: 1px solid var(--gray); }
+
+    .lc-col-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .lc-nuance-box {
+      border-top: 1px solid var(--gray);
+      padding: 14px 24px;
+      background: rgba(201,168,76,0.03);
+    }
+
+    .lc-footer {
       border: 1px solid var(--gray);
-      overflow: hidden;
+      border-top: none;
+      padding: 12px 24px;
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.2);
+    }
+
+    @media (max-width: 600px) {
+      .lc-tabs { display: flex; }
+      .lc-cols { grid-template-columns: 1fr; }
+      .lc-col:first-child { border-right: none; border-bottom: 1px solid var(--gray); }
+      .lc-mobile-hidden { display: none; }
+      .lc-mobile-visible { display: block !important; }
+      .lc-col { padding: 14px 16px 18px; }
+      .lc-section-label { padding: 12px 16px 0; }
+      .lc-nuance-box { padding: 12px 16px; }
+      .lc-footer { padding: 10px 16px; }
+      .lc-header { padding: 16px; }
+      .lc-title { font-size: 1.25rem; }
     }
 
     .lyric-header {
@@ -836,7 +1130,9 @@
         gap: 2px;
         flex-wrap: nowrap;
       }
-      .nav-btn { font-size: 0.72rem; padding: 7px 12px; letter-spacing: 0.05em; }
+      .nav-btn { font-size: 0.72rem; padding: 8px 11px; }
+      .nav-topbar { padding: 6px 12px 5px; }
+      .nav-brand { font-size: 0.62rem; letter-spacing: 0.18em; }
 
       /* Hero */
       .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; }
@@ -998,38 +1294,85 @@
     html[lang="en"] .en-only { display: revert !important; }
     html[lang="en"] span.en-only, html[lang="en"] a.en-only { display: inline !important; }
 
-    /* ── LANG TOGGLE ── */
-    .lang-toggle {
+    /* ── LANG TOGGLE (now inside nav topbar) ── */
+    .lang-toggle { display: none; } /* legacy - replaced by nav-lang */
+
+
+    /* ── LYRIC MODAL ── */
+    .lyric-modal-overlay {
+      display: none;
       position: fixed;
-      top: 12px;
-      right: 16px;
-      z-index: 200;
-      display: flex;
-      gap: 0;
-      border: 1px solid rgba(255,36,66,0.4);
-      border-radius: 2px;
-      overflow: hidden;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px;
+      backdrop-filter: blur(6px);
     }
-    .lang-btn {
-      padding: 5px 12px;
-      background: none;
-      border: none;
-      color: var(--light-gray);
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .lang-btn.active {
-      background: var(--neon-red);
-      color: #000;
-    }
-    @media (max-width: 480px) {
-      .lang-toggle { top: 8px; right: 10px; }
-      .lang-btn { padding: 4px 9px; font-size: 0.68rem; }
+    .lyric-modal-overlay.open { display: flex; }
+
+    .lyric-modal-box {
+      background: var(--dark2);
+      width: 100%;
+      overflow-y: auto;
+      border: 1px solid rgba(255,36,66,0.2);
+      border-top: none;
+      box-shadow: 0 0 60px rgba(255,36,66,0.08);
+      scrollbar-width: thin;
+      scrollbar-color: var(--gray) transparent;
     }
 
+    .lyric-modal-wrap {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 720px;
+      max-height: 90vh;
+    }
+
+    .lyric-modal-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px 8px 16px;
+      background: rgba(15,15,15,0.98);
+      border: 1px solid rgba(255,36,66,0.2);
+      border-bottom: none;
+      flex-shrink: 0;
+    }
+
+    .lyric-modal-topbar-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: var(--light-gray);
+      text-transform: uppercase;
+    }
+
+    .lyric-modal-close {
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: 1px solid var(--gray);
+      color: var(--light-gray);
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.15s;
+    }
+
+    .lyric-modal-close:hover { color: var(--white); border-color: var(--neon-red); }
+
+    @media (max-width: 600px) {
+      .lyric-modal-overlay { padding: 0; align-items: flex-end; }
+      .lyric-modal-wrap { max-height: 94vh; border-radius: 16px 16px 0 0; overflow: hidden; }
+      .lyric-modal-topbar { border-radius: 16px 16px 0 0; }
+      .lyric-modal-box { border-bottom: none; }
+    }
   </style>
 
 <script>
@@ -1137,15 +1480,23 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body>
 
-<!-- LANG TOGGLE -->
-<div class="lang-toggle">
-  <button class="lang-btn active" onclick="setLang('ko')" id="btnKo">KO</button>
-  <button class="lang-btn" onclick="setLang('en')" id="btnEn">EN</button>
-</div>
-
 <!-- ALBUM MODAL -->
 <div class="modal-overlay" id="albumModal" onclick="closeModal(event)">
   <div class="modal-box" id="albumModalBox"></div>
+</div>
+
+<!-- LYRIC MODAL -->
+<div class="lyric-modal-overlay" id="lyricModal" onclick="closeLyricModal(event)">
+  <div class="lyric-modal-wrap">
+    <div class="lyric-modal-topbar">
+      <span class="lyric-modal-topbar-label ko-only">가사 해석</span>
+      <span class="lyric-modal-topbar-label en-only">Lyrics</span>
+      <button class="lyric-modal-close" onclick="closeLyricModal(null)">✕</button>
+    </div>
+    <div class="lyric-modal-box" id="lyricModalBox">
+      <div id="lyricCard"></div>
+    </div>
+  </div>
 </div>
 
 <!-- HERO -->
@@ -1167,16 +1518,57 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- NAV -->
 <nav id="mainNav">
-  <button class="nav-btn active" onclick="goTo('dday', this)" data-ko="D-DAY" data-en="D-DAY">D-DAY</button>
-  <button class="nav-btn" onclick="goTo('disco', this)" data-ko="필모그래피" data-en="Discography">필모그래피</button>
-  <button class="nav-btn" onclick="goTo('setlist-combined', this)" data-ko="셋리스트" data-en="Setlist">셋리스트</button>
-  <button class="nav-btn" onclick="goTo('lyrics', this)" data-ko="가사 해석" data-en="Lyrics">가사 해석</button>
-  <button class="nav-btn" onclick="goTo('quiz', this)" data-ko="퀴즈" data-en="Quiz">퀴즈</button>
-  <button class="nav-btn" onclick="goTo('lyrics-card', this)" data-ko="가사 뽑기" data-en="Lyric Card">가사 뽑기</button>
-  <button class="nav-btn" onclick="goTo('guide', this)" data-ko="공연 가이드" data-en="Concert Guide">공연 가이드</button>
-  <button class="nav-btn" onclick="goTo('type-test', this)" data-ko="유형 테스트" data-en="Type Test">유형 테스트</button>
-  <button class="nav-btn" onclick="goTo('setcheck', this)" data-ko="셋리스트 체크" data-en="Live Check">셋리스트 체크</button>
+  <div class="nav-topbar">
+    <span class="nav-brand">XO <span>·</span> SEOUL <span>·</span> 2026</span>
+    <div class="nav-lang">
+      <button class="lang-btn active" onclick="setLang('ko')" id="btnKo">KO</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btnEn">EN</button>
+    </div>
+  </div>
+  <div class="nav-scroll-wrap">
+    <div class="nav-items">
+      <button class="nav-btn active" onclick="goTo('dday', this)" data-ko="D-DAY" data-en="D-DAY">D-DAY</button>
+      <button class="nav-btn" onclick="goTo('disco', this)" data-ko="필모그래피" data-en="Discography">필모그래피</button>
+      <button class="nav-btn" onclick="goTo('setlist-combined', this)" data-ko="셋리스트" data-en="Setlist">셋리스트</button>
+      <button class="nav-btn" onclick="goTo('lyrics', this)" data-ko="가사 해석" data-en="Lyrics">가사 해석</button>
+      <button class="nav-btn" onclick="goTo('quiz', this)" data-ko="퀴즈" data-en="Quiz">퀴즈</button>
+      <button class="nav-btn" onclick="goTo('lyrics-card', this)" data-ko="가사 뽑기" data-en="Lyric Card">가사 뽑기</button>
+      <button class="nav-btn" onclick="goTo('guide', this)" data-ko="공연 가이드" data-en="Concert Guide">공연 가이드</button>
+      <button class="nav-btn" onclick="goTo('type-test', this)" data-ko="유형 테스트" data-en="Type Test">유형 테스트</button>
+      <button class="nav-btn" onclick="goTo('setcheck', this)" data-ko="셋리스트 체크" data-en="Live Check">셋리스트 체크</button>
+    </div>
+  </div>
 </nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap ko-only">
+  <div class="ticker">
+    <span class="ticker-item">위켄드 서울 2026</span>
+    <span class="ticker-item">10월 7-8일 고양종합운동장</span>
+    <span class="ticker-item">현대카드 슈퍼콘서트 28</span>
+    <span class="ticker-item">After Hours Til Dawn</span>
+    <span class="ticker-item">XO Until The End</span>
+    <span class="ticker-item">위켄드 서울 2026</span>
+    <span class="ticker-item">10월 7-8일 고양종합운동장</span>
+    <span class="ticker-item">현대카드 슈퍼콘서트 28</span>
+    <span class="ticker-item">After Hours Til Dawn</span>
+    <span class="ticker-item">XO Until The End</span>
+  </div>
+</div>
+<div class="ticker-wrap en-only">
+  <div class="ticker">
+    <span class="ticker-item">The Weeknd Seoul 2026</span>
+    <span class="ticker-item">Oct 7-8 · Goyang Stadium</span>
+    <span class="ticker-item">Hyundai Card Super Concert 28</span>
+    <span class="ticker-item">After Hours Til Dawn Tour</span>
+    <span class="ticker-item">XO Until The End</span>
+    <span class="ticker-item">The Weeknd Seoul 2026</span>
+    <span class="ticker-item">Oct 7-8 · Goyang Stadium</span>
+    <span class="ticker-item">Hyundai Card Super Concert 28</span>
+    <span class="ticker-item">After Hours Til Dawn Tour</span>
+    <span class="ticker-item">XO Until The End</span>
+  </div>
+</div>
 
 <div class="ad-slot" id="adSlot1" style="display:none">
   <ins class="adsbygoogle"
@@ -1276,9 +1668,10 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="section-header">
     <span class="section-tag" id="tag-lyrics">🎵 Lyrics</span>
     <h2 class="section-title" id="title-lyrics">가사 &<br>한국어 해석</h2>
+    <p class="lyrics-intro ko-only" style="margin-top:16px;font-size:0.88rem;color:var(--light-gray);line-height:1.8">공연 셋리스트에 실제로 등장하는 곡들을 ACT 순서로 정리했습니다.<br>공연 전 미리 가사를 익혀두면 떼창 구간에서 다르게 느껴집니다.</p>
+    <p class="lyrics-intro en-only" style="margin-top:16px;font-size:0.88rem;color:var(--light-gray);line-height:1.8">Every song below appears in the live setlist — organized by ACT.<br>Learn the lyrics before the show. You'll feel the difference when 100,000 people sing together.</p>
   </div>
-  <div class="lyrics-picker" id="lyricsPicker"></div>
-  <div class="lyric-card" id="lyricCard"></div>
+  <div id="lyricsPicker"></div>
 </section>
 
 <div class="divider"></div>
@@ -1974,7 +2367,7 @@ function openAlbumModal(idx, type) {
     return `<div class="modal-track">
       <div class="track-num">${i+1}<\/div>
       <div class="track-name">${t}<\/div>
-      ${hasLyrics ? `<button class="track-link-btn" onclick="jumpToLyrics('${clean}')">"+(currentLang==="en"?"Lyrics ↓":"가사 ↓")+"<\/button>` : ''}
+      ${hasLyrics ? `<button class="track-link-btn" onclick="jumpToLyrics('${clean}')">${currentLang==="en"?"Lyrics ↓":"가사 ↓"}<\/button>` : ''}
     <\/div>`;
   }).join('');
   document.getElementById('albumModalBox').innerHTML = `
@@ -2228,7 +2621,8 @@ var lyricsData = [
       { label: 'Pre-Chorus',
         en: "Play smile, live fully\nWhen life is hard I know death's easy\nSun is never rising\nI don't know if it's day or night\nAnd I can't find the horizon\nI'm running out of time\nAre you real, or are you an illusion?\n'Cause I fear your love's my delusion",
         kr: "웃는 척, 충만하게 살아\n삶이 힘들 때 죽음이 쉽다는 걸 알아\n해는 절대 뜨지 않아\n낮인지 밤인지 모르겠어\n지평선을 찾을 수가 없어\n시간이 다 떨어져가고 있어\n넌 현실이야, 아니면 환상이야?\n왜냐하면 네 사랑이 내 망상인 것 같아서",
-        nuance: "'웃는 척, 충만하게 살아' — 겉모습과 내면의 괴리. '죽음이 쉽다' — The Abyss의 테마 연속. '네 사랑이 망상인 것 같다' — 유일한 구원조차 실재하지 않을 수 있다는 두려움."
+        nuance: "'웃는 척, 충만하게 살아' — 겉모습과 내면의 괴리. '죽음이 쉽다' — The Abyss의 테마 연속. '네 사랑이 망상인 것 같다' — 유일한 구원조차 실재하지 않을 수 있다는 두려움.",
+        nuanceEn: "'Play smile, live fully' — the mask over inner collapse. 'Death's easy' — direct continuation of The Abyss. 'Your love might be my delusion' — even the one saving grace might not be real."
       }
     ]
   },
@@ -2267,7 +2661,8 @@ var lyricsData = [
       { label: 'Verse',
         en: "Baby, ride me till the darkness of the night\nKill me softly like you want me euthanized\nHot like rising sun, burning everything she touch\nShe don't even want your money, can buy you and someone else\nShe's addicted to the rush, I can never get enough",
         kr: "자기야, 밤의 어둠이 올 때까지 나를 타\n안락사시키듯 부드럽게 날 죽여줘\n떠오르는 태양처럼 뜨거워, 닿는 모든 걸 태워\n그녀는 네 돈을 원하지 않아, 너와 다른 누군가도 살 수 있어\n그녀는 스릴에 중독됐어, 나는 충분히 가질 수가 없어",
-        nuance: "'안락사시키듯 부드럽게' — 위켄드 특유의 쾌락과 죽음을 연결하는 은유. '돈으로 살 수 없다' — 물질로 제어할 수 없는 존재. 스릴 자체가 목적인 관계."
+        nuance: "'안락사시키듯 부드럽게' — 위켄드 특유의 쾌락과 죽음을 연결하는 은유. '돈으로 살 수 없다' — 물질로 제어할 수 없는 존재. 스릴 자체가 목적인 관계.",
+        nuanceEn: "'Euthanized softly' — The Weeknd's signature pleasure-as-death metaphor. 'Can't buy her' — she operates outside material control. An attraction that exists purely for the rush."
       }]
   },
   {
@@ -2279,7 +2674,8 @@ var lyricsData = [
       { label: 'Verse',
         en: "I fell asleep in the tub, I was there with paralysis\nMy foot hit the faucet, water started flowing in\nCouldn't scream for help, I just slowly felt the pressure hit\nMoving one toe was the only form of motion left\nCan't breathe for air, can't breathe\nTrying to remember everything that my preacher said\nAll the times I dodged death, this can't be the way it ends",
         kr: "욕조에서 잠들었어, 마비 상태로 거기 있었어\n발이 수도꼭지에 닿았고, 물이 흘러들어오기 시작했어\n도움을 외칠 수 없었어, 그냥 천천히 압박감이 느껴졌어\n발가락 하나 움직이는 게 남은 유일한 움직임이었어\n숨을 쉴 수 없어, 숨을 쉴 수 없어\n목사님이 하신 말씀을 기억하려 애쓰면서\n죽음을 피해온 모든 순간들, 이렇게 끝날 수는 없어",
-        nuance: "실제 경험에 기반한 듯한 생생한 묘사. 욕조 — 일상적 공간에서 찾아오는 죽음의 공포. '목사님 말씀' — 종교적 구원에 대한 마지막 의지. HUT 앨범에서 가장 구체적인 죽음과의 조우."
+        nuance: "실제 경험에 기반한 듯한 생생한 묘사. 욕조 — 일상적 공간에서 찾아오는 죽음의 공포. '목사님 말씀' — 종교적 구원에 대한 마지막 의지. HUT 앨범에서 가장 구체적인 죽음과의 조우.",
+        nuanceEn: "Reads like a lived experience — total paralysis in a bathtub. Death arrives in the most ordinary space. The preacher's words as a last lifeline. HUT's most visceral near-death encounter."
       },
       { label: 'Chorus',
         en: "I've been baptized in fear, my dear\nLike Paul, I'm the chief of sin\nWashing my soul within",
@@ -2299,7 +2695,7 @@ var lyricsData = [
         en: "I saw the fire in your eyes\nYou tell me things you wanna try\nYou risk it all to feel alive\nYou're offering yourself to me like sacrifice\nYou said you do this all the time\nTell me you love me if I bring you to the light",
         kr: "네 눈 속에서 불꽃을 봤어\n해보고 싶은 것들을 말해줘\n살아있음을 느끼기 위해 전부를 걸어\n희생처럼 나에게 자신을 바치고 있어\n항상 이렇게 한다고 했어\n빛으로 데려다주면 사랑한다고 말해줘",
         nuance: "'살아있음을 느끼기 위해 전부를 건다' — Dawn FM의 죽음 앞 쾌락 철학. '희생처럼' — Sacrifice와 연결되는 테마. '빛으로 데려다주면' — Dawn FM의 라디오 세계관에서 빛 = 저 너머.",
-        nuanceEn: "Death arriving in the most ordinary place — the bathtub. Total paralysis. The pastor's words as a last lifeline. HUT's most visceral encounter with mortality.",
+        nuanceEn: "'Fire in your eyes' — desire and danger as one. 'Offering yourself like sacrifice' — Dawn FM's core trade: ecstasy for surrender. 'Bring you to the light' = the radio station's afterlife in Dawn FM's world.",
       },
       { label: 'Chorus',
         en: "Take my breath away\nAnd make it last forever, babe\nDo it now or never, babe\nTake my breath away\nNobody does it better, babe\nBring me close to heaven, babe",
@@ -2318,6 +2714,7 @@ var lyricsData = [
         en: "I was born in a city where the winter nights don't ever sleep\nSo this life's always with me\nThe ice inside my veins will never bleed\nEvery time you try to fix me\nI know you'll never find that missing piece\nWhen you cry and say you miss me\nI lie and tell you that I'll never leave",
         kr: "겨울 밤이 절대 잠들지 않는 도시에서 태어났어\n그래서 이 삶이 항상 나와 함께해\n내 혈관 속의 얼음은 절대 피를 흘리지 않아\n날 고치려 할 때마다\n그 빠진 조각을 절대 찾지 못할 거라는 걸 알아\n울면서 그립다고 할 때\n절대 떠나지 않겠다고 거짓말을 해",
         nuance: "'겨울 밤이 잠들지 않는 도시' — 토론토 출신 위켄드의 자기 묘사. '혈관 속의 얼음' — 감정적 냉혹함. '절대 떠나지 않겠다고 거짓말한다' — 이 앨범에서 가장 솔직한 자기 고백.",
+        nuanceEn: "'A city where winter nights never sleep' — Toronto as identity, as coldness. 'Ice in my veins' — emotional detachment as survival. 'I lie and say I'll never leave' — Dawn FM's most direct self-indictment.",
       },
       { label: 'Chorus',
         en: "I sacrificed your love for more of the night\nI try to put up a fight, can't tie me down\nI don't wanna sacrifice for your love, I try\nI don't wanna sacrifice, but I love my time",
@@ -2336,6 +2733,7 @@ var lyricsData = [
         en: "We're going back in time, I'd like to see you try\nUnpacking thoughts through tunnels in your mind\nI'll fix you mushroom tea and cross the restless sea\nRelease yourself to escape reality\nIt doesn't faze you, I need a breakthrough\nI only want what's right in front of me",
         kr: "시간을 되돌리는 거야, 네가 시도하는 걸 보고 싶어\n네 마음속 터널을 통해 생각을 풀어내\n버섯차를 끓여줄게, 불안한 바다를 건너\n현실에서 탈출하기 위해 너 자신을 놓아줘\n넌 흔들리지 않아, 나는 돌파구가 필요해\n바로 내 앞에 있는 것만 원해",
         nuance: "'버섯차' — 환각 물질의 은유. 현실에서 벗어나게 해준다는 약속. '흔들리지 않는다' — 상대방의 무관심. 아무리 해도 감동받지 않는 상대를 향한 절박함.",
+        nuanceEn: "'Mushroom tea' — an offer of escape through substances. The person who offers transcendence but still can't move her. 'It doesn't faze you' — the desperation of trying everything and landing nothing.",
       },
       { label: 'Chorus',
         en: "How do I make you love me?\nHow do I make you fall for me?\nHow do I make you want me\nAnd make it last eternally?",
@@ -2353,12 +2751,14 @@ var lyricsData = [
       { label: 'Verse',
         en: "The last few months, I've been workin' on me, baby\nThere's so much trauma in my life\nI've been so cold to the ones who loved me\nI look back now and I realize\nAnd I remember when I held you\nYou begged me with your drowning eyes to stay\nAnd I regret I didn't tell you",
         kr: "지난 몇 달간, 나 자신을 위해 노력해왔어, 자기야\n내 삶에 트라우마가 너무 많아\n날 사랑한 사람들에게 너무 차갑게 굴었어\n지금 돌아보면 깨닫게 돼\n내가 너를 안았을 때가 기억나\n잠들어가는 눈으로 있어달라고 빌었잖아\n말해주지 못한 걸 후회해",
-        nuance: "'나 자신을 위해 노력해왔다' — 뒤늦은 성장. '잠들어가는 눈으로 빌었다' — 감정적으로 절박했던 상대의 이미지. Dawn FM에서 가장 강렬한 후회의 순간."
+        nuance: "'나 자신을 위해 노력해왔다' — 뒤늦은 성장. '잠들어가는 눈으로 빌었다' — 감정적으로 절박했던 상대의 이미지. Dawn FM에서 가장 강렬한 후회의 순간.",
+        nuanceEn: "Growth that arrives too late. 'She begged with drowning eyes' — the partner's desperation he once ignored. The most intense moment of regret on Dawn FM."
       },
       { label: 'Chorus',
         en: "Say I love you, girl, but I'm out of time\nSay I'm there for you, but I'm out of time\nSay that I'll care for you, but I'm out of time\nSaid I'm too late to make you mine, out of time",
         kr: "사랑한다고 말해, 자기야, 하지만 시간이 다 됐어\n거기 있어줄 거라고 말해, 하지만 시간이 다 됐어\n돌봐줄 거라고 말해, 하지만 시간이 다 됐어\n내 것으로 만들기엔 너무 늦었어, 시간이 다 됐어",
-        nuance: "'말하지만 시간이 다 됐다' — 깨달음이 행동보다 항상 늦게 온다. 사랑, 헌신, 배려를 이제야 약속하지만 이미 늦었다. Jim Carrey의 내레이션이 죽음 이후의 세계를 묘사하며 곡을 닫는 Dawn FM 세계관."
+        nuance: "'말하지만 시간이 다 됐다' — 깨달음이 행동보다 항상 늦게 온다. 사랑, 헌신, 배려를 이제야 약속하지만 이미 늦었다. Jim Carrey의 내레이션이 죽음 이후의 세계를 묘사하며 곡을 닫는 Dawn FM 세계관.",
+        nuanceEn: "Every promise — love, presence, care — arrives too late. The chorus is an act of recognition without resolution. Jim Carrey's narration about purgatory closes the track in Dawn FM's radio universe."
       }]
   },
   {
@@ -2370,12 +2770,14 @@ var lyricsData = [
       { label: 'Verse',
         en: "I know that you're hiding something from me\nThat's been close to your heart\nI know that look you give when we're fighting\n'Cause I used to be the one who was lying",
         kr: "네가 나에게 뭔가를 숨기고 있다는 걸 알아\n마음 깊이 간직해온 것을\n우리가 싸울 때 네가 짓는 그 표정을 알아\n왜냐하면 예전엔 내가 거짓말하는 쪽이었으니까",
-        nuance: "'예전엔 내가 거짓말하는 쪽이었다' — 자기 인식. 과거의 행동이 현재의 의심으로 돌아온 것. 배신한 자가 배신당하는 것을 두려워하는 카르마."
+        nuance: "'예전엔 내가 거짓말하는 쪽이었다' — 자기 인식. 과거의 행동이 현재의 의심으로 돌아온 것. 배신한 자가 배신당하는 것을 두려워하는 카르마.",
+        nuanceEn: "'I used to be the one lying' — rare self-awareness. The cheater now terrified of being cheated on. His past behavior returning as the very paranoia that's destroying him."
       },
       { label: 'Chorus',
         en: "Is there someone else or not?\n'Cause I wanna keep you close, I don't wanna lose my spot\nIf you're hurting him, or you're hurting me\nIf I ain't with you, I don't wanna be\nI don't deserve someone loyal to me\nI swear I changed my ways for the better\n'Cause I wanna be with you forever",
         kr: "다른 사람이 있어, 없어?\n왜냐하면 가까이 두고 싶어, 내 자리를 잃고 싶지 않아\n그를 아프게 하든, 나를 아프게 하든\n너와 함께가 아니라면 있고 싶지 않아\n충실한 사람을 받을 자격이 없어\n더 나은 쪽으로 바뀌었다고 맹세해\n영원히 너와 함께하고 싶어",
         nuance: "'받을 자격이 없다' — 드문 자기 비하. 과거의 행동을 인정하며 변화를 주장하지만 상대는 이미 떠나고 있다. '영원히'를 원하지만 신뢰가 무너진 상태 — Dawn FM의 뒤늦은 깨달음.",
+        nuanceEn: "'I don't deserve someone loyal' — one of his rarest self-deprecating moments. Changed man, unchanged outcome. Wanting forever after breaking trust — Dawn FM's core tragedy.",
       }]
   },
   {
@@ -2387,12 +2789,14 @@ var lyricsData = [
       { label: 'Verse',
         en: "Remember I was your hero, yeah\nI'd wear your heart like a symbol\nI couldn't save you from my darkest truth of all\nI know I'll always be less than zero\nYou tried your best with me, I know\nI couldn't face you with my darkest truth of all",
         kr: "내가 네 영웅이었던 거 기억해, 그래\n네 마음을 상징처럼 달고 다녔어\n내 가장 어두운 진실에서 널 구할 수 없었어\n나는 항상 제로 이하일 거라는 걸 알아\n나와 함께 최선을 다했다는 거 알아\n내 가장 어두운 진실로 너를 마주할 수 없었어",
-        nuance: "'영웅이었지만 제로 이하' — 자기 이미지의 완전한 붕괴. '가장 어두운 진실' — 끝내 말하지 못한 비밀. 상대를 사랑했지만 자기 파괴적 본성을 숨길 수 없었던 것."
+        nuance: "'영웅이었지만 제로 이하' — 자기 이미지의 완전한 붕괴. '가장 어두운 진실' — 끝내 말하지 못한 비밀. 상대를 사랑했지만 자기 파괴적 본성을 숨길 수 없었던 것.",
+        nuanceEn: "Once her hero, now less than zero — total collapse of self-image. 'My darkest truth' — the secret he could never confess. He loved her but couldn't hide what he was."
       },
       { label: 'Chorus',
         en: "I can't get it out of my head\nNo, I can't shake this feeling that crawls in my bed\nI try to hide it, but I know you know me\nI try to fight it, but I'd rather be free",
         kr: "머리에서 지울 수가 없어\n침대로 기어드는 이 감각을 떨쳐낼 수 없어\n숨기려 해도 네가 나를 안다는 걸 알아\n싸우려 해도, 차라리 자유롭고 싶어",
         nuance: "'침대로 기어드는 감각' — 불안과 집착의 신체적 묘사. '네가 나를 안다' — 숨길 수 없는 진짜 자아. '차라리 자유롭고 싶다' — 관계보다 해방을 택하는 위켄드의 일관된 패턴.",
+        nuanceEn: "'This feeling crawls into my bed' — obsession made physical, inescapable. 'You know me' — no mask left to wear. Choosing freedom over love — his most consistent self-portrait.",
       }]
   },
   // ── AFTER HOURS (ACT III) ─────────────────────────────────
@@ -2406,8 +2810,7 @@ var lyricsData = [
         en: "Never need a bitch, I'm what a bitch need\nTryna find the one that can fix me\nI've been dodgin' death in the six-speed\nAmphetamine got my stummy feelin' sickly\nI want it all now, I've been runnin' through\nTryna love me, but they never get a pulse down",
         kr: "여자가 필요 없어, 내가 여자가 필요로 하는 것\n날 고칠 수 있는 사람을 찾으려 해\n6단 기어로 죽음을 피해왔어\n암페타민이 속을 메스껍게 해\n지금 당장 다 원해\n사랑하려 해도 맥박을 느낄 수가 없어",
         nuance: "Metro Boomin 협업. '날 고칠 수 있는 사람을 찾는다' — 냉정함의 이면에 있는 구원 갈망. '맥박이 없다' — 감정적 마비를 신체적으로 표현. '죽음을 피해왔다' — 실제 위험한 생활 방식의 고백.",
-        nuanceEn: "'Born in a city that never sleeps' — Toronto as origin. 'Ice in my veins' — emotional coldness as armor. His most direct self-indictment in After Hours.",
-        nuanceEn: "Knowing without wanting to know. Fear based on what he's done to others — karma returning. Suspicion hurts more than confirmation.",
+        nuanceEn: "Metro Boomin collab. 'Can't get a pulse down' — emotional deadness as a physical symptom. 'Dodgin\' death in the six-speed' — risk as lifestyle. Searching for someone to fix him while being unable to feel anything.",
       },
       { label: 'Chorus',
         en: "'Cause I'm heartless\nAnd I'm back to my ways 'cause I'm heartless\nAll this money and this pain got me heartless\nLow life for life 'cause I'm heartless\nTryna be a better man, but I'm heartless\nNever be a weddin' plan for the heartless",
@@ -2431,7 +2834,8 @@ var lyricsData = [
       { label: 'Bridge',
         en: "I've been sober for a year, now it\'s time for me to go back\nThought I\'d be a better man, but I lied to me and to you\nBut if I OD, I want you to OD right beside me\nI want you to hold me while I\'m smilin\' while I\'m dyin\'",
         kr: "1년간 맑은 정신이었어, 이제 다시 돌아갈 시간이야\n더 나은 사람이 될 거라 생각했는데, 나 자신과 너에게 거짓말했어\n하지만 내가 과다복용하면, 내 옆에서 같이 과다복용해줘\n내가 웃으면서 죽어가는 동안 안아줘",
-        nuance: "'1년의 금주 후 다시 돌아간다' — 회복과 재발의 반복. '같이 죽어달라' — 극단적 공동 파멸 욕구. After Hours 앨범에서 가장 충격적인 구절. '웃으면서 죽는다' — 고통과 황홀감의 경계."
+        nuance: "'1년의 금주 후 다시 돌아간다' — 회복과 재발의 반복. '같이 죽어달라' — 극단적 공동 파멸 욕구. After Hours 앨범에서 가장 충격적인 구절. '웃으면서 죽는다' — 고통과 황홀감의 경계.",
+        nuanceEn: "A year sober, then relapse — the cycle unbroken. 'Die with me' — mutual destruction as the ultimate intimacy. After Hours' most shocking request. The line between pain and ecstasy erased entirely."
       }]
   },
   {
@@ -2500,12 +2904,14 @@ var lyricsData = [
       { label: 'Verse',
         en: "And I know she\'ll be the death of me\nAt least we\'ll both be numb\nAnd she\'ll always get the best of me\nThe worst is yet to come\nBut at least we\'ll both be beautiful and stay forever young",
         kr: "그녀가 나를 죽게 할 거라는 걸 알아\n적어도 우린 둘 다 무감각할 거야\n그녀는 항상 나의 최선을 가져가\n최악은 아직 오지 않았어\n하지만 적어도 우린 둘 다 아름답고 영원히 젊을 거야",
-        nuance: "'나를 죽게 할 것을 알지만 사랑한다' — 파멸적 사랑의 선언. '둘 다 무감각하다' — 약물 은유. 위켄드 최초 팝 메인스트림 히트. BbtM의 상업적 전환점이면서도 자기파괴 테마는 유지."
+        nuance: "'나를 죽게 할 것을 알지만 사랑한다' — 파멸적 사랑의 선언. '둘 다 무감각하다' — 약물 은유. 위켄드 최초 팝 메인스트림 히트. BbtM의 상업적 전환점이면서도 자기파괴 테마는 유지.",
+        nuanceEn: "Knowing she'll be his death and choosing it anyway — the pure logic of self-destruction. 'We'll both be numb' — substance as equalizer. His first mainstream pop entry, but the dark themes remain untouched."
       },
       { label: 'Chorus',
         en: "I can\'t feel my face when I\'m with you\nBut I love it, but I love it\nShe told me, \"Don\'t worry about it\"\nShe told me, \"You\'ll never be alone\"",
         kr: "너와 함께일 때 얼굴이 느껴지지 않아\n하지만 좋아, 하지만 좋아\n걱정하지 말라고 했어\n절대 혼자가 아닐 거라고 했어",
-        nuance: "'얼굴이 느껴지지 않는다' — 코카인 마비 효과의 직접적 묘사이자 감정적 마비. '하지만 좋아' — 해롭다는 걸 알면서도 멈출 수 없는 중독. 공연에서 전체 관객이 함께 부르는 최대 떼창 구간."
+        nuance: "'얼굴이 느껴지지 않는다' — 코카인 마비 효과의 직접적 묘사이자 감정적 마비. '하지만 좋아' — 해롭다는 걸 알면서도 멈출 수 없는 중독. 공연에서 전체 관객이 함께 부르는 최대 떼창 구간.",
+        nuanceEn: "'Can't feel my face' — cocaine numbness and emotional detachment in one line. 'But I love it' — addiction's core logic: knowing the harm, staying anyway. The biggest singalong moment of the entire show."
       }]
   },
   {
@@ -2536,12 +2942,14 @@ var lyricsData = [
       { label: 'Verse',
         en: "I\'ve seen her get rich hittin\' the pole\nI knew she had to know\nI\'ve seen her take down that tequila, down by the liter\nOoh, she mine, ooh, girl, bump a line",
         kr: "폴댄스로 돈 버는 그녀를 봤어\n그녀가 알아야 한다는 걸 알았어\n그 테킬라를 리터로 들이켜는 걸 봤어\n그녀는 내 것이야",
-        nuance: "Lana Del Rey 피처링. Starboy 앨범에서 가장 어두운 곡. 클럽의 화려한 삶 이면의 공허함. '이름도 모르는 여자 옆에서 깨어난다' — 반복되는 일상이 된 허무."
+        nuance: "Lana Del Rey 피처링. Starboy 앨범에서 가장 어두운 곡. 클럽의 화려한 삶 이면의 공허함. '이름도 모르는 여자 옆에서 깨어난다' — 반복되는 일상이 된 허무.",
+        nuanceEn: "Features Lana Del Rey. Starboy's darkest track. The club life stripped of its glamour — just a woman on a pole, a tequila shot, a name he won't remember. Emptiness as a routine."
       },
       { label: 'Hook',
         en: "Got up, thank the Lord for the day\nWoke up by a girl, I don\'t even know her name\nParanoid, but I see somethin\' in you",
         kr: "일어나서, 오늘 하루에 감사해\n이름도 모르는 여자 옆에서 깨어났어\n편집증적이지만, 너에게서 뭔가 보여",
-        nuance: "'오늘 하루에 감사한다' — 종교적 표현이지만 이름도 모르는 여자 옆에서. 신앙과 방탕함의 병존. '편집증적이지만 뭔가 보인다' — Lana Del Rey와 교차하는 불신과 끌림."
+        nuance: "'오늘 하루에 감사한다' — 종교적 표현이지만 이름도 모르는 여자 옆에서. 신앙과 방탕함의 병존. '편집증적이지만 뭔가 보인다' — Lana Del Rey와 교차하는 불신과 끌림.",
+        nuanceEn: "Thanking God next to a stranger whose name he doesn't know — faith and debauchery coexisting. 'Paranoid but I see it' — distrust and desire crossing paths with Lana's presence."
       }]
   },
   {
@@ -2573,12 +2981,13 @@ var lyricsData = [
         en: "You know what I\'m thinkin\', see it in your eyes\nYou hate that you want me, hate it when you cry\nYou\'re scared to be lonely, \'specially in the night\nI\'m scared that I\'ll miss you, happens every time",
         kr: "내가 뭘 생각하는지 알아, 네 눈에 보여\n날 원하는 게 싫어, 울 때가 싫어\n혼자가 되는 게 두려워, 특히 밤에\n너를 그리워할까봐 두려워, 매번 그러거든",
         nuance: "서로의 두려움이 대칭을 이룬다. 상대는 자신을 원하는 것이 싫고, 화자는 그리워할까봐 두렵다. 둘 다 감정을 인정하지 않으려 하지만 이미 너무 깊이 빠진 상태.",
-        nuanceEn: "Jim Carrey's narration frames this as a message from beyond. Regret arriving too late. 'I love you but the time is up' — the whole Dawn FM album in one line.",
+        nuanceEn: "Symmetric fears — she hates wanting him, he's scared he'll miss her. Both refusing to admit what's already true. Two people in the same feeling, unable to meet in the middle.",
       },
       { label: 'Chorus',
         en: "Even though we\'re goin\' through it and it makes you feel alone\nJust know that I would die for you\nThe distance and the time between us\nIt\'ll never change my mind\n\'Cause baby, I would die for you",
         kr: "힘든 시간을 보내고 있고 외롭게 느껴지더라도\n나는 너를 위해 죽을 수 있다는 걸 알아줘\n우리 사이의 거리와 시간\n내 마음은 절대 바뀌지 않아\n왜냐하면 자기야, 나는 너를 위해 죽을 수 있어",
-        nuance: "2022년 틱톡 바이럴로 재발견된 Starboy 수록곡. '힘든 시간에도 죽을 수 있다' — 위켄드 음악에서 가장 순수한 헌신 표현. Daft Punk의 신시사이저가 감정의 진폭을 극대화. 공연 최대 감동 구간."
+        nuance: "2022년 틱톡 바이럴로 재발견된 Starboy 수록곡. '힘든 시간에도 죽을 수 있다' — 위켄드 음악에서 가장 순수한 헌신 표현. Daft Punk의 신시사이저가 감정의 진폭을 극대화. 공연 최대 감동 구간.",
+        nuanceEn: "Rediscovered via TikTok in 2022 — a buried Starboy gem. 'I would die for you' — the most uncomplicated declaration of devotion in his catalog. Daft Punk's synths amplify every emotion. The show's peak tender moment."
       }]
   },
   {
@@ -2596,7 +3005,8 @@ var lyricsData = [
       { label: 'Chorus',
         en: "Call out my name when I kiss you so gently\nI want you to stay, even though you don\'t want me\nGirl, why can\'t you wait \'til I fall out of love?",
         kr: "내가 부드럽게 키스할 때 내 이름을 불러줘\n날 원하지 않아도 있어주길 바라\n자기야, 사랑이 식을 때까지 기다릴 수 없어?",
-        nuance: "'날 원하지 않아도 있어달라' — My Dear Melancholy에서 가장 솔직한 고백. '사랑이 식을 때까지' — 이미 끝났다는 것을 알면서도 붙잡으려는 마지막 몸부림. 감정적으로 가장 날것인 구간."
+        nuance: "'날 원하지 않아도 있어달라' — My Dear Melancholy에서 가장 솔직한 고백. '사랑이 식을 때까지' — 이미 끝났다는 것을 알면서도 붙잡으려는 마지막 몸부림. 감정적으로 가장 날것인 구간.",
+        nuanceEn: "'Stay even though you don't want me' — the most exposed he gets on My Dear Melancholy. Holding on past the end because letting go is worse. Emotionally rawer than anything on a studio album."
       }]
   },
   {
@@ -2608,12 +3018,14 @@ var lyricsData = [
       { label: 'Verse',
         en: "What makes a grown man wanna cry?\nWhat makes him wanna take his life?\nHis happiness is never real\nAnd mindless sex is how he feels, he heals",
         kr: "어른이 된 남자를 울고 싶게 만드는 게 뭘까?\n그가 목숨을 끊고 싶게 만드는 게 뭘까?\n그의 행복은 절대 진짜가 아니야\n무의미한 섹스가 그가 느끼는 방법, 치유하는 방법",
-        nuance: "Gesaffelstein의 다크 일렉트로닉. My Dear Melancholy에서 가장 마비된 곡. 3인칭 자기 묘사 — 자신을 관찰자로 분리. '무의미한 섹스로 치유한다' — 감정적 공허를 신체적 감각으로 채우는 패턴."
+        nuance: "Gesaffelstein의 다크 일렉트로닉. My Dear Melancholy에서 가장 마비된 곡. 3인칭 자기 묘사 — 자신을 관찰자로 분리. '무의미한 섹스로 치유한다' — 감정적 공허를 신체적 감각으로 채우는 패턴.",
+        nuanceEn: "Gesaffelstein's dark electronic production. He speaks about himself in third person — total dissociation. 'Mindless sex is how he heals' — the body filling a void the heart can't touch. MDM's most numb moment."
       },
       { label: 'Chorus',
         en: "It was like he was never there\nIt was like he was gone in thin air\nWhen it\'s time, it won\'t matter",
         kr: "마치 그는 거기 없었던 것 같아\n마치 허공에서 사라진 것 같아\n때가 되면, 상관없을 거야",
-        nuance: "'때가 되면 상관없다' — 죽음이나 소멸에 대한 무감각한 수용. '허공에서 사라진다' — 존재 자체의 희미함. 마지막 구절 '오직 너 때문이야' — 모든 마비와 파멸의 원인을 상대에게 귀결."
+        nuance: "'때가 되면 상관없다' — 죽음이나 소멸에 대한 무감각한 수용. '허공에서 사라진다' — 존재 자체의 희미함. 마지막 구절 '오직 너 때문이야' — 모든 마비와 파멸의 원인을 상대에게 귀결.",
+        nuanceEn: "'When it's time, it won't matter' — indifference to death or erasure. 'Gone in thin air' — existence fading to nothing. The final turn: 'it's only you' — she is the origin of all the numbness and ruin."
       }]
   },
   {
@@ -2626,12 +3038,13 @@ var lyricsData = [
         en: "When I got on stage, she swore I was six feet tall\nBallin\' ain\'t an issue for me\nAnd I\'ll admit baby, I\'m a little camera shy\nBut exceptions can be made baby, \'cause you\'re too damn fly",
         kr: "무대에 올랐을 때, 그녀는 내가 180이라고 했어\n돈은 내게 문제가 아니야\n솔직히 말해서 자기야, 나는 카메라 앞에 좀 수줍어\n하지만 예외가 될 수 있어, 네가 너무 예쁘니까",
         nuance: "Kiss Land 타이틀 트랙. 2013년 첫 정규앨범. 무대 위와 뒤의 간극 — 6피트 거인처럼 보이지만 카메라엔 수줍어한다. 명성과 실제 자아 사이의 괴리감이 이미 초기부터 드러난다.",
-        nuanceEn: "Gesaffelstein's dark electronics. Third-person self-description — watching himself from outside. The body substituting for what the soul can't reach.",
+        nuanceEn: "Debut album 2013. The stage makes him six feet tall — off it, he's camera shy. Fame vs. reality already split this early. The disconnect between performance and person fully formed from the start.",
       },
       { label: 'Outro',
         en: "This ain\'t nothing to relate to\nEven if you tried, you tried, you tried",
         kr: "공감할 게 없어\n아무리 노력해도, 노력해도, 노력해도",
-        nuance: "'공감할 수 없다' — 성공 이후 도달한 세계는 일반적 경험과 완전히 단절된 곳. 반복되는 'You tried' — 이해받으려는 상대의 노력을 무력화. Kiss Land = 아무도 따라올 수 없는 고독의 왕국."
+        nuance: "'공감할 수 없다' — 성공 이후 도달한 세계는 일반적 경험과 완전히 단절된 곳. 반복되는 'You tried' — 이해받으려는 상대의 노력을 무력화. Kiss Land = 아무도 따라올 수 없는 고독의 왕국.",
+        nuanceEn: "'Nothing to relate to' — the world fame brought him is unreachable by anyone else. The repetition of 'you tried' dismisses every attempt to understand. Kiss Land = a kingdom of solitude no one can enter."
       }]
   },
   {
@@ -2643,12 +3056,14 @@ var lyricsData = [
       { label: 'Part I: House of Balloons',
         en: "You\'re in my world now, you can stay\nBut you belong to me\nIf it hurts to breathe, open a window\nYour mind wants to leave, but you can\'t go\nThis is a happy house, we\'re happy here",
         kr: "내 세상에 온 거야, 있어도 돼\n하지만 넌 내 것이야\n숨쉬기 힘들면 창문을 열어\n마음은 떠나고 싶지만, 갈 수가 없어\n이곳은 행복한 집, 우리는 여기서 행복해",
-        nuance: "2011년 SoundCloud 무명 공개. '행복한 집' — 반어. 실제로는 약과 파티로 현실을 잊는 공간. '마음은 떠나고 싶지만 갈 수 없다' — 중독과 도피의 역설. 위켄드 신화의 시작점."
+        nuance: "2011년 SoundCloud 무명 공개. '행복한 집' — 반어. 실제로는 약과 파티로 현실을 잊는 공간. '마음은 떠나고 싶지만 갈 수 없다' — 중독과 도피의 역설. 위켄드 신화의 시작점.",
+        nuanceEn: "Dropped anonymously on SoundCloud in 2011. 'This is a happy house' — pure irony. Drugs and parties as escape from reality. 'Your mind wants to leave but you can't go' — the paradox of addiction. Where the myth began."
       },
       { label: 'Part II: Glass Table Girls',
         en: "She bad and her head bad, escaping\nHer van is a Wonderland\nAnd it\'s half past six\nRead skies \'cause time don\'t exist",
         kr: "그녀는 나쁘고 그녀의 머리도 나빠, 탈출하면서\n그녀의 밴은 원더랜드야\n새벽 여섯 시 반\n하늘을 읽어, 시간이 존재하지 않으니까",
-        nuance: "'원더랜드' — Alice in Wonderland 인용. 약물로 변형된 현실. '시간이 존재하지 않는다' — 트릴로지 시대 위켄드 세계관의 핵심. 새벽 여섯 시 반 — 밤이 끝나지 않는 시간."
+        nuance: "'원더랜드' — Alice in Wonderland 인용. 약물로 변형된 현실. '시간이 존재하지 않는다' — 트릴로지 시대 위켄드 세계관의 핵심. 새벽 여섯 시 반 — 밤이 끝나지 않는 시간.",
+        nuanceEn: "'Her van is a Wonderland' — Alice in Wonderland rewritten through a drug haze. 'Time don't exist' — the Trilogy era's defining worldview. Half past six in the morning: a night that was never allowed to end."
       }]
   },
   {
@@ -2660,7 +3075,8 @@ var lyricsData = [
       { label: 'Verse',
         en: "Bring your love, baby, I could bring my shame\nBring the drugs, baby, I could bring my pain\nI got my heart right here\nI got my scars right here\nBring your body, baby, I could bring you fame",
         kr: "네 사랑을 가져와, 자기야, 나의 수치심을 가져올게\n약을 가져와, 자기야, 나의 고통을 가져올게\n여기 내 마음이 있어\n여기 내 상처가 있어\n네 몸을 가져와, 자기야, 명성을 줄게",
-        nuance: "교환의 언어. 사랑과 수치심, 약과 고통, 몸과 명성 — 모든 것이 거래된다. '여기 내 상처가 있다' — House of Balloons에서 가장 드문 취약함의 노출. 상처를 숨기지 않고 제시하는 순간."
+        nuance: "교환의 언어. 사랑과 수치심, 약과 고통, 몸과 명성 — 모든 것이 거래된다. '여기 내 상처가 있다' — House of Balloons에서 가장 드문 취약함의 노출. 상처를 숨기지 않고 제시하는 순간.",
+        nuanceEn: "Everything is a transaction — love for shame, drugs for pain, body for fame. 'I got my scars' — the rarest moment of exposed vulnerability in the mixtape era. Wounds placed on the table, not hidden."
       },
       { label: 'Chorus',
         en: "So tell me you love me, only for tonight\nEven though you don\'t love me\nJust tell me you love me\nEven though you don\'t love me",
@@ -2698,12 +3114,14 @@ var lyricsData = [
       { label: 'Verse',
         en: "You should stay with him\n\'Cause he seems like he\'s good for you\nAnd he makes you feel like you should\nBut does he know you call me when he sleeps?\nDoes he know the pictures that you keep?\nDoes he know the reasons that you cry?",
         kr: "그와 함께 있어야 해\n그가 너에게 좋은 사람인 것 같으니까\n네가 느껴야 할 것들을 느끼게 해주니까\n하지만 그가 잠들 때 나한테 전화한다는 거 알아?\n네가 간직하는 사진들 알아?\n네가 우는 이유 알아?",
-        nuance: "Swedish House Mafia와 협업. 투어 피날레 곡. '그와 함께 있어야 해' — 놓아주는 척하면서 실제론 연결을 확인하는 심리. '잠들 때 전화한다' — 비밀 관계의 핵심 이미지. 알면서 모른 척하는 위선."
+        nuance: "Swedish House Mafia와 협업. 투어 피날레 곡. '그와 함께 있어야 해' — 놓아주는 척하면서 실제론 연결을 확인하는 심리. '잠들 때 전화한다' — 비밀 관계의 핵심 이미지. 알면서 모른 척하는 위선.",
+        nuanceEn: "The tour's closing song. 'You should stay with him' — performing release while confirming the pull. 'You call me when you're sleeping' — the secret relationship's defining image. Pretending not to know what both of them know."
       },
       { label: 'Outro',
         en: "Where it truly lies\nRight here with me, babe\nIn my arms, babe",
         kr: "진짜 마음이 있는 곳\n바로 여기, 내 곁에, 자기야\n내 품 안에, 자기야",
-        nuance: "'진짜 마음이 있는 곳' — 모든 설득의 결론. 떠나보내는 척했지만 결국 자신에게 오라는 선언. Moth to a Flame — 해롭다는 걸 알면서 끌리는 것. 공연 마지막을 장식하는 이유."
+        nuance: "'진짜 마음이 있는 곳' — 모든 설득의 결론. 떠나보내는 척했지만 결국 자신에게 오라는 선언. Moth to a Flame — 해롭다는 걸 알면서 끌리는 것. 공연 마지막을 장식하는 이유.",
+        nuanceEn: "'Where it truly lies — right here with me' — every line of letting go was a lie. Moth to a Flame: drawn to what will destroy you. The reason this song closes every show."
       }]
   }
 ,
@@ -2716,7 +3134,8 @@ var lyricsData = [
       { label: 'Verse',
         en: "Take me to a time when I was young\nAnd my heart could take the drugs and heartache without loss\nBut now my bones are frail and my voice fails\nAnd my tears fall without a warning either way",
         kr: "어렸을 때로 데려가줘\n마음이 약이나 상처를 잃음 없이 견딜 수 있었을 때\n하지만 이제 뼈가 약해지고 목소리가 끊기고\n눈물이 예고도 없이 흘러",
-        nuance: "HUT 앨범 중 가장 시간을 되돌리고 싶어하는 곡. '약과 상처를 견뎠던 시절' — 이제는 그러지 못한다. 노화와 소진. '예고 없이' — 제목이 가사 안에서 감정의 갑작스러움으로 연결."
+        nuance: "HUT 앨범 중 가장 시간을 되돌리고 싶어하는 곡. '약과 상처를 견뎠던 시절' — 이제는 그러지 못한다. 노화와 소진. '예고 없이' — 제목이 가사 안에서 감정의 갑작스러움으로 연결.",
+        nuanceEn: "HUT's most nostalgic track. 'When my heart could take the drugs and heartache' — that capacity is gone now. Exhaustion and aging folded into longing. The title lives in the lyric as sudden emotion."
       },
       { label: 'Chorus',
         en: "The crowd will scream, the crowd will scream my name\nEven when the world wants me to fail\nAnd the crowd will feel, the crowd will feel my pain\nHope you\'ll love me \'til my final day",
@@ -2734,7 +3153,8 @@ var lyricsData = [
       { label: 'Verse',
         en: "Lock me up and throw away the key\nHe knows how to get the best out of me\nI\'m no force for the world to see\nTrade my whole life just to be\nTop of the world but I\'m still not free",
         kr: "나를 가두고 열쇠를 버려\n그는 내게서 최선을 끌어내는 법을 알아\n세상에 보여줄 힘이 없어\n그냥 존재하기 위해 삶 전체를 거래해\n세상 꼭대기에 있지만 여전히 자유롭지 않아",
-        nuance: "The Idol OST. Jennie, Lily-Rose Depp 협업. '꼭대기에 있지만 자유롭지 않다' — 성공과 통제의 역설. 권력 관계에서 자발적 복종을 선택하는 심리. The Idol 드라마의 핵심 테마."
+        nuance: "The Idol OST. Jennie, Lily-Rose Depp 협업. '꼭대기에 있지만 자유롭지 않다' — 성공과 통제의 역설. 권력 관계에서 자발적 복종을 선택하는 심리. The Idol 드라마의 핵심 테마.",
+        nuanceEn: "From The Idol OST with Jennie and Lily-Rose Depp. 'Lock me up and throw away the key' — chosen captivity. Power dynamics and voluntary submission. The Idol's core theme: success as a cage you build yourself."
       },
       { label: 'Chorus',
         en: "We don\'t gotta be in love, no\nI don\'t gotta be the one, no\nI just wanna be one of your girls tonight",
@@ -2752,12 +3172,14 @@ var lyricsData = [
       { label: 'The Weeknd',
         en: "Finally free, found the God in me\nAnd I want you to see I can walk on water\nFather, hold me close, don\'t let me drown\nI know You won\'t",
         kr: "마침내 자유로워져, 내 안에서 신을 찾았어\n내가 물 위를 걸을 수 있다는 걸 보여주고 싶어\n아버지, 가까이 잡아줘, 익사하게 두지 마\n그러지 않을 거라는 걸 알아",
-        nuance: "Ye의 Donda 수록. 위켄드 파트는 Donda 앨범에서 가장 종교적인 구절 중 하나. '내 안에서 신을 찾았다' — HUT의 구원 테마와 연결. '물 위를 걷는다' — 성경적 기적의 은유. 자기파괴에서 신앙으로의 전환."
+        nuance: "Ye의 Donda 수록. 위켄드 파트는 Donda 앨범에서 가장 종교적인 구절 중 하나. '내 안에서 신을 찾았다' — HUT의 구원 테마와 연결. '물 위를 걷는다' — 성경적 기적의 은유. 자기파괴에서 신앙으로의 전환.",
+        nuanceEn: "From Ye's Donda. The Weeknd's verse is one of the album's most spiritual moments — 'found the God in me.' Walking on water as biblical metaphor. The pivot from self-destruction to faith that runs through HUT."
       },
       { label: 'Kanye West',
         en: "God made it rain, the devil made it hail\nDropped out of school, but I\'m that one at Yale\nHad to go down, down, down, this the new town",
         kr: "신은 비를 내렸고, 악마는 우박을 내렸어\n학교를 그만뒀지만, 예일에 있는 그 사람이야\n내려가야 했어, 이곳이 새로운 도시야",
-        nuance: "Ye의 자기 서사. '신과 악마' — Donda 앨범 전체의 선악 이분법. '학교 중퇴했지만 예일에 있다' — 정규 교육 외의 길로 성공. 공연에서 위켄드 파트만 단독 퍼포먼스."
+        nuance: "Ye의 자기 서사. '신과 악마' — Donda 앨범 전체의 선악 이분법. '학교 중퇴했지만 예일에 있다' — 정규 교육 외의 길로 성공. 공연에서 위켄드 파트만 단독 퍼포먼스.",
+        nuanceEn: "Ye's autobiography in two bars: dropout to Yale, God made rain and devil made hail. Donda's good-vs-evil binary in microcosm. Live, The Weeknd performs his verse solo — this section is for context."
       }]
   },
   {
@@ -2769,7 +3191,8 @@ var lyricsData = [
       { label: 'Verse',
         en: "I just want a baby with the right one\n\'Cause I could never be the one to hide one\nAnd we lost a lot of things in the fire\nSo it took a year for me to find out",
         kr: "맞는 사람과 아이를 원해\n왜냐하면 숨길 수 있는 사람이 아니니까\n그리고 우린 불 속에서 많은 것들을 잃었어\n그래서 알아내는 데 1년이 걸렸어",
-        nuance: "Gesaffelstein과 협업. '맞는 사람과 아이' — 위켄드 음악에서 가장 드문 미래 지향적 발언. '불 속에서 잃은 것들' — 관계의 파괴와 상실. 다크 일렉트로닉 사운드 위의 갑작스러운 취약함."
+        nuance: "Gesaffelstein과 협업. '맞는 사람과 아이' — 위켄드 음악에서 가장 드문 미래 지향적 발언. '불 속에서 잃은 것들' — 관계의 파괴와 상실. 다크 일렉트로닉 사운드 위의 갑작스러운 취약함.",
+        nuanceEn: "Gesaffelstein collab. 'I just want a baby with the right one' — one of the rarest forward-looking statements in his work. 'We lost a lot in the fire' — destruction as the price of every relationship. Vulnerability over dark electronics."
       },
       { label: 'Chorus',
         en: "I can\'t lose you, babe\nI\'m tired of being home alone\nI used to have a girl a day\nBut I want you to stay",
@@ -2787,12 +3210,14 @@ var lyricsData = [
       { label: 'Verse',
         en: "I can hear the wind blow, even through the window\nAll the silver and gold only made my skin cold\nI told myself I would never get old\nThen you pulled me in close",
         kr: "바람 소리가 들려, 창문을 통해서도\n은과 금 전부가 피부를 차갑게 만들었어\n절대 늙지 않겠다고 다짐했어\n그런데 네가 가까이 당겨줬어",
-        nuance: "HUT에서 가장 희망적인 곡. '은과 금이 피부를 차갑게 했다' — 성공이 감정을 마비시킨 것. '절대 늙지 않겠다' — 취약해지지 않겠다는 다짐. 하지만 상대가 그 벽을 무너뜨린다."
+        nuance: "HUT에서 가장 희망적인 곡. '은과 금이 피부를 차갑게 했다' — 성공이 감정을 마비시킨 것. '절대 늙지 않겠다' — 취약해지지 않겠다는 다짐. 하지만 상대가 그 벽을 무너뜨린다.",
+        nuanceEn: "HUT's most hopeful track. 'Silver and gold only made my skin cold' — success as emotional freeze. 'Never getting old' — a vow against vulnerability. But someone is finally breaking through the wall."
       },
       { label: 'Chorus',
         en: "Where do I start when I open my heart?\nIt\'s never easy falling in love again\nCover my scars when I open my arms\nIt\'s never easy falling in love again",
         kr: "마음을 열 때 어디서부터 시작해?\n다시 사랑에 빠지는 건 절대 쉽지 않아\n팔을 벌릴 때 내 상처를 가려줘\n다시 사랑에 빠지는 건 절대 쉽지 않아",
-        nuance: "'어디서부터 시작해' — 오랫동안 닫혀있어서 사랑의 방법을 잊었다. '상처를 가려달라' — 취약함을 드러내면서도 보호를 요청. Kiss Land부터 HUT까지 쌓인 상처들을 인정하는 순간. The Weeknd 마지막 앨범의 치유."
+        nuance: "'어디서부터 시작해' — 오랫동안 닫혀있어서 사랑의 방법을 잊었다. '상처를 가려달라' — 취약함을 드러내면서도 보호를 요청. Kiss Land부터 HUT까지 쌓인 상처들을 인정하는 순간. The Weeknd 마지막 앨범의 치유.",
+        nuanceEn: "'Where do I start' — so long closed off, he's forgotten how to love. 'Cover my scars' — asking to be protected while opening up. Every wound from Kiss Land to HUT acknowledged at once. The healing on his final album."
       }]
   },
   {
@@ -2804,7 +3229,8 @@ var lyricsData = [
       { label: 'Verse',
         en: "You\'ve been scared of love and what it did to you\nYou don\'t have to run, I know what you\'ve been through\nJust a simple touch and it could set you free\nWe don\'t have to rush when you\'re alone with me",
         kr: "사랑과 그것이 너에게 한 일이 두려웠잖아\n도망칠 필요 없어, 네가 겪은 걸 알아\n간단한 접촉만으로도 자유로워질 수 있어\n나와 단둘이 있을 때 서두를 필요 없어",
-        nuance: "Daft Punk과 두 번째 협업. Starboy 마지막 트랙. '상처를 안다' — 상대의 과거를 이해하는 드문 공감. '서두를 필요 없다' — Starboy의 차갑고 과시적인 이미지와 대조. 안전과 편안함을 제공하는 위켄드의 드문 면."
+        nuance: "Daft Punk과 두 번째 협업. Starboy 마지막 트랙. '상처를 안다' — 상대의 과거를 이해하는 드문 공감. '서두를 필요 없다' — Starboy의 차갑고 과시적인 이미지와 대조. 안전과 편안함을 제공하는 위켄드의 드문 면.",
+        nuanceEn: "Second Daft Punk collab, Starboy's closer. 'I know what you've been through' — rare empathy for his partner's pain. 'No rush' — a contrast to every cold, show-off moment on Starboy. The Weeknd as safe harbor, briefly."
       },
       { label: 'Chorus',
         en: "I feel it comin\', I feel it comin\', babe",
@@ -2822,12 +3248,14 @@ var lyricsData = [
       { label: 'Lana Del Rey',
         en: "I shouldn\'t cry, but I love it, starboy",
         kr: "울면 안 되는데, 좋아, 스타보이",
-        nuance: "Lana Del Rey의 몽환적 보컬. '울면 안 되는데 좋다' — 해롭다는 걸 알면서도 포기 못하는 감정. Starboy 앨범에서 유일하게 상대방 시각으로 쓰인 구간. 1분 30초의 짧은 인터루드지만 앨범의 분위기 전환점."
+        nuance: "Lana Del Rey의 몽환적 보컬. '울면 안 되는데 좋다' — 해롭다는 걸 알면서도 포기 못하는 감정. Starboy 앨범에서 유일하게 상대방 시각으로 쓰인 구간. 1분 30초의 짧은 인터루드지만 앨범의 분위기 전환점.",
+        nuanceEn: "Lana drifting in like smoke. 'I shouldn't cry but I love it' — knowing it's harmful and loving it anyway. The only section on Starboy written from the other person's perspective. A 90-second interlude that shifts the whole album's tone."
       },
       { label: 'The Weeknd',
         en: "I just wanna see you shine\n\'Cause I know you are a stargirl",
         kr: "네가 빛나는 걸 보고 싶어\n왜냐하면 넌 스타걸이라는 걸 알기 때문에",
-        nuance: "'스타걸' — Starboy의 대응 존재. 화려한 겉모습 뒤에서 서로를 인정하는 순간. 공연에서 무대 전환 사이 짧게 삽입되는 감성적 쉼표. Lana Del Rey와의 케미가 만들어낸 Starboy 앨범의 숨겨진 보석."
+        nuance: "'스타걸' — Starboy의 대응 존재. 화려한 겉모습 뒤에서 서로를 인정하는 순간. 공연에서 무대 전환 사이 짧게 삽입되는 감성적 쉼표. Lana Del Rey와의 케미가 만들어낸 Starboy 앨범의 숨겨진 보석.",
+        nuanceEn: "The stargirl to his starboy — mutual recognition beneath all the performance. An emotional pause between stage changes at the live show. The hidden gem of Starboy, born from his chemistry with Lana."
       }]
   },
   {
@@ -2839,7 +3267,8 @@ var lyricsData = [
       { label: 'Chorus (The Weeknd)',
         en: "I don\'t wanna know\nIf you\'re playin\' me, keep it on the low\n\'Cause my heart can\'t take it anymore\nAnd if you\'re creepin\', please, don\'t let it show",
         kr: "알고 싶지 않아\n날 갖고 노는 거라면, 조용히 해줘\n왜냐하면 내 마음이 더 이상 견딜 수 없으니까\n몰래 움직이는 거라면, 드러내지 마줘",
-        nuance: "Metro Boomin의 Heroes & Villains. '알고 싶지 않다' — 진실보다 평온을 택하는 심리. 위켄드가 평소에 상대에게 했던 행동이 이제 자신에게 돌아온다는 역설. 공연에서 위켄드 파트만 단독 퍼포먼스."
+        nuance: "Metro Boomin의 Heroes & Villains. '알고 싶지 않다' — 진실보다 평온을 택하는 심리. 위켄드가 평소에 상대에게 했던 행동이 이제 자신에게 돌아온다는 역설. 공연에서 위켄드 파트만 단독 퍼포먼스.",
+        nuanceEn: "'I don't wanna know' — choosing peace over truth. The irony: what he used to do to others is now being done to him. Live, The Weeknd performs this section solo."
       },
       { label: 'Bridge',
         en: "Did he touch you better than me?\nDid he watch you fall asleep?\nDid you show him all those things that you used to do to me?",
@@ -2857,12 +3286,14 @@ var lyricsData = [
       { label: 'Drake Verse',
         en: "Seeing my family have it all\nTook the place of that desire for diplomas on the wall\nAnd really, I think I like who I\'m becoming",
         kr: "가족이 모든 걸 갖는 걸 보는 것이\n벽에 걸린 졸업장을 원하는 욕망을 대신했어\n그리고 사실, 내가 되어가는 모습이 마음에 드는 것 같아",
-        nuance: "Drake의 Take Care(2011). 명문 교육보다 가족과 크루를 택하는 선언. '내가 되어가는 모습이 마음에 든다' — 자기 수용. 위켄드가 Drake의 세계에 처음 등장한 역사적 순간."
+        nuance: "Drake의 Take Care(2011). 명문 교육보다 가족과 크루를 택하는 선언. '내가 되어가는 모습이 마음에 든다' — 자기 수용. 위켄드가 Drake의 세계에 처음 등장한 역사적 순간.",
+        nuanceEn: "Drake's Take Care (2011). Family over diplomas — a declaration of chosen loyalty. 'I like who I'm becoming' — rare self-acceptance. The historical moment: The Weeknd stepping into the world through Drake's door."
       },
       { label: 'Hook',
         en: "They loving the crew\nThey loving the crew\nOh, they loving the crew",
         kr: "크루를 사랑해\n크루를 사랑해\n오, 크루를 사랑해",
-        nuance: "반복적 선언. Crew Love — 개인보다 집단적 정체성. XO와 OVO의 초기 연대. 위켄드가 무명에서 Drake 앨범을 통해 처음 세상에 알려진 시작점."
+        nuance: "반복적 선언. Crew Love — 개인보다 집단적 정체성. XO와 OVO의 초기 연대. 위켄드가 무명에서 Drake 앨범을 통해 처음 세상에 알려진 시작점.",
+        nuanceEn: "Repetition as declaration. Crew over individual — XO and OVO's earliest alliance. The hook that introduced The Weeknd to the world before anyone knew his name. The origin point."
       }]
   },
   {
@@ -2875,73 +3306,197 @@ var lyricsData = [
         en: "From the morning to the evening, complaints from the tenants\nGot the walls kicking like they six-months pregnant\nDrinking Alizé with our cereal for breakfast\nGirls calling cabs at dawn quarter to seven",
         kr: "아침부터 저녁까지, 입주자들의 불만\n벽이 임신 6개월처럼 발길질을 해\n아침 시리얼에 알리제를 마시고\n새벽 여섯시 45분에 여자들이 택시를 불러",
         nuance: "House of Balloons 수록. '아침 시리얼에 알리제' — 낮과 밤의 경계가 없는 생활. '새벽에 택시 부르는 여자들' — 파티가 끝난 뒤의 냉혹한 현실. 2011년 무명 시절, 이미 이 삶의 방식이 완성되어 있었다.",
-        nuanceEn: "Lana Del Rey's dreamy presence. 'Don't wanna cry but it feels good' — the contradiction that defines Starboy. 90 seconds of tenderness before the album closes.",
+        nuanceEn: "From House of Balloons (2011). 'Alizé with cereal' — no boundary between night and morning. 'Girls calling cabs at quarter to seven' — the cold reality after the party. Anonymous, 20 years old, already living this fully.",
       },
       { label: 'Hook',
         en: "All that money, the money is the motive\nGirl, put in work",
         kr: "그 모든 돈, 돈이 동기야\n자기야, 일해",
-        nuance: "'돈이 동기' — Kiss Land, Starboy와 연결되는 물질주의 테마의 원점. 'Put in work' — 일과 쾌락의 경계 해체. 2011년 트릴로지 시대부터 일관된 위켄드의 세계관."
+        nuance: "'돈이 동기' — Kiss Land, Starboy와 연결되는 물질주의 테마의 원점. 'Put in work' — 일과 쾌락의 경계 해체. 2011년 트릴로지 시대부터 일관된 위켄드의 세계관.",
+        nuanceEn: "'Money is the motive' — the root of the materialism thread that runs through Kiss Land and Starboy. 'Put in work' — collapsing the line between labor and pleasure. This worldview was already fully formed in 2011."
       }]
   }
 ]
 
 var currentLyric = 0;
+var currentLcTab = 'lyrics'; // 'lyrics' | 'kr' | 'analysis'
+
+// ACT grouping for lyrics picker
+var lyricsActMap = {
+  'The Abyss': {act:'ACT I', actEn:'ACT I · HURRY UP TOMORROW'},
+  'Wake Me Up': {act:'ACT I', actEn:'ACT I · HURRY UP TOMORROW'},
+  'Cry for Me': {act:'ACT I', actEn:'ACT I · HURRY UP TOMORROW'},
+  'Sao Paulo': {act:'ACT I', actEn:'ACT I · HURRY UP TOMORROW'},
+  'Baptized in Fear': {act:'ACT I', actEn:'ACT I · HURRY UP TOMORROW'},
+  'Without a Warning': {act:'ACT I', actEn:'ACT I · HURRY UP TOMORROW'},
+  'Take My Breath': {act:'ACT II', actEn:'ACT II · DAWN FM'},
+  'Sacrifice': {act:'ACT II', actEn:'ACT II · DAWN FM'},
+  'How Do I Make You Love Me?': {act:'ACT II', actEn:'ACT II · DAWN FM'},
+  'Out of Time': {act:'ACT II', actEn:'ACT II · DAWN FM'},
+  'Is There Someone Else?': {act:'ACT II', actEn:'ACT II · DAWN FM'},
+  'Less Than Zero': {act:'ACT II', actEn:'ACT II · DAWN FM'},
+  'One of the Girls': {act:'ACT II', actEn:'ACT II · DAWN FM'},
+  'Heartless': {act:'ACT III', actEn:'ACT III · AFTER HOURS'},
+  'Faith': {act:'ACT III', actEn:'ACT III · AFTER HOURS'},
+  'After Hours': {act:'ACT III', actEn:'ACT III · AFTER HOURS'},
+  'Save Your Tears': {act:'ACT III', actEn:'ACT III · AFTER HOURS'},
+  'Hurricane': {act:'ACT III', actEn:'ACT III · AFTER HOURS'},
+  'Lost in the Fire': {act:'ACT III', actEn:'ACT III · AFTER HOURS'},
+  'Open Hearts': {act:'ACT III', actEn:'ACT III · AFTER HOURS'},
+  'Often': {act:'ACT IV', actEn:'ACT IV · CLASSICS'},
+  "Can't Feel My Face": {act:'ACT IV', actEn:'ACT IV · CLASSICS'},
+  'The Hills': {act:'ACT IV', actEn:'ACT IV · CLASSICS'},
+  'Party Monster': {act:'ACT IV', actEn:'ACT IV · CLASSICS'},
+  'Starboy': {act:'ACT IV', actEn:'ACT IV · CLASSICS'},
+  'I Feel It Coming': {act:'ACT IV', actEn:'ACT IV · CLASSICS'},
+  'Stargirl Interlude': {act:'ACT IV', actEn:'ACT IV · CLASSICS'},
+  'Die For You': {act:'ACT IV', actEn:'ACT IV · CLASSICS'},
+  'Call Out My Name': {act:'ACT IV', actEn:'ACT IV · CLASSICS'},
+  'I Was Never There': {act:'ACT IV', actEn:'ACT IV · CLASSICS'},
+  "Creepin'": {act:'ACT IV', actEn:'ACT IV · CLASSICS'},
+  'Crew Love': {act:'ACT IV', actEn:'ACT IV · CLASSICS'},
+  'Kiss Land': {act:'ACT IV', actEn:'ACT IV · CLASSICS'},
+  'House of Balloons': {act:'ACT IV', actEn:'ACT IV · CLASSICS'},
+  'Wicked Games': {act:'ACT IV', actEn:'ACT IV · CLASSICS'},
+  'The Morning': {act:'ACT IV', actEn:'ACT IV · CLASSICS'},
+  'Blinding Lights': {act:'FINALE', actEn:'FINALE'},
+  'Moth to a Flame': {act:'FINALE', actEn:'FINALE'},
+};
+
+var actOrder = ['ACT I','ACT II','ACT III','ACT IV','FINALE'];
+var actLabels = {
+  ko: {
+    'ACT I': 'ACT I · HURRY UP TOMORROW',
+    'ACT II': 'ACT II · DAWN FM',
+    'ACT III': 'ACT III · AFTER HOURS',
+    'ACT IV': 'ACT IV · CLASSICS',
+    'FINALE': 'FINALE'
+  },
+  en: {
+    'ACT I': 'ACT I · HURRY UP TOMORROW',
+    'ACT II': 'ACT II · DAWN FM',
+    'ACT III': 'ACT III · AFTER HOURS',
+    'ACT IV': 'ACT IV · CLASSICS',
+    'FINALE': 'FINALE'
+  }
+};
 
 function renderLyricsPicker() {
-  document.getElementById('lyricsPicker').innerHTML = lyricsData.map(function(l, i) {
-    return '<button class="lyric-pick-btn' + (i === 0 ? ' active' : '') + '" onclick="selectLyric(' + i + ', this)">' + l.title + '<\/button>';
-  }).join('');
+  var groups = {};
+  actOrder.forEach(function(a){ groups[a] = []; });
+  lyricsData.forEach(function(l, i) {
+    var act = (lyricsActMap[l.title] || {act:'ACT IV'}).act;
+    if (!groups[act]) groups[act] = [];
+    groups[act].push({l:l, i:i});
+  });
+
+  var html = '<div style="margin-bottom:36px">';
+  actOrder.forEach(function(act) {
+    if (!groups[act] || groups[act].length === 0) return;
+    var label = actLabels[currentLang] ? actLabels[currentLang][act] : act;
+    html += '<div class="lyrics-act-group">'
+      + '<div class="lyrics-act-label">' + label + '<\/div>'
+      + '<div class="lyrics-act-songs">';
+    groups[act].forEach(function(item) {
+      html += '<button class="lyric-pick-btn' + (item.i === currentLyric ? ' active' : '') + '" onclick="selectLyric(' + item.i + ', this)">' + item.l.title + '<\/button>';
+    });
+    html += '<\/div><\/div>';
+  });
+  html += '<\/div>';
+  document.getElementById('lyricsPicker').innerHTML = html;
 }
 
 function selectLyric(i, btn) {
   currentLyric = i;
   document.querySelectorAll('.lyric-pick-btn').forEach(function(b){ b.classList.remove('active'); });
-  btn.classList.add('active');
+  if (btn) btn.classList.add('active');
   renderLyricCard();
-  setTimeout(function() {
-    var card = document.getElementById('lyricCard');
-    if (card) {
-      var top = card.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top: top, behavior: 'smooth' });
-    }
-  }, 50);
+  document.getElementById('lyricModal').classList.add('open');
+  document.getElementById('lyricModalBox').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLyricModal(e) {
+  if (e && e.target !== document.getElementById('lyricModal')) return;
+  document.getElementById('lyricModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function setLcTab(tab) {
+  currentLcTab = tab;
+  document.querySelectorAll('.lc-tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  var activeBtn = document.querySelector('.lc-tab-btn[data-tab="' + tab + '"]');
+  if (activeBtn) activeBtn.classList.add('active');
+  document.querySelectorAll('.lc-col-lyrics').forEach(function(el){ el.style.display = (tab === 'lyrics' || tab === 'kr') ? 'block' : 'none'; });
+  document.querySelectorAll('.lc-col-right').forEach(function(el){ el.style.display = (tab === 'kr' || tab === 'analysis') ? 'block' : 'none'; });
+  document.querySelectorAll('.lc-nuance-box').forEach(function(el){ el.style.display = (tab === 'analysis') ? 'block' : 'none'; });
+  if (tab === 'lyrics') {
+    document.querySelectorAll('.lc-col-lyrics').forEach(function(el){ el.style.display = 'block'; });
+    document.querySelectorAll('.lc-col-right').forEach(function(el){ el.style.display = 'none'; });
+    document.querySelectorAll('.lc-nuance-box').forEach(function(el){ el.style.display = 'none'; });
+  } else if (tab === 'kr') {
+    document.querySelectorAll('.lc-col-lyrics').forEach(function(el){ el.style.display = 'none'; });
+    document.querySelectorAll('.lc-col-right').forEach(function(el){ el.style.display = 'block'; });
+    document.querySelectorAll('.lc-nuance-box').forEach(function(el){ el.style.display = 'none'; });
+  } else {
+    document.querySelectorAll('.lc-col-lyrics').forEach(function(el){ el.style.display = 'none'; });
+    document.querySelectorAll('.lc-col-right').forEach(function(el){ el.style.display = 'none'; });
+    document.querySelectorAll('.lc-nuance-box').forEach(function(el){ el.style.display = 'block'; });
+  }
 }
 
 function renderLyricCard() {
   var l = lyricsData[currentLyric];
+  var isEn = currentLang === 'en';
+  var actInfo = lyricsActMap[l.title] || {act:'', actEn:''};
+  var actLabel = isEn ? actInfo.actEn : actInfo.act;
+
   var sections = '';
   for (var s = 0; s < l.sections.length; s++) {
     var sec = l.sections[s];
-    var isEn = currentLang === 'en';
-    var rightLabel = isEn ? '💡 ANALYSIS' : 'Korean Translation';
+    var rightColLabel = isEn ? '💡 ANALYSIS' : '한국어';
     var rightContent = isEn
-      ? '<p style="font-size:0.82rem;line-height:1.8;color:rgba(240,236,230,0.8)">' + (sec.nuanceEn || sec.nuance) + '<\/p>'
-      : '<pre style="font-family:inherit;font-size:0.85rem;line-height:1.9;white-space:pre-wrap;color:rgba(240,236,230,0.75)">' + sec.kr + '<\/pre>';
-    var nuanceBox = (isEn || !sec.nuance) ? '' : '<div style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray);border-top:none"><div style="font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);margin-bottom:8px">💡 뉘앙스<\/div><p style="font-size:0.82rem;line-height:1.8;color:rgba(240,236,230,0.7)">' + sec.nuance + '<\/p><\/div>';
-    sections += '<div style="margin-bottom:32px">'
-      + '<div style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--neon-red);margin-bottom:14px">' + sec.label + '<\/div>'
-      + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--gray)" class="lyric-cols">'
-      + '<div style="padding:20px 24px;border-right:1px solid var(--gray)">'
-      + '<div style="font-size:0.65rem;letter-spacing:0.2em;color:var(--light-gray);margin-bottom:10px">LYRICS<\/div>'
-      + '<pre style="font-family:inherit;font-size:0.85rem;line-height:1.9;white-space:pre-wrap;color:var(--white)">' + sec.en + '<\/pre>'
+      ? (sec.nuanceEn ? '<p style="font-size:0.82rem;line-height:1.9;color:rgba(240,236,230,0.82)">' + sec.nuanceEn + '<\/p>' : '<p style="font-size:0.8rem;color:var(--gray)">—<\/p>')
+      : '<pre style="font-family:inherit;font-size:0.85rem;line-height:1.9;white-space:pre-wrap;color:rgba(240,236,230,0.78)">' + sec.kr + '<\/pre>';
+    var nuanceKo = (!isEn && sec.nuance)
+      ? '<div class="lc-nuance-box"><div style="font-size:0.58rem;letter-spacing:0.25em;color:var(--gold);margin-bottom:8px">💡 뉘앙스<\/div><p style="font-size:0.8rem;line-height:1.85;color:rgba(240,236,230,0.7)">' + sec.nuance + '<\/p><\/div>'
+      : '';
+
+    sections += '<div class="lc-section">'
+      + '<div class="lc-section-label">' + sec.label + '<\/div>'
+      + '<div class="lc-cols">'
+      + '<div class="lc-col lc-col-lyrics"><div class="lc-col-label" style="color:var(--light-gray)">LYRICS<\/div><pre style="font-family:inherit;font-size:0.85rem;line-height:1.95;white-space:pre-wrap;color:var(--white)">' + sec.en + '<\/pre><\/div>'
+      + '<div class="lc-col lc-col-right"><div class="lc-col-label" style="color:var(--gold)">' + rightColLabel + '<\/div>' + rightContent + '<\/div>'
       + '<\/div>'
-      + '<div style="padding:20px 24px">'
-      + '<div style="font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);margin-bottom:10px">' + rightLabel + '<\/div>'
-      + rightContent
-      + '<\/div><\/div>'
-      + nuanceBox
+      + nuanceKo
       + '<\/div>';
   }
+
+  var tabLyrics = isEn ? 'LYRICS' : '가사';
+  var tabKr = isEn ? 'TRANSLATION' : '번역';
+  var tabAnalysis = isEn ? 'ANALYSIS' : '해석';
+
   document.getElementById('lyricCard').innerHTML =
-    '<div style="padding:20px 28px;border-bottom:1px solid var(--gray);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">'
-    + '<div><div style="font-family:Oswald,sans-serif;font-size:1.4rem">' + l.title + '<\/div>'
-    + '<div style="font-size:0.72rem;color:var(--neon-red);letter-spacing:0.15em;text-transform:uppercase;margin-top:4px">' + l.album + '<\/div><\/div>'
-    + '<div style="display:flex;gap:8px">'
-    + '<a href="' + l.youtube + '" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;background:#ff0000;color:#fff;text-decoration:none;font-size:0.78rem;font-family:Oswald,sans-serif;letter-spacing:0.1em">▶ YouTube<\/a>'
-    + '<a href="' + l.spotify + '" target="_blank" style="display:inline-flex;align-items:center;padding:8px 14px;background:#1db954;color:#000;text-decoration:none;font-size:0.78rem;font-family:Oswald,sans-serif;letter-spacing:0.1em">♫ Spotify<\/a>'
-    + '<\/div><\/div>'
-    + '<div style="padding:28px">' + sections + '<\/div>'
-    + '<div style="padding:14px 28px;border-top:1px solid var(--gray);font-size:0.72rem;color:var(--light-gray)">* Translations and notes are interpretive.<\/div>';
+    '<div class="lc-header">'
+    + '<div>'
+    + (actLabel ? '<div class="lc-act-badge">' + actLabel + '<\/div>' : '')
+    + '<div class="lc-title">' + l.title + '<\/div>'
+    + '<div class="lc-album">' + l.album + '<\/div>'
+    + '<\/div>'
+    + '<div class="lc-links">'
+    + '<a href="' + l.youtube + '" target="_blank" class="lc-link-btn" style="background:#c00;color:#fff">▶ YouTube<\/a>'
+    + '<a href="' + l.spotify + '" target="_blank" class="lc-link-btn" style="background:#1db954;color:#000">♫ Spotify<\/a>'
+    + '<\/div>'
+    + '<\/div>'
+    + '<div class="lc-tabs">'
+    + '<button class="lc-tab-btn' + (currentLcTab==='lyrics'?' active':'') + '" data-tab="lyrics" onclick="setLcTab(\'lyrics\')">' + tabLyrics + '<\/button>'
+    + '<button class="lc-tab-btn' + (currentLcTab==='kr'?' active':'') + '" data-tab="kr" onclick="setLcTab(\'kr\')">' + tabKr + '<\/button>'
+    + '<button class="lc-tab-btn' + (currentLcTab==='analysis'?' active':'') + '" data-tab="analysis" onclick="setLcTab(\'analysis\')">' + tabAnalysis + '<\/button>'
+    + '<\/div>'
+    + sections
+    + '<div class="lc-footer">* Translations and nuance notes are interpretive.</div>';
+
+  // Apply current tab on mobile
+  if (window.innerWidth <= 600) { setLcTab(currentLcTab); }
 }
 
 renderLyricsPicker();

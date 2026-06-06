@@ -1490,6 +1490,74 @@
       .lyric-modal-topbar { border-radius: 16px 16px 0 0; }
       .lyric-modal-box { border-bottom: none; }
     }
+  
+    /* ── STORY SECTION ── */
+    .story-year-block {
+      position: relative;
+      padding: 0 0 28px 28px;
+    }
+    .story-year-block:last-child { padding-bottom: 0; }
+    .story-dot {
+      position: absolute;
+      left: -5px;
+      top: 4px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--gray);
+      border: 1px solid var(--light-gray);
+    }
+    .story-year {
+      font-family: Oswald, sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--light-gray);
+      margin-bottom: 6px;
+    }
+    .story-text {
+      font-size: 0.85rem;
+      line-height: 1.85;
+      color: rgba(240,236,230,0.82);
+    }
+    .story-detail {
+      background: var(--dark3);
+      border: 1px solid var(--gray);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .story-detail[open] { border-color: var(--neon-red); }
+    .story-detail summary {
+      padding: 18px 22px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+    }
+    .story-detail summary::-webkit-details-marker { display: none; }
+    .story-detail summary::after {
+      content: '+';
+      margin-left: auto;
+      font-family: Oswald, sans-serif;
+      font-size: 1.1rem;
+      color: var(--neon-red);
+      transition: transform 0.2s;
+    }
+    .story-detail[open] summary::after { content: '−'; }
+    .story-detail-body {
+      padding: 0 22px 22px;
+      font-size: 0.84rem;
+      line-height: 1.9;
+      color: rgba(240,236,230,0.78);
+      border-top: 1px solid var(--gray);
+      padding-top: 18px;
+    }
+    .story-detail-body p { margin: 0; }
+    .story-detail-body strong { color: var(--white); }
+
   </style>
 
 <script>
@@ -1508,10 +1576,10 @@ var i18n = {
     tagLyrics: '🎵 Lyrics', titleLyrics: '가사 &<br>한국어 해석',
     tagQuiz: '🎤 Quiz', titleQuiz: '당신은 진짜<br>위켄드 팬?',
     tagLcard: '🎴 Lyrics Card', titleLcard: '오늘의<br>위켄드 가사', descLcard: '랜덤으로 뽑은 가사 한 구절.<br>공연 전 감성을 올려보세요.',
-    tagVote: '🗳️ Wishlist Vote', titleVote: '서울 공연에서<br>꼭 듣고 싶은 곡은?',
-    tagGuide: '🎪 Tour Guide', titleGuide: '공연장 가이드<br>& XO 문화',
-    tagSetcheck: '✅ Live Check', titleSetcheck: '셋리스트<br>실시간 체크', descSetcheck: '공연 당일 곡이 나올 때마다 체크해보세요.<br>몇 곡이나 예측했나요?',
-    tagType: '🎭 Weeknd Type Test', titleType: '나는 어떤<br>위켄드 유형?', descType: '8가지 질문으로 알아보는 나의 위켄드 노래 유형.<br>공유하고 친구와 비교해보세요.',
+    tagPrep: '🎟️ 공연 준비', titlePrep: '공연 전<br>완벽 준비 가이드',
+    tagCulture: '🔴 XO 문화', titleCulture: '공연장 문화<br>& XO 세계관',
+    tagStory: '📖 위켄드 스토리', titleStory: 'Abel의<br>이야기',
+    tagType: '🎭 유형 테스트', titleType: '나의 MBTI로<br>위켄드 곡 찾기', descType: 'MBTI를 선택하거나 질문으로 알아보세요. 당신의 위켄드 노래를 찾아드립니다.',
     shareTitle: '이 페이지 공유하기',
     checklistItems: [
       '🎫 티켓 (NOL 앱 실행 확인)', '🪪 실물 신분증 (만 19세 이상 확인용)',
@@ -1532,10 +1600,10 @@ var i18n = {
     tagLyrics: '🎵 Lyrics', titleLyrics: 'Lyrics &<br>Deep Dives',
     tagQuiz: '🎤 Quiz', titleQuiz: 'Are You a True<br>Weeknd Fan?',
     tagLcard: '🎴 Lyrics Card', titleLcard: "Today's<br>Lyric", descLcard: 'A random lyric from the setlist.<br>Feel the vibe before the show.',
-    tagVote: '🗳️ Wishlist Vote', titleVote: 'Which songs do<br>you want to hear?',
-    tagGuide: '🎪 Concert Guide', titleGuide: 'International Fan<br>Guide',
-    tagSetcheck: '✅ Live Check', titleSetcheck: 'Live Setlist<br>Tracker', descSetcheck: 'Check off songs as they play.<br>How many did you predict?',
-    tagType: '🎭 Weeknd Type Test', titleType: 'Which Weeknd<br>Type Are You?', descType: '8 questions to find your Weeknd song match.<br>Share and compare with friends.',
+    tagPrep: '🎟️ Concert Prep', titlePrep: 'Pre-Concert<br>Complete Guide',
+    tagCulture: '🔴 XO Culture', titleCulture: 'Concert Culture<br>& XO World',
+    tagStory: '📖 His Story', titleStory: "Abel's<br>Story",
+    tagType: '🎭 Type Test', titleType: 'Find Your Weeknd Song<br>by MBTI', descType: 'Pick your MBTI or take the question test to find your Weeknd song.',
     shareTitle: 'Share This Page',
     checklistItems: [
       '🎫 Ticket (check NOL app works)', '🪪 Photo ID (age 19+ required)',
@@ -1560,14 +1628,14 @@ function applyI18n() {
   set('hero-sub', t.heroSub);
   set('scroll-hint', t.scrollHint);
   set('tag-dday', t.tagDday); set('title-dday', t.titleDday);
-  set('tag-checklist', t.tagChecklist); set('title-checklist', t.titleChecklist);
+  set('tag-prep', t.tagPrep); set('title-prep', t.titlePrep);
+  set('tag-culture', t.tagCulture); set('title-culture', t.titleCulture);
+  set('tag-story', t.tagStory); set('title-story', t.titleStory);
   set('tag-disco', t.tagDisco); set('title-disco', t.titleDisco);
   set('tag-setlist', t.tagSetlist); set('title-setlist', t.titleSetlist);
   // lyrics section removed — merged into setlist
   set('tag-quiz', t.tagQuiz); set('title-quiz', t.titleQuiz);
   set('tag-lcard', t.tagLcard); set('title-lcard', t.titleLcard); set('desc-lcard', t.descLcard);
-  set('tag-vote', t.tagVote); set('title-vote', t.titleVote);
-  set('tag-guide', t.tagGuide); set('title-guide', t.titleGuide);
   set('tag-type', t.tagType); set('title-type', t.titleType); set('desc-type', t.descType);
   // Nav buttons
   document.querySelectorAll('#mainNav .nav-btn').forEach(function(btn) {
@@ -1577,10 +1645,12 @@ function applyI18n() {
   // Share title
   var shareH = document.querySelector('#share-section h3');
   if (shareH) shareH.textContent = t.shareTitle;
-  // Guide tabs
-  document.querySelectorAll('#guide .disco-tab').forEach(function(b) {
-    var key = currentLang === 'en' ? b.dataset.en : b.dataset.ko;
-    if (key) b.textContent = key;
+  // 섹션 탭 레이블 업데이트
+  ['#prepTabs', '#cultureTabs', '#typeTabs'].forEach(function(sel) {
+    document.querySelectorAll(sel + ' .disco-tab').forEach(function(b) {
+      var key = currentLang === 'en' ? b.dataset.en : b.dataset.ko;
+      if (key) b.textContent = key;
+    });
   });
   // Update dday-main after title re-render
   updateCounter();
@@ -1596,6 +1666,80 @@ document.addEventListener('DOMContentLoaded', function() {
   applyI18n();
 });
 </script>
+  <!-- JSON-LD 구조화 데이터 (Google Rich Snippet) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicEvent",
+    "name": "The Weeknd Seoul 2026 — 현대카드 슈퍼콘서트 28",
+    "alternateName": "위켄드 서울 공연 2026",
+    "startDate": "2026-10-07T19:00:00+09:00",
+    "endDate": "2026-10-08T23:00:00+09:00",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "MusicVenue",
+      "name": "고양종합운동장",
+      "alternateName": "Goyang Sports Complex",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "지영로 33",
+        "addressLocality": "고양시 덕양구",
+        "addressRegion": "경기도",
+        "addressCountry": "KR"
+      }
+    },
+    "performer": {
+      "@type": "MusicGroup",
+      "name": "The Weeknd",
+      "sameAs": [
+        "https://www.theweeknd.com",
+        "https://www.instagram.com/theweeknd",
+        "https://open.spotify.com/artist/1Xyo4u8uXC1ZmMpatF05PJ"
+      ]
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "현대카드",
+      "url": "https://www.hyundaicard.com"
+    },
+    "description": "위켄드 서울 2026 공연 완벽 가이드 — D-DAY 카운트다운, 셋리스트 분석, 가사 한국어 해석, 공연장 팁, MBTI 유형 테스트까지.",
+    "image": "https://YOUR-SITE-URL.com/og-image.jpg",
+    "url": "https://YOUR-SITE-URL.com",
+    "inLanguage": ["ko", "en"],
+    "keywords": "위켄드 서울, The Weeknd Seoul, 현대카드 슈퍼콘서트 28, 위켄드 공연, 위켄드 셋리스트, 위켄드 가사, 고양종합운동장"
+  }
+  </script>
+
+  <!-- FAQ 구조화 데이터 (자주 묻는 질문 → Google 검색 결과에 펼쳐짐) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "위켄드 서울 공연 날짜는?",
+        "acceptedAnswer": { "@type": "Answer", "text": "2026년 10월 7일(수)~8일(목), 고양종합운동장. 현대카드 슈퍼콘서트 28." }
+      },
+      {
+        "@type": "Question",
+        "name": "위켄드 서울 공연 셋리스트는?",
+        "acceptedAnswer": { "@type": "Answer", "text": "After Hours Til Dawn 투어 기준 약 36~38곡. ACT I(Hurry Up Tomorrow) → ACT II(Dawn FM) → ACT III(After Hours) → ACT IV(클래식) → FINALE(Blinding Lights, Moth to a Flame) 순서." }
+      },
+      {
+        "@type": "Question",
+        "name": "위켄드 서울 공연 교통편은?",
+        "acceptedAnswer": { "@type": "Answer", "text": "지하철 3호선 대화역 하차 후 셔틀버스 이용 권장. 10만 명 규모 공연으로 자차 이용 불가." }
+      },
+      {
+        "@type": "Question",
+        "name": "위켄드 서울 공연 오프닝은?",
+        "acceptedAnswer": { "@type": "Answer", "text": "일본 힙합 듀오 Creepy Nuts가 오후 6시 45분 오프닝 공연. 위켄드 본무대는 오후 7시 45분 예정." }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -1651,13 +1795,12 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="nav-scroll-wrap">
     <div class="nav-items">
       <button class="nav-btn active" onclick="goTo('dday', this)" data-ko="D-DAY" data-en="D-DAY">D-DAY</button>
+      <button class="nav-btn" onclick="goTo('concert-prep', this)" data-ko="공연 준비" data-en="Prep Guide">공연 준비</button>
+      <button class="nav-btn" onclick="goTo('xo-culture', this)" data-ko="XO 문화" data-en="XO Culture">XO 문화</button>
+      <button class="nav-btn" onclick="goTo('story', this)" data-ko="위켄드 스토리" data-en="His Story">위켄드 스토리</button>
       <button class="nav-btn" onclick="goTo('disco', this)" data-ko="필모그래피" data-en="Discography">필모그래피</button>
       <button class="nav-btn" onclick="goTo('setlist-combined', this)" data-ko="셋리스트 · 가사" data-en="Setlist & Lyrics">셋리스트</button>
-      <button class="nav-btn" onclick="goTo('vote', this)" data-ko="위시리스트" data-en="Wishlist">위시리스트</button>
-
       <button class="nav-btn" onclick="goTo('quiz', this)" data-ko="퀴즈" data-en="Quiz">퀴즈</button>
-      <button class="nav-btn" onclick="goTo('lyrics-card', this)" data-ko="가사 뽑기" data-en="Lyric Card">가사 뽑기</button>
-      <button class="nav-btn" onclick="goTo('guide', this)" data-ko="공연 가이드" data-en="Concert Guide">공연 가이드</button>
       <button class="nav-btn" onclick="goTo('type-test', this)" data-ko="유형 테스트" data-en="Type Test">유형 테스트</button>
 
     </div>
@@ -1731,39 +1874,422 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
 
-  <div class="section-header" style="margin-top:60px">
-    <span class="section-tag" id="tag-checklist">체크리스트</span>
-    <h3 class="section-title" id="title-checklist" style="font-size:1.8rem">공연 전<br>준비물</h3>
-  </div>
-
-  <div class="checklist" id="checklist"></div>
 </section>
 
 <div class="divider"></div>
 
-<!-- SETLIST VOTE -->
-<section id="vote">
+<!-- CONCERT PREP -->
+<section id="concert-prep">
   <div class="section-header">
-    <span class="section-tag" id="tag-vote">🗳️ Wishlist Vote</span>
-    <h2 class="section-title" id="title-vote">서울 공연에서<br>꼭 듣고 싶은 곡은?</h2>
-    <p id="desc-vote" style="color:var(--light-gray);font-size:0.88rem;margin-top:16px;line-height:1.7">원하는 곡에 투표하세요. 결과는 내 브라우저에 저장됩니다.</p>
+    <span class="section-tag" id="tag-prep">🎟️ 공연 준비</span>
+    <h2 class="section-title" id="title-prep">공연 전<br>완벽 준비 가이드</h2>
+    <p id="desc-prep" style="color:var(--light-gray);font-size:0.88rem;margin-top:16px;line-height:1.7"><span class="ko-only">체크리스트부터 교통·좌석·굿즈까지. 이것만 보면 준비 끝.</span><span class="en-only">Checklist, transport, seats, and merch — everything you need before the show.</span></p>
   </div>
 
-  <div style="display:grid;gap:28px">
-    <!-- 투표 영역 -->
-    <div id="voteGrid" style="display:grid;gap:8px"></div>
+  <div class="disco-tabs" id="prepTabs">
+    <button class="disco-tab active" onclick="switchPrepTab('checklist',this)" data-ko="✅ 준비물" data-en="✅ Checklist">✅ 준비물</button>
+    <button class="disco-tab" onclick="switchPrepTab('transport',this)" data-ko="교통편" data-en="Getting There">교통편</button>
+    <button class="disco-tab" onclick="switchPrepTab('seats',this)" data-ko="좌석 뷰" data-en="Seat Views">좌석 뷰</button>
+    <button class="disco-tab" onclick="switchPrepTab('tips',this)" data-ko="현장 팁" data-en="On-Site Tips">현장 팁</button>
+    <button class="disco-tab" onclick="switchPrepTab('goods',this)" data-ko="공식 굿즈" data-en="Official Merch">공식 굿즈</button>
+  </div>
 
-    <!-- 내 위시리스트 요약 -->
-    <div id="voteSummary" style="display:none;background:var(--dark3);border:1px solid var(--neon-red);padding:24px 28px">
-      <div style="font-size:0.65rem;letter-spacing:0.25em;color:var(--neon-red);margin-bottom:14px">🔴 <span id="vote-summary-label">내 위시리스트</span></div>
-      <div id="voteSummaryList" style="display:flex;flex-wrap:wrap;gap:8px"></div>
-      <button onclick="resetVotes()" style="margin-top:18px;padding:7px 18px;background:none;border:1px solid var(--gray);color:var(--light-gray);font-family:Oswald,sans-serif;font-size:0.72rem;letter-spacing:0.1em;cursor:pointer" id="vote-reset-btn">초기화</button>
+  <div class="disco-panel active" id="prep-checklist">
+    <div id="prepChecklistArea"></div>
+  </div>
+
+  <div class="disco-panel" id="prep-transport">
+    <div style="display:grid;gap:14px" class="ko-only">
+      <div style="background:var(--dark3);border:1px solid var(--neon-red);padding:24px 28px"><div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:12px">⚠️ 핵심 요약</div><p style="font-size:0.88rem;font-weight:700;color:var(--white)">차는 절대 포기. 10만 명 규모 행사에서 주차장은 없다고 생각하세요.</p></div>
+      <div class="setlist-note-item" style="padding:18px 20px;background:var(--dark3);border:1px solid var(--gray)">🚇 <strong>지하철 + 셔틀 (권장)</strong><br>3호선 대화역 하차 → 셔틀버스 탑승. 대화역 → 고양종합운동장 약 10~15분.</div>
+      <div class="setlist-note-item" style="padding:18px 20px;background:var(--dark3);border:1px solid var(--gray)">🚌 <strong>버스</strong><br>고양 시내버스 다수 노선이 운동장 인근 정차. 공연 당일 임시 노선 추가 예정.</div>
+      <div class="setlist-note-item" style="padding:18px 20px;background:var(--dark3);border:1px solid var(--gray)">🚕 <strong>택시 / 카카오T</strong><br>공연 후: 수요 폭증으로 대기 30~40분 예상. 사전에 귀가 경로 계획 필수.</div>
+      <div class="setlist-note-item" style="padding:18px 20px;background:var(--dark3);border:1px solid var(--gray)">⏰ <strong>추천 타임라인</strong><br>굿즈: 3~4시간 전 / 자리: 1~2시간 전 / 오프닝: 18:00 전 / 귀가: 공연 후 20~30분 여유</div>
+    </div>
+    <div style="display:grid;gap:14px" class="en-only">
+      <div style="background:var(--dark3);border:1px solid var(--neon-red);padding:24px 28px"><div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:12px">⚠️ Key Summary</div><p style="font-size:0.88rem;font-weight:700;color:var(--white)">Do NOT drive. Assume zero parking for a 100,000-person event.</p></div>
+      <div class="setlist-note-item" style="padding:18px 20px;background:var(--dark3);border:1px solid var(--gray)">🚇 <strong>Subway + Shuttle (Recommended)</strong><br>Take Line 3 (Orange) to Daehwa Station → Shuttle bus. ~10–15 min to venue.</div>
+      <div class="setlist-note-item" style="padding:18px 20px;background:var(--dark3);border:1px solid var(--gray)">🚕 <strong>Taxi / Kakao T</strong><br>After the show: huge surge — expect 30–40 min wait. Plan your return route in advance.</div>
+      <div class="setlist-note-item" style="padding:18px 20px;background:var(--dark3);border:1px solid var(--gray)">🌍 <strong>From Seoul (International Fans)</strong><br>From Hongdae/Itaewon: ~50–60 min by subway. From Incheon Airport: ~90 min.</div>
+      <div class="setlist-note-item" style="padding:18px 20px;background:var(--dark3);border:1px solid var(--gray)">⏰ <strong>Recommended Timeline</strong><br>Merch: 3–4 hrs early / Seat: 1–2 hrs early / Opening act: before 6 PM / After show: wait 20–30 min before leaving</div>
     </div>
   </div>
+
+  <div class="disco-panel" id="prep-seats">
+    <div style="display:grid;gap:16px" class="ko-only">
+      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">🏟️ 고양종합운동장 구역 안내</div>
+        <div style="display:grid;gap:12px;font-size:0.85rem;line-height:1.8;color:rgba(240,236,230,0.85)">
+          <div style="background:rgba(255,36,66,0.08);padding:14px 18px;border-left:3px solid var(--neon-red)"><strong>🔥 스탠딩 (그라운드)</strong><br>무대와 가장 가까워 몰입감 최고. 장시간 서있어야 하며 앞자리 경쟁 치열. 운동화·보조배터리 필수.</div>
+          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><strong>💺 1층 지정석 (하단 트랙)</strong><br>스탠딩 바로 옆. 앉아서 볼 수 있고 시야 확보 용이. PixMob 팔찌 효과가 가장 잘 보이는 구간.</div>
+          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><strong>🎭 2층 지정석 (중단)</strong><br>무대 전체를 내려다보는 시야. 공연 연출(레이저·화염·LED)을 가장 잘 볼 수 있는 구역.</div>
+          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><strong>🌟 3층 지정석 (상단)</strong><br>전체 조감도 뷰. PixMob 팔찌로 객석 전체가 빛나는 장면이 장관.</div>
+        </div>
+        <div style="margin-top:16px;padding:12px 16px;background:rgba(255,36,66,0.05);font-size:0.78rem;color:var(--light-gray)">💡 어느 자리든 PixMob 리스트밴드로 일체감은 동일. 음향은 중앙 구역이 가장 균형 잡힘.</div>
+      </div>
+    </div>
+    <div style="display:grid;gap:16px" class="en-only">
+      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">🏟️ Goyang Sports Complex — Zone Guide</div>
+        <div style="display:grid;gap:12px;font-size:0.85rem;line-height:1.8;color:rgba(240,236,230,0.85)">
+          <div style="background:rgba(255,36,66,0.08);padding:14px 18px;border-left:3px solid var(--neon-red)"><strong>🔥 Standing Pit (Ground)</strong><br>Closest to stage — maximum immersion. Long periods of standing, competitive for front spots. Sneakers &amp; power bank essential.</div>
+          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><strong>💺 Level 1 Reserved (Lower Track)</strong><br>Right next to the pit. Seated, clear sightlines. Best area to see the PixMob wristband effects.</div>
+          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><strong>🎭 Level 2 Reserved (Mid-tier)</strong><br>Overhead view of the full stage. Best seats to appreciate production (lasers, flames, LED).</div>
+          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><strong>🌟 Level 3 Reserved (Upper)</strong><br>Full birds-eye view. 100,000 PixMob lights from above is spectacular.</div>
+        </div>
+        <div style="margin-top:16px;padding:12px 16px;background:rgba(255,36,66,0.05);font-size:0.78rem;color:var(--light-gray)">💡 PixMob creates a unified experience everywhere. Best sound is in the center zones.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="disco-panel" id="prep-tips">
+    <div style="display:grid;gap:14px">
+      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)"><span class="ko-only">⏰ <strong>언제 도착?</strong> 굿즈 구매라면 3~4시간 전. 자리만 잡을 거라면 1~2시간 전. 오프닝 보려면 18:00 이전 입장 권장.</span><span class="en-only">⏰ <strong>When to arrive?</strong> Merch: 3–4 hrs early. Just for your seat: 1–2 hrs. For the opener: before 6 PM.</span></div>
+      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)"><span class="ko-only">🎽 <strong>복장:</strong> 스탠딩이면 운동화 필수. 10월 고양 야외는 저녁에 쌀쌀 — 겉옷 챙기기.</span><span class="en-only">🎽 <strong>What to wear:</strong> Sneakers if you're in the pit. October in Goyang gets cold at night — bring a jacket.</span></div>
+      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)"><span class="ko-only">📱 <strong>폰 배터리:</strong> 2시간 30분 논스톱. 보조배터리 필수. NOL 티켓 앱도 켜둬야 하니까 충전 100%로 시작.</span><span class="en-only">📱 <strong>Phone battery:</strong> 2.5-hour non-stop show. Power bank essential. Start at 100%.</span></div>
+      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)"><span class="ko-only">🪪 <strong>신분증:</strong> 만 19세 이상 공연. 실물 신분증 필수.</span><span class="en-only">🪪 <strong>ID:</strong> Age 19+ event. Physical photo ID required — passport works for international fans.</span></div>
+      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)"><span class="ko-only">📷 <strong>카메라:</strong> 렌즈 교환식 카메라·삼각대 반입 금지. 스마트폰은 OK.</span><span class="en-only">📷 <strong>Camera:</strong> No interchangeable-lens cameras or tripods. Smartphones are fine.</span></div>
+      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)"><span class="ko-only">💡 <strong>PixMob 리스트밴드:</strong> 입장 시 배포. 절대 버리지 마세요. Blinding Lights 구간에서 가장 화려해요.</span><span class="en-only">💡 <strong>PixMob wristband:</strong> Free at entry. Do NOT throw it away — the Blinding Lights moment is unforgettable.</span></div>
+    </div>
+  </div>
+
+  <div class="disco-panel" id="prep-goods">
+    <div style="display:grid;gap:16px">
+      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:12px">🧢 OFFICIAL TOUR MERCH</div>
+        <div style="display:grid;gap:12px">
+          <div class="feat-item"><div class="feat-emoji">👕</div><div class="feat-body"><div class="feat-song">Tour Jersey (Black)</div><div class="feat-artist"><span class="ko-only">XO After Hours Til Dawn · 공연장 현장 판매 예정</span><span class="en-only">XO After Hours Til Dawn · sold on-site at the venue</span></div></div><div class="feat-year">$120</div></div>
+          <div class="feat-item"><div class="feat-emoji">🧥</div><div class="feat-body"><div class="feat-song">Tour Hoodie</div><div class="feat-artist"><span class="ko-only">블랙 베이스 · 투어 그래픽 · 한정 수량</span><span class="en-only">Black base · tour graphic · limited stock</span></div></div><div class="feat-year">$95</div></div>
+          <div class="feat-item"><div class="feat-emoji">👒</div><div class="feat-body"><div class="feat-song">XO Snapback / Hat</div><div class="feat-artist">After Hours Til Dawn 2026 Edition</div></div><div class="feat-year">$45</div></div>
+          <div class="feat-item"><div class="feat-emoji">📿</div><div class="feat-body"><div class="feat-song">PixMob LED Wristband</div><div class="feat-artist"><span class="ko-only">입장 시 무료 배포 — 공연과 블루투스 동기화</span><span class="en-only">Free at entry — Bluetooth synced to the show</span></div></div><div class="feat-year"><span class="ko-only">무료</span><span class="en-only">Free</span></div></div>
+          <div class="feat-item"><div class="feat-emoji">📸</div><div class="feat-body"><div class="feat-song"><span class="ko-only">포토북 / 포스터</span><span class="en-only">Photobook / Poster</span></div><div class="feat-artist"><span class="ko-only">현장 부스 한정 · 수량 미정</span><span class="en-only">Venue booth only · limited qty</span></div></div><div class="feat-year"><span class="ko-only">미정</span><span class="en-only">TBD</span></div></div>
+        </div>
+        <div style="margin-top:20px;padding:14px 18px;background:rgba(255,36,66,0.08);border-left:3px solid var(--neon-red);font-size:0.82rem;line-height:1.7;color:rgba(240,236,230,0.8)">
+          💡 <span class="ko-only"><strong>굿즈 팁:</strong> 공식 굿즈는 공연 시작 3~4시간 전부터 현장 부스에서 판매 시작. 인기 아이템은 공연 전 매진 경우 多.</span><span class="en-only"><strong>Merch Tip:</strong> Official merch booths open 3–4 hours before showtime. Popular items sell out before the show starts.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <div class="divider"></div>
+<!-- XO CULTURE -->
+<section id="xo-culture">
+  <div class="section-header">
+    <span class="section-tag" id="tag-culture">🔴 XO 문화</span>
+    <h2 class="section-title" id="title-culture">공연장 문화<br>& XO 세계관</h2>
+    <p id="desc-culture" style="color:var(--light-gray);font-size:0.88rem;margin-top:16px;line-height:1.7"><span class="ko-only">PixMob·떼창·XO 팬덤까지. 공연이 더 깊어지는 맥락들.</span><span class="en-only">PixMob, sing-alongs, and XO culture — context that makes the show deeper.</span></p>
+  </div>
 
+  <div class="disco-tabs" id="cultureTabs">
+    <button class="disco-tab active" onclick="switchCultureTab('pixmob',this)" data-ko="PixMob" data-en="PixMob">PixMob</button>
+    <button class="disco-tab" onclick="switchCultureTab('singalong',this)" data-ko="떼창 가이드" data-en="Sing-Along">떼창 가이드</button>
+    <button class="disco-tab" onclick="switchCultureTab('xo',this)" data-ko="XO란?" data-en="What is XO?">XO란?</button>
+    <button class="disco-tab" onclick="switchCultureTab('compare',this)" data-ko="2018 vs 2026" data-en="2018 vs 2026">2018 vs 2026</button>
+    <button class="disco-tab" onclick="switchCultureTab('rumors',this)" data-ko="소식 & 루머" data-en="News & Rumors">소식 & 루머</button>
+  </div>
+
+  <div class="disco-panel active" id="culture-pixmob">
+    <div style="display:grid;gap:16px" class="ko-only">
+      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">📿 PixMob LED 리스트밴드 완전 가이드</div>
+        <div style="display:grid;gap:14px;font-size:0.85rem;line-height:1.8;color:rgba(240,236,230,0.85)">
+          <div><strong>🔴 그게 뭔가요?</strong><br>입장 시 무료로 배포되는 LED 팔찌. Bluetooth 신호로 공연 시스템과 동기화되어 음악에 맞춰 색상과 패턴이 자동으로 변함. 10만 명의 팔찌가 하나처럼 움직이는 게 포인트.</div>
+          <div><strong>⚡ 어떻게 작동하나요?</strong><br>팔찌 안에 수신기가 내장되어 있고, 무대 시스템에서 무선 신호를 보내면 일제히 반응. 관객이 조작할 필요 없이 완전 자동.</div>
+          <div><strong>🎨 언제 가장 화려한가요?</strong><br>• Blinding Lights — 흰색+파란색 파도 효과<br>• Starboy — 노란별 패턴<br>• Moth to a Flame — 불꽃 색상 (피날레)</div>
+          <div><strong>📌 주의사항</strong><br>절대 버리지 마세요. 팔목에 착용하면 자동 활성화. 공연 끝나면 기념품으로 가져가세요.</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;gap:16px" class="en-only">
+      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">📿 PixMob LED Wristband — Complete Guide</div>
+        <div style="display:grid;gap:14px;font-size:0.85rem;line-height:1.8;color:rgba(240,236,230,0.85)">
+          <div><strong>🔴 What is it?</strong><br>A free LED wristband handed out at entry. It syncs to the show via Bluetooth — colors and patterns change automatically with the music. 100,000 wristbands moving as one.</div>
+          <div><strong>⚡ How does it work?</strong><br>A receiver inside the band picks up wireless signals from the stage system. Fully automatic — battery lasts the whole show.</div>
+          <div><strong>🎨 When is it most spectacular?</strong><br>• Blinding Lights — white + blue wave effect, 100K simultaneous flashes<br>• Starboy — yellow star pattern<br>• Moth to a Flame — fire gradient colors (finale)</div>
+          <div><strong>📌 Important</strong><br>Do NOT throw it away. Put it on your wrist and it activates automatically. Take it home as a souvenir.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="disco-panel" id="culture-singalong">
+    <div style="display:grid;gap:14px" class="ko-only">
+      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">🎤 공연 떼창 & 감상 포인트</div>
+        <div style="display:grid;gap:12px">
+          <div style="padding:14px 18px;background:rgba(255,36,66,0.08);border-left:3px solid var(--neon-red)"><div style="font-size:0.8rem;font-weight:700;margin-bottom:4px">🔥 최강 떼창 구간</div><div style="font-size:0.82rem;color:rgba(240,236,230,0.8)">Blinding Lights, Starboy, The Hills, Die For You, Save Your Tears, Can't Feel My Face</div></div>
+          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><div style="font-size:0.8rem;font-weight:700;margin-bottom:4px">🤫 조용히 감상하는 구간</div><div style="font-size:0.82rem;color:rgba(240,236,230,0.8)">Call Out My Name, I Was Never There, Faith</div></div>
+          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><div style="font-size:0.8rem;font-weight:700;margin-bottom:4px">📱 폰 내려놓고 경험할 구간</div><div style="font-size:0.82rem;color:rgba(240,236,230,0.8)">Moth to a Flame (피날레) — PixMob, 화염, 레이저가 동시에 터지는 순간.</div></div>
+          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><div style="font-size:0.8rem;font-weight:700;margin-bottom:4px">💡 팁</div><div style="font-size:0.82rem;color:rgba(240,236,230,0.8)">위켄드는 관중과 직접 소통을 많이 함. 마이크를 관중석으로 돌리는 구간 多.</div></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;gap:14px" class="en-only">
+      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">🎤 Sing-Along & Concert Moments Guide</div>
+        <div style="display:grid;gap:12px">
+          <div style="padding:14px 18px;background:rgba(255,36,66,0.08);border-left:3px solid var(--neon-red)"><div style="font-size:0.8rem;font-weight:700;margin-bottom:4px">🔥 Biggest Sing-Alongs</div><div style="font-size:0.82rem;color:rgba(240,236,230,0.8)">Blinding Lights, Starboy, The Hills, Die For You, Save Your Tears, Can't Feel My Face — learn these before the show.</div></div>
+          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><div style="font-size:0.8rem;font-weight:700;margin-bottom:4px">🤫 Silent &amp; Emotional Moments</div><div style="font-size:0.82rem;color:rgba(240,236,230,0.8)">Call Out My Name, I Was Never There, Faith — the crowd goes quiet. Let it wash over you.</div></div>
+          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><div style="font-size:0.8rem;font-weight:700;margin-bottom:4px">📱 Put the Phone Down</div><div style="font-size:0.82rem;color:rgba(240,236,230,0.8)">Moth to a Flame (finale) — PixMob, flames, and lasers hit all at once. Watch it with your eyes.</div></div>
+          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><div style="font-size:0.8rem;font-weight:700;margin-bottom:4px">💡 Tip</div><div style="font-size:0.82rem;color:rgba(240,236,230,0.8)">The Weeknd turns the mic to the crowd frequently. Knowing the choruses makes those moments unforgettable.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="disco-panel" id="culture-xo">
+    <div style="display:grid;gap:20px" class="ko-only">
+      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">XO란?</div>
+        <p style="font-size:0.88rem;line-height:1.9;color:rgba(240,236,230,0.85)">XO는 위켄드의 레이블이자 팬덤의 이름. 'X'는 ecstasy, 'O'는 oxycontin — 약물 용어이기도 하고 사랑을 나타내는 "Kiss &amp; Hug"이기도 하다. 위켄드는 XO를 통해 수익 일부를 UN 세계식량계획(WFP)에 기부하는 인도주의 활동도 이어가고 있다.</p>
+      </div>
+      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">공연장 분위기</div>
+        <div style="display:grid;gap:10px;font-size:0.85rem;line-height:1.8;color:rgba(240,236,230,0.8)">
+          <div>• 위켄드 공연은 "떼창"이 가장 조용한 공연 중 하나. Blinding Lights, Starboy 구간과 Call Out My Name 같은 침묵 구간이 공존.</div>
+          <div>• 한국 관중 특유의 "조용하지만 집중적인" 감상 문화가 위켄드 공연과 특히 잘 맞는다는 해외 팬들 후기 多.</div>
+          <div>• The Hills, Die For You 구간은 한국 팬덤 특성상 떼창 강도 최상 예측.</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;gap:20px" class="en-only">
+      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">What is XO?</div>
+        <p style="font-size:0.88rem;line-height:1.9;color:rgba(240,236,230,0.85)">XO is The Weeknd's label and fanbase. "X" stands for ecstasy, "O" for oxycontin — but it also means "kiss and hug." Through XO, The Weeknd donates a portion of proceeds to the UN World Food Programme (WFP).</p>
+      </div>
+      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">Crowd Vibe</div>
+        <div style="display:grid;gap:10px;font-size:0.85rem;line-height:1.8;color:rgba(240,236,230,0.8)">
+          <div>• Weeknd shows are quiet but intense — massive sing-alongs for Blinding Lights and Starboy, near-silence for Call Out My Name.</div>
+          <div>• Korean crowds are known for focused, attentive listening — which pairs perfectly with The Weeknd's atmospheric sound.</div>
+          <div>• The Hills and Die For You are predicted to be the biggest crowd moments.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="disco-panel" id="culture-compare">
+    <div style="display:grid;gap:16px" class="ko-only">
+      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">📊 2018년 vs 2026년 내한 비교</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--gray)">
+          <div style="padding:20px;border-right:1px solid var(--gray)">
+            <div style="font-family:Oswald,sans-serif;font-size:1rem;color:var(--light-gray);margin-bottom:16px">2018년 첫 내한</div>
+            <div style="display:grid;gap:10px;font-size:0.82rem;color:rgba(240,236,230,0.8)">
+              <div>📍 <strong>장소</strong><br>올림픽공원 올림픽홀</div>
+              <div>👥 <strong>규모</strong><br>약 5,000명</div>
+              <div>💿 <strong>당시 최신앨범</strong><br>My Dear Melancholy,</div>
+              <div>💰 <strong>티켓가격</strong><br>약 15~18만원</div>
+              <div>🎪 <strong>무대규모</strong><br>소규모 실내 공연장</div>
+            </div>
+          </div>
+          <div style="padding:20px">
+            <div style="font-family:Oswald,sans-serif;font-size:1rem;color:var(--neon-red);margin-bottom:16px">2026년 두 번째 내한</div>
+            <div style="display:grid;gap:10px;font-size:0.82rem;color:rgba(240,236,230,0.85)">
+              <div>📍 <strong>장소</strong><br>고양종합운동장</div>
+              <div>👥 <strong>규모</strong><br>약 100,000명 (20배↑)</div>
+              <div>💿 <strong>당시 최신앨범</strong><br>Hurry Up Tomorrow</div>
+              <div>💰 <strong>티켓가격</strong><br>약 18~25만원</div>
+              <div>🎪 <strong>무대규모</strong><br>스타디움급 + PixMob</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding:14px 18px;background:rgba(255,36,66,0.05);font-size:0.82rem;color:rgba(240,236,230,0.75);line-height:1.8">8년 사이 위켄드의 위상이 얼마나 달라졌는지 숫자가 말해준다. 5천 명 실내공연 → 10만 명 스타디움.</div>
+      </div>
+    </div>
+    <div style="display:grid;gap:16px" class="en-only">
+      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
+        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">📊 2018 vs 2026 — Korea Return</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--gray)">
+          <div style="padding:20px;border-right:1px solid var(--gray)">
+            <div style="font-family:Oswald,sans-serif;font-size:1rem;color:var(--light-gray);margin-bottom:16px">2018 — First Visit</div>
+            <div style="display:grid;gap:10px;font-size:0.82rem;color:rgba(240,236,230,0.8)">
+              <div>📍 <strong>Venue</strong><br>Olympic Hall, Seoul</div>
+              <div>👥 <strong>Capacity</strong><br>~5,000</div>
+              <div>💿 <strong>Latest Album</strong><br>My Dear Melancholy,</div>
+              <div>💰 <strong>Ticket Price</strong><br>~₩150,000–180,000</div>
+              <div>🎪 <strong>Stage Scale</strong><br>Small indoor venue</div>
+            </div>
+          </div>
+          <div style="padding:20px">
+            <div style="font-family:Oswald,sans-serif;font-size:1rem;color:var(--neon-red);margin-bottom:16px">2026 — Second Visit</div>
+            <div style="display:grid;gap:10px;font-size:0.82rem;color:rgba(240,236,230,0.85)">
+              <div>📍 <strong>Venue</strong><br>Goyang Sports Complex</div>
+              <div>👥 <strong>Capacity</strong><br>~100,000 (20× bigger)</div>
+              <div>💿 <strong>Latest Album</strong><br>Hurry Up Tomorrow</div>
+              <div>💰 <strong>Ticket Price</strong><br>~₩180,000–250,000</div>
+              <div>🎪 <strong>Stage Scale</strong><br>Stadium-level + PixMob</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding:14px 18px;background:rgba(255,36,66,0.05);font-size:0.82rem;color:rgba(240,236,230,0.75);line-height:1.8">The numbers say it all. 5,000 indoors → 100,000 in a stadium. Eight years, twenty times the scale.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="disco-panel" id="culture-rumors">
+    <div style="display:grid;gap:16px" class="ko-only">
+      <div style="background:var(--dark3);border:1px solid var(--neon-red);padding:24px 28px;position:relative">
+        <div style="position:absolute;top:16px;right:20px;font-size:0.65rem;letter-spacing:0.15em;color:var(--neon-red)">🔴 HOT</div>
+        <div style="font-size:0.85rem;font-weight:700;margin-bottom:8px">이번 서울이 "The Weeknd" 이름으로 마지막 공연?</div>
+        <p style="font-size:0.82rem;line-height:1.8;color:rgba(240,236,230,0.75)">위켄드는 Hurry Up Tomorrow를 "The Weeknd"라는 이름으로 내는 마지막 앨범이라고 공식 선언했다. 서울 공연이 "The Weeknd"로 보는 마지막 공연이 될 수도 있다는 것.</p>
+      </div>
+      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
+        <div style="font-size:0.85rem;font-weight:700;margin-bottom:8px">8년 만의 내한 — 2018년 공연과 비교</div>
+        <p style="font-size:0.82rem;line-height:1.8;color:rgba(240,236,230,0.75)">2018년 첫 내한은 올림픽공원 올림픽홀에서 5천 명 규모였다. 이번엔 10만 명. 8년 사이 위켄드의 위상이 20배로 커진 셈.</p>
+      </div>
+      <div style="padding:12px 18px;font-size:0.72rem;color:var(--light-gray);border:1px dashed var(--gray)">⚠️ 루머 및 소식은 팬 커뮤니티와 언론 보도 기반이며 공식 확인되지 않은 내용 포함.</div>
+    </div>
+    <div style="display:grid;gap:16px" class="en-only">
+      <div style="background:var(--dark3);border:1px solid var(--neon-red);padding:24px 28px;position:relative">
+        <div style="position:absolute;top:16px;right:20px;font-size:0.65rem;letter-spacing:0.15em;color:var(--neon-red)">🔴 HOT</div>
+        <div style="font-size:0.85rem;font-weight:700;margin-bottom:8px">Is Seoul the last show as "The Weeknd"?</div>
+        <p style="font-size:0.82rem;line-height:1.8;color:rgba(240,236,230,0.75)">The Weeknd officially announced that Hurry Up Tomorrow is the final album under the "The Weeknd" name. Seoul could be one of the last shows you see under that name.</p>
+      </div>
+      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
+        <div style="font-size:0.85rem;font-weight:700;margin-bottom:8px">8 Years Later — 2018 vs 2026</div>
+        <p style="font-size:0.82rem;line-height:1.8;color:rgba(240,236,230,0.75)">His first Korea show in 2018 was at Olympic Hall for 5,000 fans. This time: 100,000. His scale grew 20x in 8 years.</p>
+      </div>
+      <div style="padding:12px 18px;font-size:0.72rem;color:var(--light-gray);border:1px dashed var(--gray)">⚠️ Rumors and news are based on fan communities and press. May include unconfirmed information.</div>
+    </div>
+  </div>
+
+</section>
+
+<div class="divider"></div>
+<!-- WEEKND STORY -->
+<section id="story">
+  <div class="section-header">
+    <span class="section-tag" id="tag-story">📖 위켄드 스토리</span>
+    <h2 class="section-title" id="title-story">Abel의<br>이야기</h2>
+    <p id="desc-story" style="color:var(--light-gray);font-size:0.88rem;margin-top:16px;line-height:1.7"><span class="ko-only">SoundCloud 익명 업로드에서 10만 명 스타디움까지. 위켄드라는 이름 뒤의 아벨 테스파예.</span><span class="en-only">From anonymous SoundCloud uploads to 100,000-seat stadiums. The story of Abel Tesfaye behind The Weeknd.</span></p>
+  </div>
+
+  <!-- 타임라인 -->
+  <div style="margin-bottom:48px">
+    <div style="font-size:0.65rem;letter-spacing:0.3em;color:var(--neon-red);margin-bottom:24px"><span class="ko-only">📅 타임라인</span><span class="en-only">📅 TIMELINE</span></div>
+    <div style="position:relative;padding-left:24px;border-left:1px solid var(--gray);display:grid;gap:0" id="storyTimeline">
+
+      <div class="story-year-block">
+        <div class="story-dot"></div>
+        <div class="story-year">1990</div>
+        <div class="story-text"><span class="ko-only">에티오피아 이민자 가정에서 토론토 출생. 본명 <strong>Abel Makkonen Tesfaye</strong>. 어머니와 외할머니 손에서 자람.</span><span class="en-only">Born in Toronto to Ethiopian immigrant parents. Full name: <strong>Abel Makkonen Tesfaye</strong>. Raised by his mother and grandmother.</span></div>
+      </div>
+
+      <div class="story-year-block">
+        <div class="story-dot"></div>
+        <div class="story-year">2010</div>
+        <div class="story-text"><span class="ko-only">고등학교 중퇴 후 친구와 토론토를 떠돌며 음악 시작. <strong>SoundCloud에 익명으로 3곡 업로드</strong>. 아티스트명 "The Weeknd" — 주말에 집을 나왔던 그 기억에서. 드레이크가 발견해 트위터에 공유.</span><span class="en-only">Dropped out of high school, crashed on couches around Toronto. <strong>Anonymously uploaded 3 songs to SoundCloud</strong>. Named "The Weeknd" after the weekend he left home. Drake discovered him and shared on Twitter.</span></div>
+      </div>
+
+      <div class="story-year-block">
+        <div class="story-dot"></div>
+        <div class="story-year">2011</div>
+        <div class="story-text"><span class="ko-only"><strong>Trilogy</strong> EP 3부작 무료 배포 — <em>House of Balloons, Thursday, Echoes of Silence</em>. 어두운 R&amp;B·마약·섹스를 가감 없이 다룬 가사로 일약 언더그라운드 스타.</span><span class="en-only">Released Trilogy — three free mixtapes: <em>House of Balloons, Thursday, Echoes of Silence</em>. Dark R&amp;B dealing with drugs, sex, and nightlife earned him underground cult status.</span></div>
+      </div>
+
+      <div class="story-year-block">
+        <div class="story-dot"></div>
+        <div class="story-year">2012</div>
+        <div class="story-text"><span class="ko-only">Republic Records 계약. Trilogy 정규 발매. 당시까지도 얼굴 공개 없이 미스터리한 이미지 유지.</span><span class="en-only">Signed to Republic Records. Trilogy released officially. Still maintained a mysterious, faceless image.</span></div>
+      </div>
+
+      <div class="story-year-block">
+        <div class="story-dot"></div>
+        <div class="story-year">2015</div>
+        <div class="story-text"><span class="ko-only"><strong>Beauty Behind the Madness</strong> 발매. <em>Can't Feel My Face</em> 빌보드 1위. 주류 팝으로의 전환. Bella Hadid와 첫 열애 시작.</span><span class="en-only"><strong>Beauty Behind the Madness</strong> released. <em>Can't Feel My Face</em> hits #1 on Billboard Hot 100. Crossover to mainstream pop. First public relationship with Bella Hadid begins.</span></div>
+      </div>
+
+      <div class="story-year-block">
+        <div class="story-dot"></div>
+        <div class="story-year">2016</div>
+        <div class="story-text"><span class="ko-only"><strong>Starboy</strong> — Daft Punk 협업. 앨범 전 시그니처 헤어스타일(드레드락) 자름. 셀레나 고메즈와 열애.</span><span class="en-only"><strong>Starboy</strong> with Daft Punk. Cut his signature dreadlocks before the album — a deliberate image reset. Dated Selena Gomez.</span></div>
+      </div>
+
+      <div class="story-year-block">
+        <div class="story-dot"></div>
+        <div class="story-year">2018</div>
+        <div class="story-text"><span class="ko-only"><strong>My Dear Melancholy,</strong> (Bella Hadid 이별 앨범). <strong>첫 번째 한국 내한</strong> — 올림픽홀 5,000명. Grammys 불참 선언 ("시스템이 불투명하다").</span><span class="en-only"><strong>My Dear Melancholy,</strong> — widely interpreted as about Bella Hadid. <strong>First Seoul show</strong> at Olympic Hall (5,000 fans). Boycotted the Grammys, calling the nomination process "corrupt and inconsistent."</span></div>
+      </div>
+
+      <div class="story-year-block">
+        <div class="story-dot"></div>
+        <div class="story-year">2020</div>
+        <div class="story-text"><span class="ko-only"><strong>After Hours</strong> 발매. <em>Blinding Lights</em> — 빌보드 HOT 100 역사상 <strong>최장 차트 기록</strong>(90주+). 붉은 재킷+붕대 퍼소나 시작.</span><span class="en-only"><strong>After Hours</strong> released. <em>Blinding Lights</em> sets the record for <strong>longest-charting song</strong> in Billboard Hot 100 history (90+ weeks). Red jacket + bandage persona introduced.</span></div>
+      </div>
+
+      <div class="story-year-block">
+        <div class="story-dot"></div>
+        <div class="story-year">2021</div>
+        <div class="story-text"><span class="ko-only"><strong>슈퍼볼 하프타임쇼</strong> — 붉은 재킷에 얼굴 붕대로 등장. 시청자 9,600만 명. 역대 최고 시청률 하프타임쇼 중 하나.</span><span class="en-only"><strong>Super Bowl LV Halftime Show</strong> — performed in red jacket with bandaged face. 96 million viewers. One of the most-watched halftime shows in history.</span></div>
+      </div>
+
+      <div class="story-year-block">
+        <div class="story-dot"></div>
+        <div class="story-year">2022</div>
+        <div class="story-text"><span class="ko-only"><strong>Dawn FM</strong> — 라디오 방송국 컨셉 앨범. Jim Carrey 내레이션 참여. After Hours Til Dawn 투어 시작.</span><span class="en-only"><strong>Dawn FM</strong> — concept album styled as a radio station playing music for souls in purgatory. Jim Carrey narrates. After Hours Til Dawn tour begins.</span></div>
+      </div>
+
+      <div class="story-year-block">
+        <div class="story-dot"></div>
+        <div class="story-year">2023</div>
+        <div class="story-text"><span class="ko-only">HBO 드라마 <strong>The Idol</strong> 감독·주연. 논란 속 조기 종영. 투어는 116공연 이어가며 역대급 규모.</span><span class="en-only">Created and starred in HBO's <strong>The Idol</strong>. Cancelled after one season amid controversy. Tour continues across 116+ shows.</span></div>
+      </div>
+
+      <div class="story-year-block" style="margin-bottom:0">
+        <div class="story-dot" style="background:var(--neon-red)"></div>
+        <div class="story-year" style="color:var(--neon-red)">2026</div>
+        <div class="story-text"><span class="ko-only"><strong>Hurry Up Tomorrow</strong> — "The Weeknd"라는 이름으로 마지막 앨범 선언. 그리고 <strong>서울</strong>. 10만 명.</span><span class="en-only"><strong>Hurry Up Tomorrow</strong> — officially declared as the last album under "The Weeknd" name. Then: <strong>Seoul</strong>. 100,000 people.</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 주제별 심층 -->
+  <div style="font-size:0.65rem;letter-spacing:0.3em;color:var(--neon-red);margin-bottom:24px"><span class="ko-only">🔍 더 깊이</span><span class="en-only">🔍 DEEP DIVES</span></div>
+
+  <div style="display:grid;gap:16px">
+
+    <details class="story-detail">
+      <summary><span class="ko-only">🎤 음악의 진화 — 지하실에서 스타디움까지</span><span class="en-only">🎤 Musical Evolution — Basement to Stadium</span></summary>
+      <div class="story-detail-body">
+        <p class="ko-only">위켄드의 음악은 크게 세 단계로 나뉜다. <strong>1기 (2011~2013)</strong> — Trilogy 시절. PBR&amp;B라고 불리는 어두운 R&amp;B. 마약, 섹스, 하강하는 인간을 가감 없이 그린다. <strong>2기 (2015~2018)</strong> — 주류화. Daft Punk와 손잡고 신스팝으로 확장. <em>Can't Feel My Face, Starboy</em>가 탄생한다. 어둠은 남아있지만 훨씬 세련됐다. <strong>3기 (2020~)</strong> — 컨셉 아티스트. After Hours의 붉은 재킷 퍼소나, Dawn FM의 라디오 컨셉, Hurry Up Tomorrow의 영화적 내러티브. 음악이 아닌 세계관을 파는 아티스트.</p>
+        <p class="en-only">The Weeknd's sound has gone through three distinct phases. <strong>Phase 1 (2011–2013)</strong> — The Trilogy era. Raw, dark PBR&amp;B about drugs, hedonism, and self-destruction. <strong>Phase 2 (2015–2018)</strong> — Mainstream crossover. Partnered with Daft Punk, expanded into synth-pop. <em>Can't Feel My Face</em> and <em>Starboy</em> were born. Still dark, but polished. <strong>Phase 3 (2020–)</strong> — Concept artist. The red jacket persona of After Hours, the radio station concept of Dawn FM, the cinematic narrative of Hurry Up Tomorrow. He no longer just sells music — he sells worlds.</p>
+      </div>
+    </details>
+
+    <details class="story-detail">
+      <summary><span class="ko-only">🔴 XO와 "weeknd" — 이름에 담긴 의미</span><span class="en-only">🔴 XO &amp; "weeknd" — The Meaning in the Name</span></summary>
+      <div class="story-detail-body">
+        <p class="ko-only">"The Weeknd"에 'e'가 없는 이유는 단순하다 — 토론토에 이미 "The Weekend"라는 밴드가 있었기 때문. 철자를 빼서 법적 문제를 피한 것인데, 결과적으로 가장 독특한 아티스트명이 됐다. XO는 레이블이자 팬덤의 이름. X(ecstasy)와 O(oxycontin)라는 약물 코드이기도 하고, "Kiss &amp; Hug"의 줄임말이기도 하다. XO를 통해 위켄드는 UN 세계식량계획(WFP)에 수익 일부를 기부하고, 에티오피아 기근 구호 활동도 이어가고 있다.</p>
+        <p class="en-only">The missing "e" in "The Weeknd" has a simple origin — there was already a band called "The Weekend" in Toronto. Dropping the letter avoided legal issues and accidentally created one of music's most distinctive artist names. XO is both his label and fanbase name. It's a drug reference (X = ecstasy, O = oxycontin) and simultaneously "Kiss &amp; Hug." Through XO, The Weeknd donates to the UN World Food Programme and has funded famine relief in Ethiopia.</p>
+      </div>
+    </details>
+
+    <details class="story-detail">
+      <summary><span class="ko-only">💔 구설수와 인간 아벨</span><span class="en-only">💔 Controversies &amp; The Human Behind the Persona</span></summary>
+      <div class="story-detail-body">
+        <p class="ko-only"><strong>Bella Hadid와의 관계</strong> — 2015년부터 시작된 반복되는 이별과 재회. My Dear Melancholy, (2018) 수록곡 대부분이 이별 이후 쓰여진 것으로 알려져 있다. <strong>Grammy 불참</strong> — 2021년 Grammy 후보에 오른 <em>Blinding Lights</em>가 주요 부문에서 제외되자 공개적으로 Grammy를 비판하고 이후 불참 선언. <strong>The Idol 논란</strong> — HBO와 제작한 성인 드라마가 "착취적"이라는 비판을 받고 시즌 1 조기 종영. <strong>가사의 솔직함</strong> — 마약 사용, 여성 편력을 여과 없이 담은 가사가 종종 논란이 됐지만, 팬들은 이를 자전적 고백으로 받아들이고 오히려 진정성의 근거로 삼는다.</p>
+        <p class="en-only"><strong>Bella Hadid relationship</strong> — An on-and-off relationship from 2015, widely believed to have inspired much of My Dear Melancholy, (2018). <strong>Grammy boycott</strong> — After <em>Blinding Lights</em> was snubbed across major categories in 2021, he publicly criticized the Recording Academy and refused future submissions. <strong>The Idol controversy</strong> — His HBO drama was criticized as exploitative and cancelled after one season. <strong>Lyrical honesty</strong> — Lyrics about drug use and sexual relationships have drawn criticism, but fans view them as confessional autobiography — the source of his authenticity.</p>
+      </div>
+    </details>
+
+    <details class="story-detail">
+      <summary><span class="ko-only">🔮 지금 그리고 다음 — "The Weeknd" 이후</span><span class="en-only">🔮 Now &amp; Next — After "The Weeknd"</span></summary>
+      <div class="story-detail-body">
+        <p class="ko-only">Hurry Up Tomorrow를 "The Weeknd"라는 이름으로 내는 마지막 앨범으로 공식 선언했다. 동명의 영화도 제작 예정이다. 서울 공연은 그 마지막 챕터의 일부다. 다음 이름이 무엇인지는 알려지지 않았다. Abel Tesfaye로 돌아갈지, 새 아티스트 이름을 쓸지 — 확실한 건 "The Weeknd"는 서울을 끝으로 막을 내린다는 것.</p>
+        <p class="en-only">He has officially announced Hurry Up Tomorrow as the last album under "The Weeknd" name. A film of the same name is in production. The Seoul show is part of that final chapter. What comes next — whether he returns as Abel Tesfaye or adopts a new name — remains unknown. What's certain: "The Weeknd" closes this chapter in Seoul.</p>
+      </div>
+    </details>
+
+  </div>
+
+</section>
+
+<div class="divider"></div>
 <!-- DISCOGRAPHY -->
 <section id="disco">
   <div class="section-header">
@@ -1818,6 +2344,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <div class="divider"></div>
 
+
+
+
+<div class="divider"></div>
+
 <!-- QUIZ -->
 <section id="quiz">
   <div class="section-header">
@@ -1841,292 +2372,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <div class="divider"></div>
 
-<!-- TOUR GUIDE -->
-<section id="guide">
-  <div class="section-header">
-    <span class="section-tag" id="tag-guide">🎪 Tour Guide</span>
-    <h2 class="section-title" id="title-guide">공연장 가이드<br>& XO 문화</h2>
-  </div>
 
-  <div class="disco-tabs">
-    <button class="disco-tab active" onclick="switchGuideTab('goods', this)" data-ko="공식 굿즈" data-en="Official Merch">공식 굿즈</button>
-    <button class="disco-tab" onclick="switchGuideTab('tips', this)" data-ko="현장 팁" data-en="On-Site Tips">현장 팁</button>
-    <button class="disco-tab" onclick="switchGuideTab('culture', this)" data-ko="XO 문화" data-en="XO Culture">XO 문화</button>
-    <button class="disco-tab" onclick="switchGuideTab('rumors', this)" data-ko="소식 & 루머" data-en="News & Rumors">소식 & 루머</button>
-    <button class="disco-tab" onclick="switchGuideTab('seats', this)" data-ko="좌석 뷰" data-en="Seat Views">좌석 뷰</button>
-    <button class="disco-tab" onclick="switchGuideTab('transport', this)" data-ko="교통편" data-en="Getting There">교통편</button>
-    <button class="disco-tab" onclick="switchGuideTab('pixmob', this)" data-ko="PixMob" data-en="PixMob">PixMob</button>
-    <button class="disco-tab" onclick="switchGuideTab('singalong', this)" data-ko="떼창 가이드" data-en="Sing-Along">떼창 가이드</button>
-    <button class="disco-tab" onclick="switchGuideTab('compare', this)" data-ko="2018 vs 2026" data-en="2018 vs 2026">2018 vs 2026</button>
-    <button class="disco-tab" onclick="switchGuideTab('checklist', this)" data-ko="✅ 준비물" data-en="✅ Checklist">✅ 준비물</button>
-  </div>
-
-  <div class="disco-panel active" id="guide-goods">
-    <div style="display:grid;gap:16px">
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:12px">🧢 OFFICIAL TOUR MERCH</div>
-        <div style="display:grid;gap:12px">
-          <div class="feat-item"><div class="feat-emoji">👕</div><div class="feat-body"><div class="feat-song">Tour Jersey (Black)</div><div class="feat-artist"><span class="ko-only">XO After Hours Til Dawn · 공연장 현장 판매 예정</span><span class="en-only">XO After Hours Til Dawn · sold on-site at the venue</span></div></div><div class="feat-year">$120</div></div>
-          <div class="feat-item"><div class="feat-emoji">🧥</div><div class="feat-body"><div class="feat-song">Tour Hoodie</div><div class="feat-artist"><span class="ko-only">블랙 베이스 · 투어 그래픽 · 한정 수량</span><span class="en-only">Black base · tour graphic · limited stock</span></div></div><div class="feat-year">$95</div></div>
-          <div class="feat-item"><div class="feat-emoji">👒</div><div class="feat-body"><div class="feat-song">XO Snapback / Hat</div><div class="feat-artist">After Hours Til Dawn 2026 Edition</div></div><div class="feat-year">$45</div></div>
-          <div class="feat-item"><div class="feat-emoji">📿</div><div class="feat-body"><div class="feat-song">PixMob LED Wristband</div><div class="feat-artist"><span class="ko-only">입장 시 무료 배포 — 공연과 블루투스 동기화</span><span class="en-only">Free at entry — Bluetooth synced to the show</span></div></div><div class="feat-year"><span class="ko-only">무료</span><span class="en-only">Free</span></div></div>
-          <div class="feat-item"><div class="feat-emoji">📸</div><div class="feat-body"><div class="feat-song"><span class="ko-only">포토북 / 포스터</span><span class="en-only">Photobook / Poster</span></div><div class="feat-artist"><span class="ko-only">현장 부스 한정 · 수량 미정</span><span class="en-only">Venue booth only · limited qty</span></div></div><div class="feat-year"><span class="ko-only">미정</span><span class="en-only">TBD</span></div></div>
-        </div>
-        <div style="margin-top:20px;padding:14px 18px;background:rgba(255,36,66,0.08);border-left:3px solid var(--neon-red);font-size:0.82rem;line-height:1.7;color:rgba(240,236,230,0.8)">
-          💡 <span class="ko-only"><strong>굿즈 팁:</strong> 공식 굿즈는 공연 시작 3~4시간 전부터 현장 부스에서 판매 시작. 인기 아이템은 공연 전 매진 경우 多.</span><span class="en-only"><strong>Merch Tip:</strong> Official merch booths open 3–4 hours before showtime. Popular items sell out before the show starts.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="disco-panel" id="guide-tips">
-    <div style="display:grid;gap:14px">
-      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)"><span class="ko-only">⏰ <strong>언제 도착?</strong> 굿즈 구매라면 3~4시간 전. 자리만 잡을 거라면 1~2시간 전. 오프닝 보려면 18:00 이전 입장 권장.</span><span class="en-only">⏰ <strong>When to arrive?</strong> Merch: 3–4 hrs early. Just for your seat: 1–2 hrs. For the opener: before 6 PM.</span></div>
-      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)"><span class="ko-only">🎽 <strong>복장:</strong> 스탠딩이면 운동화 필수. 10월 고양 야외는 저녁에 쌀쌀 — 겉옷 챙기기.</span><span class="en-only">🎽 <strong>What to wear:</strong> Sneakers if you're in the pit. October in Goyang gets cold at night — bring a jacket.</span></div>
-      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)"><span class="ko-only">📱 <strong>폰 배터리:</strong> 2시간 30분 논스톱 공연. 보조배터리 필수. NOL 티켓 앱도 켜둬야 하니까 충전 100%로 시작.</span><span class="en-only">📱 <strong>Phone battery:</strong> 2.5-hour non-stop show. Power bank essential. You'll need the NOL ticket app open — start at 100%.</span></div>
-      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)"><span class="ko-only">💡 <strong>PixMob 리스트밴드:</strong> 입장 시 배포되는 LED 팔찌. 절대 버리지 마세요. Blinding Lights 구간에서 가장 화려해요.</span><span class="en-only">💡 <strong>PixMob wristband:</strong> Free LED bracelet handed out at entry. Do NOT throw it away. The Blinding Lights moment is unforgettable.</span></div>
-      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)"><span class="ko-only">🚇 <strong>교통:</strong> 3호선 대화역에서 셔틀 or 택시. 공연 후 30~40분 대기 예상.</span><span class="en-only">🚇 <strong>Transport:</strong> Subway Line 3 to Daehwa Station, then shuttle or taxi. Expect 30–40 min wait after the show.</span></div>
-      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)"><span class="ko-only">🪪 <strong>신분증:</strong> 만 19세 이상 공연. 실물 신분증 필수.</span><span class="en-only">🪪 <strong>ID:</strong> Age 19+ event (Korean age). Physical photo ID required — passport works for international fans.</span></div>
-      <div class="setlist-note-item" style="padding:16px 20px;background:var(--dark3);border:1px solid var(--gray)"><span class="ko-only">📷 <strong>카메라:</strong> 렌즈 교환식 카메라, 삼각대 반입 금지. 스마트폰은 OK.</span><span class="en-only">📷 <strong>Camera:</strong> No interchangeable-lens cameras or tripods. Smartphones are fine.</span></div>
-    </div>
-  </div>
-
-  <div class="disco-panel" id="guide-culture">
-    <div style="display:grid;gap:20px" class="ko-only">
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">XO란?</div>
-        <p style="font-size:0.88rem;line-height:1.9;color:rgba(240,236,230,0.85)">XO는 위켄드의 레이블이자 팬덤의 이름. 'X'는 ecstasy, 'O'는 oxycontin — 약물 용어이기도 하고 사랑을 나타내는 "Kiss & Hug"이기도 하다. 위켄드는 XO를 통해 수익 일부를 UN 세계식량계획(WFP)에 기부하는 인도주의 활동도 이어가고 있다.</p>
-      </div>
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">공연장 분위기</div>
-        <div style="display:grid;gap:10px;font-size:0.85rem;line-height:1.8;color:rgba(240,236,230,0.8)">
-          <div>• 위켄드 공연은 "떼창"이 가장 조용한 공연 중 하나. Blinding Lights, Starboy 구간과 Call Out My Name 같은 침묵 구간이 공존.</div>
-          <div>• 한국 관중 특유의 "조용하지만 집중적인" 감상 문화가 위켄드 공연과 특히 잘 맞는다는 해외 팬들 후기 多.</div>
-          <div>• The Hills, Die For You 구간은 한국 팬덤 특성상 떼창 강도 최상 예측.</div>
-        </div>
-      </div>
-    </div>
-    <div style="display:grid;gap:20px" class="en-only">
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">What is XO?</div>
-        <p style="font-size:0.88rem;line-height:1.9;color:rgba(240,236,230,0.85)">XO is The Weeknd's label and fanbase. "X" stands for ecstasy, "O" for oxycontin — but it also means "kiss and hug." Through XO, The Weeknd donates a portion of proceeds to the UN World Food Programme (WFP).</p>
-      </div>
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">Crowd Vibe</div>
-        <div style="display:grid;gap:10px;font-size:0.85rem;line-height:1.8;color:rgba(240,236,230,0.8)">
-          <div>• Weeknd shows are quiet but intense — massive sing-alongs for Blinding Lights and Starboy, near-silence for Call Out My Name.</div>
-          <div>• Korean crowds are known for focused, attentive listening — which pairs perfectly with The Weeknd's atmospheric sound.</div>
-          <div>• The Hills and Die For You are predicted to be the biggest crowd moments.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="disco-panel" id="guide-rumors">
-    <div style="display:grid;gap:16px" class="ko-only">
-      <div style="background:var(--dark3);border:1px solid var(--neon-red);padding:24px 28px;position:relative">
-        <div style="position:absolute;top:16px;right:20px;font-size:0.65rem;letter-spacing:0.15em;color:var(--neon-red)">🔴 HOT</div>
-        <div style="font-size:0.85rem;font-weight:700;margin-bottom:8px">이번 서울이 "The Weeknd" 이름으로 마지막 공연?</div>
-        <p style="font-size:0.82rem;line-height:1.8;color:rgba(240,236,230,0.75)">위켄드는 Hurry Up Tomorrow를 "The Weeknd"라는 이름으로 내는 마지막 앨범이라고 공식 선언했다. 서울 공연이 "The Weeknd"로 보는 마지막 공연이 될 수도 있다는 것.</p>
-      </div>
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.85rem;font-weight:700;margin-bottom:8px">8년 만의 내한 — 2018년 공연과 비교</div>
-        <p style="font-size:0.82rem;line-height:1.8;color:rgba(240,236,230,0.75)">2018년 첫 내한은 올림픽공원 올림픽홀에서 5천 명 규모였다. 이번엔 10만 명. 8년 사이 위켄드의 위상이 20배로 커진 셈.</p>
-      </div>
-      <div style="padding:12px 18px;font-size:0.72rem;color:var(--light-gray);border:1px dashed var(--gray)">⚠️ 루머 및 소식은 팬 커뮤니티와 언론 보도 기반이며 공식 확인되지 않은 내용 포함.</div>
-    </div>
-    <div style="display:grid;gap:16px" class="en-only">
-      <div style="background:var(--dark3);border:1px solid var(--neon-red);padding:24px 28px;position:relative">
-        <div style="position:absolute;top:16px;right:20px;font-size:0.65rem;letter-spacing:0.15em;color:var(--neon-red)">🔴 HOT</div>
-        <div style="font-size:0.85rem;font-weight:700;margin-bottom:8px">Is Seoul the last show as "The Weeknd"?</div>
-        <p style="font-size:0.82rem;line-height:1.8;color:rgba(240,236,230,0.75)">The Weeknd officially announced that Hurry Up Tomorrow is the final album under the "The Weeknd" name. Seoul could be one of the last shows you see under that name.</p>
-      </div>
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.85rem;font-weight:700;margin-bottom:8px">8 Years Later — 2018 vs 2026</div>
-        <p style="font-size:0.82rem;line-height:1.8;color:rgba(240,236,230,0.75)">His first Korea show in 2018 was at Olympic Hall for 5,000 fans. This time: 100,000. His scale grew 20x in 8 years.</p>
-      </div>
-      <div style="padding:12px 18px;font-size:0.72rem;color:var(--light-gray);border:1px dashed var(--gray)">⚠️ Rumors and news are based on fan communities and press. May include unconfirmed information.</div>
-    </div>
-  </div>
-
-  <!-- 좌석 뷰 -->
-  <!-- 좌석 뷰 -->
-  <div class="disco-panel" id="guide-seats">
-    <div style="display:grid;gap:16px" class="ko-only">
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">🏟️ 고양종합운동장 구역 안내</div>
-        <div style="display:grid;gap:12px;font-size:0.85rem;line-height:1.8;color:rgba(240,236,230,0.85)">
-          <div style="background:rgba(255,36,66,0.08);padding:14px 18px;border-left:3px solid var(--neon-red)"><strong>🔥 스탠딩 (그라운드)</strong><br>무대와 가장 가까워 몰입감 최고. 단, 장시간 서있어야 하며 앞자리 경쟁이 치열. 운동화 필수, 보조배터리 필수.</div>
-          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><strong>💺 1층 지정석 (하단 트랙)</strong><br>스탠딩 바로 옆. 앉아서 볼 수 있고 시야 확보 용이. PixMob 팔찌 효과가 가장 잘 보이는 구간.</div>
-          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><strong>🎭 2층 지정석 (중단)</strong><br>무대 전체를 내려다보는 시야. 공연 연출(레이저, 화염, LED)을 가장 잘 볼 수 있는 구역.</div>
-          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><strong>🌟 3층 지정석 (상단)</strong><br>전체 조감도 뷰. PixMob 팔찌로 객석 전체가 빛나는 장면이 장관.</div>
-        </div>
-        <div style="margin-top:16px;padding:12px 16px;background:rgba(255,36,66,0.05);font-size:0.78rem;color:var(--light-gray)">💡 어느 자리든 PixMob 리스트밴드 효과로 일체감은 동일. 음향은 중앙 구역이 가장 균형 잡힘.</div>
-      </div>
-    </div>
-    <div style="display:grid;gap:16px" class="en-only">
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">🏟️ Goyang Sports Complex — Zone Guide</div>
-        <div style="display:grid;gap:12px;font-size:0.85rem;line-height:1.8;color:rgba(240,236,230,0.85)">
-          <div style="background:rgba(255,36,66,0.08);padding:14px 18px;border-left:3px solid var(--neon-red)"><strong>🔥 Standing Pit (Ground)</strong><br>Closest to stage — maximum immersion. Long periods of standing, competitive for front spots. Sneakers & power bank essential.</div>
-          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><strong>💺 Level 1 Reserved (Lower Track)</strong><br>Right next to the pit. Seated, clear sightlines. Best area to see the PixMob wristband effects.</div>
-          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><strong>🎭 Level 2 Reserved (Mid-tier)</strong><br>Overhead view of the full stage. Best seats to appreciate production (lasers, flames, LED).</div>
-          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><strong>🌟 Level 3 Reserved (Upper)</strong><br>Full birds-eye view. Looking down during Blinding Lights with 100,000 PixMob lights is spectacular.</div>
-        </div>
-        <div style="margin-top:16px;padding:12px 16px;background:rgba(255,36,66,0.05);font-size:0.78rem;color:var(--light-gray)">💡 PixMob wristband creates a unified experience everywhere. Best sound is in the center zones.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 교통편 -->
-  <!-- 교통편 -->
-  <div class="disco-panel" id="guide-transport">
-    <div style="display:grid;gap:14px" class="ko-only">
-      <div style="background:var(--dark3);border:1px solid var(--neon-red);padding:24px 28px"><div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:12px">⚠️ 핵심 요약</div><p style="font-size:0.88rem;font-weight:700;color:var(--white)">차는 절대 포기. 10만 명 규모 행사에서 주차장은 없다고 생각하세요.</p></div>
-      <div class="setlist-note-item" style="padding:18px 20px;background:var(--dark3);border:1px solid var(--gray)">🚇 <strong>지하철 + 셔틀 (권장)</strong><br>3호선 대화역 하차 → 셔틀버스 탑승. 대화역 → 고양종합운동장 약 10~15분.</div>
-      <div class="setlist-note-item" style="padding:18px 20px;background:var(--dark3);border:1px solid var(--gray)">🚌 <strong>버스</strong><br>고양 시내버스 다수 노선이 운동장 인근 정차. 공연 당일 임시 노선 추가 예정.</div>
-      <div class="setlist-note-item" style="padding:18px 20px;background:var(--dark3);border:1px solid var(--gray)">🚕 <strong>택시 / 카카오T</strong><br>공연 후: 수요 폭증으로 대기 30~40분 예상. 사전에 귀가 경로 계획 필수.</div>
-      <div class="setlist-note-item" style="padding:18px 20px;background:var(--dark3);border:1px solid var(--gray)">⏰ <strong>추천 타임라인</strong><br>굿즈: 3~4시간 전 / 자리: 1~2시간 전 / 오프닝: 18:00 전 / 귀가: 공연 후 20~30분 여유</div>
-    </div>
-    <div style="display:grid;gap:14px" class="en-only">
-      <div style="background:var(--dark3);border:1px solid var(--neon-red);padding:24px 28px"><div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:12px">⚠️ Key Summary</div><p style="font-size:0.88rem;font-weight:700;color:var(--white)">Do NOT drive. Assume zero parking for a 100,000-person event.</p></div>
-      <div class="setlist-note-item" style="padding:18px 20px;background:var(--dark3);border:1px solid var(--gray)">🚇 <strong>Subway + Shuttle (Recommended)</strong><br>Take Line 3 (Orange) to Daehwa Station → Shuttle bus. ~10–15 min to venue. Expect large crowds leaving after the show.</div>
-      <div class="setlist-note-item" style="padding:18px 20px;background:var(--dark3);border:1px solid var(--gray)">🚕 <strong>Taxi / Kakao T</strong><br>After the show: huge surge — expect 30–40 min wait. Plan your return route in advance.</div>
-      <div class="setlist-note-item" style="padding:18px 20px;background:var(--dark3);border:1px solid var(--gray)">🌍 <strong>From Seoul (International Fans)</strong><br>From Hongdae/Itaewon: ~50–60 min by subway. From Incheon Airport: ~90 min. Book accommodation near Daehwa or central Seoul.</div>
-      <div class="setlist-note-item" style="padding:18px 20px;background:var(--dark3);border:1px solid var(--gray)">⏰ <strong>Recommended Timeline</strong><br>Merch: 3–4 hrs early / Seat: 1–2 hrs early / Opening act: before 6 PM / After show: wait 20–30 min before leaving</div>
-    </div>
-  </div>
-
-  <!-- PixMob -->
-  <!-- PixMob -->
-  <div class="disco-panel" id="guide-pixmob">
-    <div style="display:grid;gap:16px" class="ko-only">
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">📿 PixMob LED 리스트밴드 완전 가이드</div>
-        <div style="display:grid;gap:14px;font-size:0.85rem;line-height:1.8;color:rgba(240,236,230,0.85)">
-          <div><strong>🔴 그게 뭔가요?</strong><br>입장 시 무료로 배포되는 LED 팔찌. Bluetooth 신호로 공연 시스템과 동기화되어 음악에 맞춰 색상과 패턴이 자동으로 변함. 10만 명의 팔찌가 하나처럼 움직이는 게 포인트.</div>
-          <div><strong>⚡ 어떻게 작동하나요?</strong><br>팔찌 안에 수신기가 내장되어 있고, 무대 시스템에서 무선 신호를 보내면 일제히 반응. 관객이 조작할 필요 없이 완전 자동.</div>
-          <div><strong>🎨 언제 가장 화려한가요?</strong><br>• Blinding Lights — 흰색+파란색 파도 효과<br>• Starboy — 노란별 패턴<br>• Moth to a Flame — 불꽃 색상 (피날레)</div>
-          <div><strong>📌 주의사항</strong><br>절대 버리지 마세요. 팔목에 착용하면 자동 활성화. 공연 끝나면 기념품으로 가져가세요.</div>
-        </div>
-      </div>
-    </div>
-    <div style="display:grid;gap:16px" class="en-only">
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">📿 PixMob LED Wristband — Complete Guide</div>
-        <div style="display:grid;gap:14px;font-size:0.85rem;line-height:1.8;color:rgba(240,236,230,0.85)">
-          <div><strong>🔴 What is it?</strong><br>A free LED wristband handed out at entry. It syncs to the show via Bluetooth — colors and patterns change automatically with the music. 100,000 wristbands moving as one.</div>
-          <div><strong>⚡ How does it work?</strong><br>A receiver inside the band picks up wireless signals from the stage system. Fully automatic — no input needed from you. Battery lasts the whole show.</div>
-          <div><strong>🎨 When is it most spectacular?</strong><br>• Blinding Lights — white + blue wave effect, 100K simultaneous flashes<br>• Starboy — yellow star pattern<br>• Moth to a Flame — fire gradient colors (finale)</div>
-          <div><strong>📌 Important</strong><br>Do NOT throw it away — it's distributed at entry. Put it on your wrist and it activates automatically. Take it home as a souvenir.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 떼창 가이드 -->
-  <!-- 떼창 가이드 -->
-  <div class="disco-panel" id="guide-singalong">
-    <div style="display:grid;gap:14px" class="ko-only">
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">🎤 공연 떼창 & 감상 포인트</div>
-        <div style="display:grid;gap:12px">
-          <div style="padding:14px 18px;background:rgba(255,36,66,0.08);border-left:3px solid var(--neon-red)"><div style="font-size:0.8rem;font-weight:700;margin-bottom:4px">🔥 최강 떼창 구간</div><div style="font-size:0.82rem;color:rgba(240,236,230,0.8)">Blinding Lights, Starboy, The Hills, Die For You, Save Your Tears, Can't Feel My Face</div></div>
-          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><div style="font-size:0.8rem;font-weight:700;margin-bottom:4px">🤫 조용히 감상하는 구간</div><div style="font-size:0.82rem;color:rgba(240,236,230,0.8)">Call Out My Name, I Was Never There, Faith</div></div>
-          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><div style="font-size:0.8rem;font-weight:700;margin-bottom:4px">📱 폰 내려놓고 경험할 구간</div><div style="font-size:0.82rem;color:rgba(240,236,230,0.8)">Moth to a Flame (피날레) — PixMob, 화염, 레이저가 동시에 터지는 순간.</div></div>
-          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><div style="font-size:0.8rem;font-weight:700;margin-bottom:4px">💡 팁</div><div style="font-size:0.82rem;color:rgba(240,236,230,0.8)">위켄드는 관중과 직접 소통을 많이 함. 마이크를 관중석으로 돌리는 구간 多.</div></div>
-        </div>
-      </div>
-    </div>
-    <div style="display:grid;gap:14px" class="en-only">
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">🎤 Sing-Along & Concert Moments Guide</div>
-        <div style="display:grid;gap:12px">
-          <div style="padding:14px 18px;background:rgba(255,36,66,0.08);border-left:3px solid var(--neon-red)"><div style="font-size:0.8rem;font-weight:700;margin-bottom:4px">🔥 Biggest Sing-Alongs</div><div style="font-size:0.82rem;color:rgba(240,236,230,0.8)">Blinding Lights, Starboy, The Hills, Die For You, Save Your Tears, Can't Feel My Face — learn these before the show.</div></div>
-          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><div style="font-size:0.8rem;font-weight:700;margin-bottom:4px">🤫 Silent & Emotional Moments</div><div style="font-size:0.82rem;color:rgba(240,236,230,0.8)">Call Out My Name, I Was Never There, Faith — the crowd goes quiet. Let it wash over you.</div></div>
-          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><div style="font-size:0.8rem;font-weight:700;margin-bottom:4px">📱 Put the Phone Down</div><div style="font-size:0.82rem;color:rgba(240,236,230,0.8)">Moth to a Flame (finale) — PixMob, flames, and lasers hit all at once. Watch it with your eyes, not your screen.</div></div>
-          <div style="padding:14px 18px;border-left:3px solid var(--gray)"><div style="font-size:0.8rem;font-weight:700;margin-bottom:4px">💡 Tip</div><div style="font-size:0.82rem;color:rgba(240,236,230,0.8)">The Weeknd turns the mic to the crowd frequently. Knowing the choruses in English makes those moments unforgettable.</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 2018 vs 2026 비교 -->
-  <!-- 2018 vs 2026 비교 -->
-  <div class="disco-panel" id="guide-compare">
-    <div style="display:grid;gap:16px" class="ko-only">
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">📊 2018년 vs 2026년 내한 비교</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--gray)">
-          <div style="padding:20px;border-right:1px solid var(--gray)">
-            <div style="font-family:Oswald,sans-serif;font-size:1rem;color:var(--light-gray);margin-bottom:16px">2018년 첫 내한</div>
-            <div style="display:grid;gap:10px;font-size:0.82rem;color:rgba(240,236,230,0.8)">
-              <div>📍 <strong>장소</strong><br>올림픽공원 올림픽홀</div>
-              <div>👥 <strong>규모</strong><br>약 5,000명</div>
-              <div>💿 <strong>당시 최신앨범</strong><br>My Dear Melancholy,</div>
-              <div>🎵 <strong>주요 셋리스트</strong><br>Call Out My Name, The Hills, Starboy, Can't Feel My Face</div>
-              <div>💰 <strong>티켓가격</strong><br>약 15~18만원</div>
-              <div>🎪 <strong>무대규모</strong><br>소규모 실내 공연장</div>
-            </div>
-          </div>
-          <div style="padding:20px">
-            <div style="font-family:Oswald,sans-serif;font-size:1rem;color:var(--neon-red);margin-bottom:16px">2026년 두 번째 내한</div>
-            <div style="display:grid;gap:10px;font-size:0.82rem;color:rgba(240,236,230,0.85)">
-              <div>📍 <strong>장소</strong><br>고양종합운동장</div>
-              <div>👥 <strong>규모</strong><br>약 100,000명 (20배↑)</div>
-              <div>💿 <strong>당시 최신앨범</strong><br>Hurry Up Tomorrow</div>
-              <div>🎵 <strong>주요 셋리스트</strong><br>36곡 풀셋 + HUT 신곡</div>
-              <div>💰 <strong>티켓가격</strong><br>약 18~25만원</div>
-              <div>🎪 <strong>무대규모</strong><br>스타디움급 대형 무대 + PixMob</div>
-            </div>
-          </div>
-        </div>
-        <div style="margin-top:16px;padding:14px 18px;background:rgba(255,36,66,0.05);font-size:0.82rem;color:rgba(240,236,230,0.75);line-height:1.8">
-          8년 사이 위켄드의 위상이 얼마나 달라졌는지 숫자가 말해준다. 5천 명 실내공연 → 10만 명 스타디움.
-        </div>
-      </div>
-    </div>
-    <div style="display:grid;gap:16px" class="en-only">
-      <div style="background:var(--dark3);border:1px solid var(--gray);padding:24px 28px">
-        <div style="font-size:0.7rem;letter-spacing:0.2em;color:var(--neon-red);margin-bottom:16px">📊 2018 vs 2026 — Korea Return</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--gray)">
-          <div style="padding:20px;border-right:1px solid var(--gray)">
-            <div style="font-family:Oswald,sans-serif;font-size:1rem;color:var(--light-gray);margin-bottom:16px">2018 — First Visit</div>
-            <div style="display:grid;gap:10px;font-size:0.82rem;color:rgba(240,236,230,0.8)">
-              <div>📍 <strong>Venue</strong><br>Olympic Hall, Olympic Park</div>
-              <div>👥 <strong>Capacity</strong><br>~5,000</div>
-              <div>💿 <strong>Latest Album</strong><br>My Dear Melancholy,</div>
-              <div>🎵 <strong>Key Songs</strong><br>Call Out My Name, The Hills, Starboy</div>
-              <div>💰 <strong>Ticket Price</strong><br>~₩150,000–180,000</div>
-              <div>🎪 <strong>Stage Scale</strong><br>Small indoor venue</div>
-            </div>
-          </div>
-          <div style="padding:20px">
-            <div style="font-family:Oswald,sans-serif;font-size:1rem;color:var(--neon-red);margin-bottom:16px">2026 — Second Visit</div>
-            <div style="display:grid;gap:10px;font-size:0.82rem;color:rgba(240,236,230,0.85)">
-              <div>📍 <strong>Venue</strong><br>Goyang Sports Complex</div>
-              <div>👥 <strong>Capacity</strong><br>~100,000 (20× bigger)</div>
-              <div>💿 <strong>Latest Album</strong><br>Hurry Up Tomorrow</div>
-              <div>🎵 <strong>Key Songs</strong><br>Full 36-song set + HUT tracks</div>
-              <div>💰 <strong>Ticket Price</strong><br>~₩180,000–250,000</div>
-              <div>🎪 <strong>Stage Scale</strong><br>Stadium-level + PixMob</div>
-            </div>
-          </div>
-        </div>
-        <div style="margin-top:16px;padding:14px 18px;background:rgba(255,36,66,0.05);font-size:0.82rem;color:rgba(240,236,230,0.75);line-height:1.8">
-          The numbers say it all. 5,000 indoors → 100,000 in a stadium. Eight years, twenty times the scale.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="disco-panel" id="guide-checklist">
-    <div id="guideChecklistArea"></div>
-  </div>
-
-</section>
-
-<div class="divider"></div>
 
 <!-- SHARE -->
 <section id="share-section" style="text-align:center;padding:48px 24px">
@@ -2141,8 +2387,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 
 
-<div class="divider"></div>
-
 
 
 <div class="divider"></div>
@@ -2150,11 +2394,27 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- WEEKND TYPE TEST -->
 <section id="type-test">
   <div class="section-header">
-    <span class="section-tag" id="tag-type">🎭 Weeknd Type Test</span>
-    <h2 class="section-title" id="title-type">나는 어떤<br>위켄드 유형?</h2>
-    <p id="desc-type" style="color:var(--light-gray);font-size:0.88rem;margin-top:16px;line-height:1.7">8가지 질문으로 알아보는 나의 위켄드 노래 유형.<br>공유하고 친구와 비교해보세요.</p>
+    <span class="section-tag" id="tag-type">🎭 유형 테스트</span>
+    <h2 class="section-title" id="title-type">나의 MBTI로<br>위켄드 곡 찾기</h2>
+    <p id="desc-type" style="color:var(--light-gray);font-size:0.88rem;margin-top:16px;line-height:1.7"><span class="ko-only">MBTI를 선택하거나 질문으로 알아보세요. 당신의 위켄드 노래를 찾아드립니다.</span><span class="en-only">Pick your MBTI or take the question test to find your Weeknd song.</span></p>
   </div>
-  <div id="typeTestArea"></div>
+
+  <div class="disco-tabs" id="typeTabs">
+    <button class="disco-tab active" onclick="switchTypeTab('mbti',this)" data-ko="MBTI로 찾기" data-en="Find by MBTI">MBTI로 찾기</button>
+    <button class="disco-tab" onclick="switchTypeTab('test',this)" data-ko="질문으로 찾기" data-en="Question Test">질문으로 찾기</button>
+  </div>
+
+  <!-- MBTI 패널 -->
+  <div class="disco-panel active" id="typePanel-mbti">
+    <div style="margin-bottom:20px;font-size:0.72rem;letter-spacing:0.1em;color:var(--light-gray)"><span class="ko-only">내 MBTI를 선택하면 당신의 위켄드 노래를 알려드려요</span><span class="en-only">Tap your MBTI to get your Weeknd song</span></div>
+    <div id="mbtiGrid"></div>
+    <div id="mbtiResult" style="display:none;margin-top:24px"></div>
+  </div>
+
+  <!-- 질문 테스트 패널 -->
+  <div class="disco-panel" id="typePanel-test">
+    <div id="typeTestArea"></div>
+  </div>
 </section>
 
 
@@ -2175,7 +2435,17 @@ document.addEventListener('DOMContentLoaded', function() {
 <footer>
   <div class="footer-title">THE WEEKND SEOUL 🔴</div>
   <p><span class="ko-only">2026.10.07–08 · 고양종합운동장 · 현대카드 슈퍼콘서트 28</span><span class="en-only">2026.10.07–08 · Goyang Sports Complex · Hyundai Card Super Concert 28</span></p>
-  <p style="margin-top:8px">Fan-made · Not official</p>
+  <a href="https://www.instagram.com/_nextact" target="_blank" rel="noopener"
+    style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--white);font-family:Oswald,sans-serif;font-size:0.9rem;letter-spacing:0.08em;margin-top:16px;opacity:0.8;transition:opacity 0.2s"
+    onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+      <circle cx="12" cy="12" r="4"></circle>
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle>
+    </svg>
+    @_nextact
+  </a>
+  <p style="margin-top:12px;font-size:0.7rem;opacity:0.5"><span class="ko-only">팬이 만든 비공식 팬사이트 · The Weeknd / XO / 현대카드와 무관합니다</span><span class="en-only">Unofficial fan site · Not affiliated with The Weeknd, XO, or Hyundai Card</span></p>
 </footer>
 
 <script>
@@ -2234,43 +2504,6 @@ function updateCounter() {
 
 setInterval(updateCounter, 1000);
 updateCounter();
-
-// ─── CHECKLIST ───────────────────────────────────────────────
-const checkItems = [
-  { ko: '🎫 티켓 (NOL 앱 실행 확인)', en: '🎫 Ticket (check NOL app works)', key: 'c0' },
-  { ko: '🪪 실물 신분증 (만 19세 이상 확인용)', en: '🪪 Photo ID (age 19+ required)', key: 'c1' },
-  { ko: '🔋 보조배터리 완충', en: '🔋 Power bank (fully charged)', key: 'c2' },
-  { ko: '💳 현대카드 (10% 할인 + 혜택 확인)', en: '💳 Hyundai Card (10% discount benefit)', key: 'c3' },
-  { ko: '👟 편한 신발 (스탠딩 대비)', en: '👟 Comfortable shoes (for standing pit)', key: 'c4' },
-  { ko: '🌂 우비 또는 얇은 겉옷 (10월 야외)', en: '🌂 Light jacket (October outdoor venue)', key: 'c5' },
-  { ko: '🚇 교통 경로 미리 확인 (대중교통 권장)', en: '🚇 Plan transport (public transit recommended)', key: 'c6' },
-  { ko: '📸 카메라/폰 충전 100%', en: '📸 Phone/camera charged to 100%', key: 'c7' },
-  { ko: '🥤 음료·간식 (입장 전)', en: '🥤 Drinks & snacks (before entry)', key: 'c8' },
-  { ko: '🎵 오늘의 세트리스트 예측 완료', en: '🎵 Setlist predictions done', key: 'c9' },
-];
-
-const done = JSON.parse(sessionStorage.getItem('checklist') || '{}');
-
-function renderChecklist() {
-  const el = document.getElementById('checklist');
-  el.innerHTML = checkItems.map(item => `
-    <div class="check-item ${done[item.key] ? 'done' : ''}" onclick="toggleCheck('${item.key}', this)">
-      <div class="check-box">${done[item.key] ? '✓' : ''}<\/div>
-      <span class="check-text">${currentLang === 'en' ? item.en : item.ko}<\/span>
-    <\/div>
-  `).join('');
-}
-
-function toggleCheck(key, el) {
-  done[key] = !done[key];
-  sessionStorage.setItem('checklist', JSON.stringify(done));
-  el.classList.toggle('done');
-  const box = el.querySelector('.check-box');
-  box.textContent = done[key] ? '✓' : '';
-}
-
-renderChecklist();
-
 
 // ─── QUIZ ─────────────────────────────────────────────────────
 const quizDataKo = [
@@ -3743,8 +3976,18 @@ var checklistItems = {
 
 var checklistSaved = JSON.parse(localStorage.getItem('concertChecklist') || '{}');
 
-function renderGuideChecklist() {
-  var area = document.getElementById('guideChecklistArea');
+
+// ─── PREP TAB ──────────────────────────────────────────────────
+function switchPrepTab(panel, btn) {
+  document.querySelectorAll('#prepTabs .disco-tab').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('#concert-prep .disco-panel').forEach(function(p){ p.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('prep-' + panel).classList.add('active');
+  if (panel === 'checklist') renderPrepChecklist();
+}
+
+function renderPrepChecklist() {
+  var area = document.getElementById('prepChecklistArea');
   if (!area) return;
   var items = checklistItems[currentLang] || checklistItems.ko;
   var checked = items.filter(function(i){ return checklistSaved[i.id]; }).length;
@@ -3755,28 +3998,39 @@ function renderGuideChecklist() {
   var html = '<div style="margin-bottom:20px">'
     + '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'
     + '<div style="font-size:0.72rem;letter-spacing:0.15em;color:var(--neon-red)">' + checked + ' / ' + total + (isEn?' items':' 항목') + '</div>'
-    + '<button onclick="resetGuideChecklist()" style="font-size:0.68rem;background:none;border:1px solid var(--gray);color:var(--light-gray);padding:3px 10px;cursor:pointer;font-family:Oswald,sans-serif">' + (isEn?'Reset':'초기화') + '</button>'
+    + '<button onclick="resetPrepChecklist()" style="font-size:0.68rem;background:none;border:1px solid var(--gray);color:var(--light-gray);padding:3px 10px;cursor:pointer;font-family:Oswald,sans-serif">' + (isEn?'Reset':'초기화') + '</button>'
     + '</div>'
     + '<div style="height:4px;background:var(--gray);border-radius:2px">'
     + '<div style="height:100%;background:var(--neon-red);width:' + pct + '%;transition:width 0.3s;border-radius:2px"></div>'
-    + '</div>'
-    + '</div>';
+    + '</div></div>';
 
-  // Required items first
   var required = items.filter(function(i){ return i.required; });
   var optional = items.filter(function(i){ return !i.required; });
-
   html += '<div style="font-size:0.6rem;letter-spacing:0.25em;color:var(--neon-red);margin-bottom:10px;text-transform:uppercase">' + (isEn?'Must-have':'필수 항목') + '</div>';
   html += renderChecklistGroup(required);
   html += '<div style="font-size:0.6rem;letter-spacing:0.25em;color:var(--light-gray);margin:16px 0 10px;text-transform:uppercase">' + (isEn?'Nice to have':'추천 항목') + '</div>';
   html += renderChecklistGroup(optional);
-
   if (checked === total) {
     html += '<div style="text-align:center;padding:20px;font-family:Oswald,sans-serif;color:var(--neon-red);font-size:1rem">🔴 ' + (isEn?'All set. XO':'준비 완료. XO') + '</div>';
   }
-
   area.innerHTML = html;
 }
+
+function resetPrepChecklist() {
+  checklistSaved = {};
+  localStorage.removeItem('concertChecklist');
+  renderPrepChecklist();
+}
+
+// ─── CULTURE TAB ───────────────────────────────────────────────
+function switchCultureTab(panel, btn) {
+  document.querySelectorAll('#cultureTabs .disco-tab').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('#xo-culture .disco-panel').forEach(function(p){ p.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('culture-' + panel).classList.add('active');
+}
+
+renderPrepChecklist();
 
 function renderChecklistGroup(items) {
   return '<div style="display:grid;gap:6px">' + items.map(function(item) {
@@ -3793,30 +4047,15 @@ function renderChecklistGroup(items) {
 function toggleChecklistItem(id) {
   checklistSaved[id] = !checklistSaved[id];
   localStorage.setItem('concertChecklist', JSON.stringify(checklistSaved));
-  renderGuideChecklist();
+  renderPrepChecklist();
 }
 
 function resetGuideChecklist() {
   checklistSaved = {};
   localStorage.removeItem('concertChecklist');
-  renderGuideChecklist();
+  renderPrepChecklist();
 }
 
-function renderGuide() {
-  document.querySelectorAll('#guide .disco-tab').forEach(function(b) {
-    var key = currentLang === 'en' ? b.dataset.en : b.dataset.ko;
-    if (key) b.textContent = key;
-  });
-  renderGuideChecklist();
-}
-
-function switchGuideTab(panel, btn) {
-  document.querySelectorAll('.disco-tab').forEach(function(b){ b.classList.remove('active'); });
-  document.querySelectorAll('#guide .disco-panel').forEach(function(p){ p.classList.remove('active'); });
-  btn.classList.add('active');
-  document.getElementById('guide-' + panel).classList.add('active');
-  if (panel === 'checklist') renderGuideChecklist();
-}
 
 
 // ─── WEEKND TYPE TEST ─────────────────────────────────────────
@@ -3892,6 +4131,24 @@ var typeQuestionsKo = [
       { text: "무감각 — 그냥 아무 생각 없음", type: "void" },
       { text: "당당함 — 나 꽤 잘하고 있잖아", type: "star" }
     ]
+  },
+  {
+    q: "나에게 음악이란?",
+    opts: [
+      { text: "감정을 정리하고 표현하는 유일한 도구", type: "feel" },
+      { text: "밤을 견디게 해주는 동반자", type: "night" },
+      { text: "기분을 끌어올려주는 에너지원", type: "star" },
+      { text: "그냥 배경으로 흐르는 것 — 깊게 듣진 않아", type: "void" }
+    ]
+  },
+  {
+    q: "공연장에서 위켄드를 본다. 나는?",
+    opts: [
+      { text: "가사 전부 외워서 떼창을 제대로 한다", type: "connect" },
+      { text: "눈 감고 음악에만 완전히 빠진다", type: "feel" },
+      { text: "무대 연출과 분위기 전체를 만끽한다", type: "star" },
+      { text: "그 순간을 그냥 통째로 흡수한다 — 폰도 내려놓고", type: "free" }
+    ]
   }
 ];
 
@@ -3951,6 +4208,8 @@ var typeResultsEn = {
     title: "🌙 The Night Owl",
     song: "The Hills",
     album: "Beauty Behind the Madness · 2015",
+    color: "rgba(30,40,120,0.35)",
+    pct: 24,
     desc: "You live in the hours when everyone else is asleep. Dark, atmospheric, and deeply internal — you feel things at a frequency most people can't access. The Hills is yours: it knows exactly where you go at night.",
     line: '"I only call you when it\'s half past five" — the time that\'s yours alone'
   },
@@ -3958,6 +4217,8 @@ var typeResultsEn = {
     title: "⚡ The Rush Chaser",
     song: "Blinding Lights",
     album: "After Hours · 2020",
+    color: "rgba(120,100,0,0.35)",
+    pct: 21,
     desc: "You live for the peak moment — lights, energy, presence. You know the exact feeling of a night that becomes a memory before it ends. Blinding Lights captures that perfectly: the desperate, beautiful need to feel alive.",
     line: '"I\'m blinded by the lights" — and you wouldn\'t have it any other way'
   },
@@ -3965,6 +4226,8 @@ var typeResultsEn = {
     title: "🫧 The Beautiful Sad",
     song: "Call Out My Name",
     album: "My Dear Melancholy, · 2018",
+    color: "rgba(60,0,80,0.4)",
+    pct: 33,
     desc: "You feel things deeply and hold on longer than you should. Nostalgia, quiet ache, the weight of what was — you live in that beautiful sad space. Call Out My Name is written for you.",
     line: '"I almost cut a piece of myself for your life" — you know what it means'
   },
@@ -3972,6 +4235,8 @@ var typeResultsEn = {
     title: "🔴 The All-In Type",
     song: "Die For You",
     album: "Starboy · 2016",
+    color: "rgba(160,20,40,0.35)",
+    pct: 22,
     desc: "When you love, you love completely — no halfway. Obsessive, devoted, incapable of half-measures. Die For You is your anthem: total commitment, no escape.",
     line: '"I\'m not sleeping, I\'m just dreaming of you" — it\'s always been you'
   }
@@ -3980,22 +4245,28 @@ var typeResultsEn = {
 var typeResults = {
   night: {
     title: "🌃 밤의 나그네형",
-    song: "Blinding Lights",
-    album: "After Hours · 2020",
-    desc: "새벽 도시를 혼자 달리는 사람. 감정을 행동으로 표출하고, 밤이 가장 살아있는 시간. 빛나는 것들에 이끌리지만 늘 어딘가 공허한 느낌. 위켄드의 가장 유명한 순간을 함께 살아가는 유형.",
-    line: "\"I can't see clearly when you're gone\" — 네가 없으면 아무것도 선명하지 않아"
+    song: "The Hills",
+    album: "Beauty Behind the Madness · 2015",
+    color: "rgba(30,40,120,0.35)",
+    pct: 19,
+    desc: "새벽 도시를 혼자 달리는 사람. 감정을 행동으로 표출하고, 밤이 가장 살아있는 시간. 빛나는 것들에 이끌리지만 늘 어딘가 공허한 느낌이 함께한다. 위켄드의 가장 어두운 감성을 함께 사는 유형.",
+    line: "\"I only call you when it's half past five\" — 그 시간만의 감각"
   },
   star: {
     title: "⭐ 차가운 황제형",
     song: "Starboy",
     album: "Starboy · 2016",
-    desc: "성공을 향한 욕망이 강하고 자신감 넘치는 외면 뒤에 공허함이 숨어있다. 'House so empty' — 가진 게 많아도 뭔가 빠진 느낌. 화려하게 살지만 그 이면을 아는 사람.",
-    line: "\"I'm a motherfucking Starboy\" — 당당하게, 하지만 혼자"
+    color: "rgba(120,100,0,0.35)",
+    pct: 13,
+    desc: "성공을 향한 욕망이 강하고, 자신감 넘치는 외면 뒤에 공허함이 숨어있다. 'House so empty' — 가진 게 많아도 뭔가 빠진 느낌. 화려하게 살지만 그 이면을 아는 사람.",
+    line: "\"Look what you've done\" — 그래도 나는 Starboy"
   },
   devote: {
     title: "💔 상처받은 헌신형",
     song: "Call Out My Name",
     album: "My Dear Melancholy, · 2018",
+    color: "rgba(140,20,40,0.35)",
+    pct: 17,
     desc: "전부를 주는 사람. 그래서 더 많이 상처받는 사람. '내가 이렇게까지 해줬는데'라는 감정을 자주 느끼고, 사랑에서 공정함을 원하지만 늘 더 많이 주는 쪽이 된다.",
     line: "\"Even though I know you won't need me\" — 알면서도 불러줘"
   },
@@ -4003,13 +4274,17 @@ var typeResults = {
     title: "🖤 철벽 방어형",
     song: "Heartless",
     album: "After Hours · 2020",
-    desc: "냉정하게 보이지만 사실은 상처받지 않으려고 쌓은 벽. '이렇게 될 줄 몰랐어'라고 하지만 사실 선택한 것. 감정을 숨기는 게 습관이 된 사람.",
+    color: "rgba(40,40,40,0.6)",
+    pct: 11,
+    desc: "냉정하게 보이지만 사실은 상처받지 않으려고 쌓은 벽. '이렇게 될 줄 몰랐어'라고 하지만 사실 스스로 선택한 것. 감정을 숨기는 게 습관이 된 사람.",
     line: "\"Never thought I'd be this way, but I'm heartless\" — 이렇게 될 줄 몰랐어"
   },
   feel: {
     title: "🌊 감성 폭풍형",
     song: "Die For You",
     album: "Starboy · 2016",
+    color: "rgba(180,60,0,0.35)",
+    pct: 22,
     desc: "감정이 풍부하고 사랑할 때 극단적으로 헌신하는 유형. 틱톡에서 뒤늦게 재발견된 이 곡처럼, 진심은 언제나 통한다고 믿는 사람.",
     line: "\"I would die for you\" — 너를 위해서라면"
   },
@@ -4017,6 +4292,8 @@ var typeResults = {
     title: "🌑 공허한 관찰자형",
     song: "I Was Never There",
     album: "My Dear Melancholy, · 2018",
+    color: "rgba(10,10,10,0.8)",
+    pct: 8,
     desc: "감정적으로 존재하면서도 실제로는 거리를 두는 유형. '거기 있었지만 없었던' 느낌. 혼자만의 공간이 필요하고, 관계에서 완전히 투명해지는 게 두렵다.",
     line: "\"Maybe I was never there for you\" — 어쩌면 한 번도 없었던 걸지도"
   },
@@ -4024,6 +4301,8 @@ var typeResults = {
     title: "🦋 자유 영혼형",
     song: "Sacrifice",
     album: "Dawn FM · 2022",
+    color: "rgba(0,80,60,0.35)",
+    pct: 6,
     desc: "묶이는 게 싫고 새로운 것을 추구하는 유형. 헌신이 두렵지만 끌림을 완전히 무시할 수도 없다. '오늘 밤만'이라고 하지만 늘 더 길어지는 사람.",
     line: "\"I can't sacrifice for love, not tonight\" — 오늘 밤만큼은"
   },
@@ -4031,6 +4310,8 @@ var typeResults = {
     title: "🔴 새벽 연결형",
     song: "Blinding Lights",
     album: "After Hours · 2020",
+    color: "rgba(160,20,40,0.35)",
+    pct: 4,
     desc: "외로울수록 누군가를 찾게 되는 유형. 새벽에 연락하고 싶어지는 그 사람이 있다. 감정을 행동으로 표현하고, 연결되어 있을 때 살아있음을 느낀다.",
     line: "\"I can't sleep until I feel your touch\" — 네 손길을 느끼기 전까지"
   }
@@ -4078,33 +4359,111 @@ function showTypeResult() {
   var top = Object.keys(typeScores).sort(function(a,b){ return typeScores[b]-typeScores[a]; })[0];
   var r = (currentLang === 'en' ? typeResultsEn : typeResults)[top];
   var area = document.getElementById('typeTestArea');
-  area.innerHTML = '<div style="background:var(--dark3);border:1px solid var(--neon-red);overflow:hidden">'
-    + '<div style="background:rgba(255,36,66,0.1);padding:32px 28px;text-align:center">'
-    + '<div style="font-size:2.5rem;margin-bottom:12px">'+r.title.split(' ')[0]+'<\/div>'
-    + '<div style="font-family:Oswald,sans-serif;font-size:1.6rem;margin-bottom:8px">'+r.title.split(' ').slice(1).join(' ')+'<\/div>'
-    + '<div style="font-size:0.72rem;letter-spacing:0.2em;color:var(--neon-red);text-transform:uppercase;margin-bottom:4px">'+(currentLang==="en"?"Your Song":"당신의 노래")+'<\/div>'
-    + '<div style="font-family:Oswald,sans-serif;font-size:1.2rem">'+r.song+'<\/div>'
-    + '<div style="font-size:0.72rem;color:var(--light-gray)">'+r.album+'<\/div>'
-    + '<\/div>'
+  var isEn = currentLang === 'en';
+
+  var emoji = r.title.split(' ')[0];
+  var name  = r.title.split(' ').slice(1).join(' ');
+  var color = r.color || 'rgba(255,36,66,0.15)';
+
+  area.innerHTML =
+    '<div style="background:var(--dark3);border:1px solid var(--neon-red);overflow:hidden">'
+
+    // ── 헤더 (앨범아트 블러 배경 + 타입명) ──
+    + '<div id="typeResultHeader" style="position:relative;overflow:hidden;padding:40px 28px 32px;text-align:center;min-height:220px">'
+    // 블러 배경 레이어 (아트 로드 전엔 color gradient)
+    + '<div id="typeArtBg" style="position:absolute;inset:-30px;background:' + color + ';background-size:cover;background-position:center;filter:blur(28px);opacity:1;transition:opacity 0.6s"></div>'
+    // 어두운 오버레이
+    + '<div style="position:absolute;inset:0;background:rgba(0,0,0,0.52)"></div>'
+    // 콘텐츠 (z-index)
+    + '<div style="position:relative;z-index:1">'
+    + '<div style="font-family:Oswald,sans-serif;font-size:clamp(1.4rem,4vw,2rem);letter-spacing:0.04em;margin-bottom:20px">' + name + '<\/div>'
+    // 앨범 아트 썸네일 (로드되면 표시)
+    + '<div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">'
+    + '<img id="typeAlbumThumb" src="" alt="" style="width:72px;height:72px;object-fit:cover;display:none;border:2px solid rgba(255,255,255,0.2);flex-shrink:0">'
+    + '<div style="text-align:left">'
+    + '<div style="font-size:0.58rem;letter-spacing:0.3em;color:var(--neon-red);text-transform:uppercase;margin-bottom:5px">'
+    + (isEn ? 'Your Song' : '당신의 노래') + '<\/div>'
+    + '<div style="font-family:Oswald,sans-serif;font-size:1.25rem;line-height:1.2">' + r.song + '<\/div>'
+    + '<div style="font-size:0.68rem;color:rgba(240,236,230,0.6);margin-top:4px">' + r.album + '<\/div>'
+    + '<\/div><\/div>'
+    + '<\/div>'  // z-index wrapper
+    + '<\/div>'  // header
+
+    // ── 본문 ──
     + '<div style="padding:28px">'
-    + '<p style="font-size:0.88rem;line-height:1.9;color:rgba(240,236,230,0.85);margin-bottom:20px">'+r.desc+'<\/p>'
-    + '<div style="border-left:3px solid var(--neon-red);padding:12px 18px;font-family:Oswald,sans-serif;font-size:0.9rem;color:var(--light-gray);font-style:italic">'+r.line+'<\/div>'
-    + '<div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap">'
-    + '<button onclick="initTypeTest()" style="padding:10px 24px;background:none;border:1px solid var(--gray);color:var(--white);font-family:Oswald,sans-serif;font-size:0.85rem;letter-spacing:0.1em;cursor:pointer">'+(currentLang==="en"?"Try Again":"다시 하기")+'<\/button>'
-    + '<button onclick="shareTypeResult(\''+r.title+'\',\''+r.song+'\')" style="padding:10px 24px;background:var(--neon-red);border:none;color:#000;font-family:Oswald,sans-serif;font-size:0.85rem;letter-spacing:0.1em;cursor:pointer">Share Result →<\/button>'
+    + '<p style="font-size:0.88rem;line-height:1.95;color:rgba(240,236,230,0.85);margin-bottom:22px">' + r.desc + '<\/p>'
+    + '<div style="border-left:3px solid var(--neon-red);padding:12px 18px;background:rgba(255,36,66,0.05);font-size:0.85rem;color:var(--light-gray);font-style:italic;line-height:1.7;margin-bottom:28px">' + r.line + '<\/div>'
+
+    // ── 공유 유도 문구 ──
+    + '<div style="font-size:0.72rem;letter-spacing:0.08em;color:var(--light-gray);margin-bottom:14px">'
+    + (isEn ? '🔴 Share your type — see what your friends get' : '🔴 결과를 공유하고 친구 유형과 비교해보세요') + '<\/div>'
+
+    // ── 버튼 행 ──
+    + '<div style="display:flex;gap:10px;flex-wrap:wrap">'
+    + '<button onclick="initTypeTest()" style="padding:11px 22px;background:none;border:1px solid var(--gray);color:var(--white);font-family:Oswald,sans-serif;font-size:0.82rem;letter-spacing:0.1em;cursor:pointer">'
+    + (isEn ? 'Try Again' : '다시 하기') + '<\/button>'
+    + '<button onclick="shareTypeTwitter(\''+r.title+'\',\''+r.song+'\',\''+top+'\')" style="padding:11px 22px;background:#000;border:1px solid #555;color:#fff;font-family:Oswald,sans-serif;font-size:0.82rem;letter-spacing:0.08em;cursor:pointer">𝕏 ' + (isEn ? 'Post' : '트위터 공유') + '<\/button>'
+    + '<button onclick="copyTypeResult(\''+r.title+'\',\''+r.song+'\')" id="copyTypeBtn" style="padding:11px 22px;background:var(--neon-red);border:none;color:#000;font-family:Oswald,sans-serif;font-size:0.82rem;letter-spacing:0.08em;cursor:pointer">📋 ' + (isEn ? 'Copy for Instagram' : '인스타 텍스트 복사') + '<\/button>'
     + '<\/div>'
     + '<\/div><\/div>';
+
+  // 앨범 아트 비동기 로드
+  fetchAlbumArt(r.song);
 }
 
-function shareTypeResult(title, song) {
-  var text = 'My Weeknd type: '+title+' 🔴 My song: '+song+' #TheWeekndSeoul';
-  if (navigator.share) {
-    navigator.share({ title: 'THE WEEKND TYPE TEST', text: text, url: window.location.href });
-  } else {
-    navigator.clipboard.writeText(text + '\n' + window.location.href).then(function() {
-      alert('Result copied! Paste on social media 🔴');
-    });
-  }
+function fetchAlbumArt(song) {
+  var query = 'the weeknd ' + song;
+  fetch('https://itunes.apple.com/search?term=' + encodeURIComponent(query) + '&entity=song&limit=3&country=us')
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (!data.results || !data.results.length) return;
+      var art = data.results[0].artworkUrl100;
+      if (!art) return;
+      var large = art.replace('100x100bb', '600x600bb');
+
+      // 블러 배경 교체
+      var bg = document.getElementById('typeArtBg');
+      if (bg) {
+        var img = new Image();
+        img.onload = function() {
+          bg.style.backgroundImage = 'url(' + large + ')';
+          bg.style.opacity = '1';
+        };
+        img.src = large;
+      }
+
+      // 썸네일 표시
+      var thumb = document.getElementById('typeAlbumThumb');
+      if (thumb) {
+        thumb.src = art.replace('100x100bb', '150x150bb');
+        thumb.style.display = 'block';
+      }
+    })
+    .catch(function() {}); // 실패해도 기본 color gradient 유지
+}
+
+function shareTypeTwitter(title, song, typeKey) {
+  var isEn = currentLang === 'en';
+  var text = isEn
+    ? 'I got "' + title + '" 🔴\nMy Weeknd song: ' + song + '\nWhat\'s yours? → ' + window.location.href + '\n#TheWeekndSeoul'
+    : '나는 위켄드 ' + title + ' 🔴\n내 노래: ' + song + '\n너는? → ' + window.location.href + '\n#TheWeekndSeoul';
+  window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text), '_blank');
+}
+
+function copyTypeResult(title, song) {
+  var isEn = currentLang === 'en';
+  var text = isEn
+    ? 'I got "' + title + '" on the Weeknd Seoul type test 🔴\nMy song: ' + song + '\nTake the test → ' + window.location.href + '\n#TheWeekndSeoul'
+    : '위켄드 유형 테스트 결과: ' + title + ' 🔴\n내 노래: ' + song + '\n테스트 해보기 → ' + window.location.href + '\n#TheWeekndSeoul';
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = document.getElementById('copyTypeBtn');
+    if (btn) {
+      btn.textContent = isEn ? '✓ Copied!' : '✓ 복사됐어요!';
+      setTimeout(function() {
+        btn.innerHTML = '📋 ' + (isEn ? 'Copy for Instagram' : '인스타 텍스트 복사');
+      }, 2000);
+    }
+  });
 }
 
 function shareTwitter(e) {
@@ -4201,124 +4560,6 @@ function shareLyricsCard() {
 pickLyricsCard();
 
 
-// ─── SETLIST VOTE ──────────────────────────────────────────────
-var voteSongs = [
-  { id:'blinding_lights',   title:'Blinding Lights',        act:'FINALE' },
-  { id:'die_for_you',       title:'Die For You',             act:'ACT IV' },
-  { id:'starboy',           title:'Starboy',                 act:'ACT IV' },
-  { id:'the_hills',         title:'The Hills',               act:'ACT IV' },
-  { id:'call_out_my_name',  title:'Call Out My Name',        act:'ACT V'  },
-  { id:'save_your_tears',   title:'Save Your Tears',         act:'ACT III'},
-  { id:'cant_feel_face',    title:"Can't Feel My Face",      act:'ACT IV' },
-  { id:'wicked_games',      title:'Wicked Games',            act:'ACT V'  },
-  { id:'i_feel_it_coming',  title:'I Feel It Coming',        act:'ACT IV' },
-  { id:'after_hours',       title:'After Hours',             act:'ACT III'},
-  { id:'moth_to_a_flame',   title:'Moth to a Flame',         act:'FINALE' },
-  { id:'sacrifice',         title:'Sacrifice',               act:'ACT II' },
-  { id:'take_my_breath',    title:'Take My Breath',          act:'ACT II' },
-  { id:'heartless',         title:'Heartless',               act:'ACT III'},
-  { id:'out_of_time',       title:'Out of Time',             act:'ACT II' },
-  { id:'the_abyss',         title:'The Abyss',               act:'ACT I'  },
-  { id:'kiss_land',         title:'Kiss Land',               act:'ACT V'  },
-  { id:'house_of_balloons', title:'House of Balloons',       act:'ACT V'  },
-  { id:'faith',             title:'Faith',                   act:'ACT III'},
-  { id:'crew_love',         title:'Crew Love',               act:'ACT V'  },
-  { id:'less_than_zero',    title:'Less Than Zero',          act:'ACT II' },
-  { id:'stargirl',          title:'Stargirl Interlude',      act:'ACT IV' },
-  { id:'party_monster',     title:'Party Monster',           act:'ACT IV' },
-  { id:'often',             title:'Often',                   act:'ACT IV' },
-  { id:'i_was_never_there', title:'I Was Never There',       act:'ACT V'  },
-];
-
-var MAX_VOTES = 5;
-var votesSaved = {};
-try { votesSaved = JSON.parse(localStorage.getItem('setlistVotes') || '{}'); } catch(e) {}
-
-function renderVoteSection() {
-  var grid = document.getElementById('voteGrid');
-  var summary = document.getElementById('voteSummary');
-  var summaryList = document.getElementById('voteSummaryList');
-  var label = document.getElementById('vote-summary-label');
-  var resetBtn = document.getElementById('vote-reset-btn');
-  var descEl = document.getElementById('desc-vote');
-  if (!grid) return;
-
-  var isEn = currentLang === 'en';
-  var totalVoted = Object.keys(votesSaved).filter(function(k){ return votesSaved[k]; }).length;
-  var remaining = MAX_VOTES - totalVoted;
-
-  if (descEl) {
-    descEl.textContent = isEn
-      ? 'Pick up to 5 songs you want to hear in Seoul. Saved locally in your browser.'
-      : '서울에서 꼭 듣고 싶은 곡 최대 5곡을 골라보세요. 내 브라우저에 저장됩니다.';
-  }
-  if (label) label.textContent = isEn ? 'My Wishlist' : '내 위시리스트';
-  if (resetBtn) resetBtn.textContent = isEn ? 'Reset' : '초기화';
-
-  // Counter badge
-  var counterHtml = '<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">'
-    + '<div style="font-size:0.68rem;letter-spacing:0.15em;color:' + (remaining===0?'var(--neon-red)':'var(--light-gray)') + '">'
-    + (isEn
-      ? (remaining > 0 ? remaining + ' picks remaining' : '✓ 5/5 selected')
-      : (remaining > 0 ? '남은 선택 ' + remaining + '곡' : '✓ 5곡 선택 완료'))
-    + '</div>'
-    + '<div style="flex:1;height:3px;background:var(--gray);border-radius:2px">'
-    + '<div style="height:100%;background:var(--neon-red);width:' + (totalVoted/MAX_VOTES*100) + '%;transition:width 0.3s;border-radius:2px"></div>'
-    + '</div></div>';
-
-  // Song grid
-  var songsHtml = voteSongs.map(function(s) {
-    var voted = !!votesSaved[s.id];
-    var disabled = !voted && totalVoted >= MAX_VOTES;
-    return '<div onclick="' + (disabled ? '' : 'toggleVote(\'' + s.id + '\')') + '" '
-      + 'style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:' + (voted?'rgba(255,36,66,0.09)':'var(--dark3)') + ';'
-      + 'border:1px solid ' + (voted?'var(--neon-red)':'var(--gray)') + ';'
-      + (disabled?'opacity:0.35;':'cursor:pointer;') + 'transition:all 0.15s"'
-      + (disabled?'':' onmouseover="if(!this.style.cursor.includes(\'default\')){this.style.borderColor=\'' + (voted?'var(--neon-red)':'rgba(255,36,66,0.5)') + '\'}" onmouseout="this.style.borderColor=\'' + (voted?'var(--neon-red)':'var(--gray)') + '\'"')
-      + '>'
-      + '<div style="width:20px;height:20px;border:1px solid ' + (voted?'var(--neon-red)':'var(--gray)') + ';display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;color:var(--neon-red)">' + (voted?'✓':'') + '</div>'
-      + '<div style="flex:1;min-width:0">'
-      + '<div style="font-size:0.82rem;font-family:Oswald,sans-serif;letter-spacing:0.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + s.title + '</div>'
-      + '<div style="font-size:0.58rem;letter-spacing:0.15em;color:var(--light-gray);margin-top:2px">' + s.act + '</div>'
-      + '</div>'
-      + '<div style="font-size:0.95rem;opacity:' + (voted?'1':'0.2') + ';transition:opacity 0.2s">' + (voted?'🔴':'○') + '</div>'
-      + '</div>';
-  }).join('');
-
-  grid.innerHTML = counterHtml + '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px">' + songsHtml + '</div>';
-
-  // Summary
-  var picked = voteSongs.filter(function(s){ return votesSaved[s.id]; });
-  if (picked.length > 0) {
-    summary.style.display = 'block';
-    summaryList.innerHTML = picked.map(function(s){
-      return '<span style="padding:5px 12px;background:rgba(255,36,66,0.12);border:1px solid var(--neon-red);font-size:0.72rem;font-family:Oswald,sans-serif;letter-spacing:0.05em">' + s.title + '</span>';
-    }).join('');
-  } else {
-    summary.style.display = 'none';
-  }
-}
-
-function toggleVote(id) {
-  var totalVoted = Object.keys(votesSaved).filter(function(k){ return votesSaved[k]; }).length;
-  if (votesSaved[id]) {
-    votesSaved[id] = false;
-  } else if (totalVoted < MAX_VOTES) {
-    votesSaved[id] = true;
-  }
-  localStorage.setItem('setlistVotes', JSON.stringify(votesSaved));
-  renderVoteSection();
-}
-
-function resetVotes() {
-  votesSaved = {};
-  localStorage.removeItem('setlistVotes');
-  renderVoteSection();
-}
-
-renderVoteSection();
-
-
 // ─── AD SLOT CLEANUP ──────────────────────────────────────────
 // 승인 전: 슬롯1 숨김. 승인 후 id="adSlot1" display:none 제거하세요.
 window.addEventListener('load', function() {
@@ -4377,4 +4618,273 @@ var checkSongs = [
 
 initTypeTest();
 
+// ─── MBTI MAP ──────────────────────────────────────────────────
+var mbtiMap = {
+  // ── NT (분석형) ──────────────────────────────────────────────
+  INTJ: {
+    weekndType: '🖤 철벽 방어형', color: 'rgba(30,30,30,0.7)',
+    song: 'Heartless', album: 'After Hours · 2020',
+    songEn: 'Heartless', weekndTypeEn: '🖤 The Ice Wall',
+    desc: '전략적이고 냉철한 INTJ. 감정을 드러내는 게 취약함처럼 느껴져서 벽을 쌓는다. 위켄드도 같다 — Heartless는 냉정하게 보이는 사람의 내면에 있는 자기 고백이다.',
+    descEn: 'Strategic and guarded INTJ. Showing emotion feels like weakness — so you build walls. Heartless is The Weeknd\'s confession: "I chose this, but I didn\'t think it would feel like this."',
+    line: '"Never thought I\'d be this way, but I\'m heartless"'
+  },
+  INTP: {
+    weekndType: '🌑 공허한 관찰자형', color: 'rgba(10,10,20,0.75)',
+    song: 'I Was Never There', album: 'My Dear Melancholy, · 2018',
+    songEn: 'I Was Never There', weekndTypeEn: '🌑 The Ghost',
+    desc: '머릿속은 복잡한데 감정 표현은 서툰 INTP. 관계 속에 있지만 어딘가 투명인간 같은 느낌. I Was Never There는 그 감각을 정확히 포착한다 — 존재했지만 존재하지 않았던.',
+    descEn: 'Head full of thoughts, heart hard to access. You exist in relationships but feel invisible. I Was Never There captures that — present, but somehow not.',
+    line: '"Maybe I was never there for you"'
+  },
+  ENTJ: {
+    weekndType: '⭐ 차가운 황제형', color: 'rgba(100,70,0,0.5)',
+    song: 'Starboy', album: 'Starboy · 2016',
+    songEn: 'Starboy', weekndTypeEn: '⭐ The Cold Emperor',
+    desc: '목표를 향해 달리는 ENTJ. 성공을 손에 쥐었는데도 뭔가 빠진 느낌이 든다. Starboy는 가진 것을 다 가진 사람이 부르는 공허함의 노래 — 그 역설을 ENTJ만큼 이해하는 유형은 없다.',
+    descEn: 'Born to lead, driven to win. But Starboy is about having everything and feeling the hollowness underneath. No one understands that paradox like an ENTJ.',
+    line: '"Look what you\'ve done — I\'m a Starboy"'
+  },
+  ENTP: {
+    weekndType: '🦋 자유 영혼형', color: 'rgba(0,60,40,0.45)',
+    song: 'Sacrifice', album: 'Dawn FM · 2022',
+    songEn: 'Sacrifice', weekndTypeEn: '🦋 Free Spirit',
+    desc: '틀을 깨는 걸 즐기는 ENTP. 끌리는 사람은 있지만 묶이는 건 싫다. Sacrifice는 그 갈등을 솔직하게 그린다 — "사랑을 위한 희생은 오늘 밤은 못 하겠어."',
+    descEn: 'You break patterns, question rules, resist commitment. Sacrifice is your honest confession: attracted, but not ready to lose yourself for it.',
+    line: '"I can\'t sacrifice for love, not tonight"'
+  },
+  // ── NF (이상형) ──────────────────────────────────────────────
+  INFJ: {
+    weekndType: '💔 상처받은 헌신형', color: 'rgba(120,10,30,0.45)',
+    song: 'Call Out My Name', album: 'My Dear Melancholy, · 2018',
+    songEn: 'Call Out My Name', weekndTypeEn: '💔 The Devoted',
+    desc: '깊이 공감하고 전부를 주는 INFJ. 진심을 줬는데 상대가 받을 준비가 안 돼 있었던 경험. Call Out My Name은 그 억울함과 슬픔을 동시에 담고 있다.',
+    descEn: 'You give everything — and Call Out My Name is about what happens when the other person wasn\'t ready for it. You know exactly what that feels like.',
+    line: '"Even though I know you won\'t need me"'
+  },
+  INFP: {
+    weekndType: '🌊 감성 폭풍형', color: 'rgba(160,50,0,0.4)',
+    song: 'Die For You', album: 'Starboy · 2016',
+    songEn: 'Die For You', weekndTypeEn: '🌊 The Emotional Storm',
+    desc: '감정이 음악이 되는 INFP. 틱톡에서 뒤늦게 폭발한 이 곡처럼 — 진심은 언제나 결국 발견된다. 사랑을 극단적으로 표현하는 것이 이상하지 않다고 느끼는 유일한 유형.',
+    descEn: 'Feelings are your native language. Die For You went viral years later because real emotion is timeless — and no one feels that more purely than an INFP.',
+    line: '"I would die for you, yeah darling if you want me to"'
+  },
+  ENFJ: {
+    weekndType: '🔴 새벽 연결형', color: 'rgba(150,15,35,0.45)',
+    song: 'Save Your Tears', album: 'After Hours · 2020',
+    songEn: 'Save Your Tears', weekndTypeEn: '🔴 The Connector',
+    desc: '사람들을 돌보는 ENFJ. 그러면서도 자신도 누군가의 손이 필요할 때가 있다. Save Your Tears는 상처를 주고서 후회하는 사람의 이야기 — 관계에 진심인 당신에게 가장 아픈 곡.',
+    descEn: 'You care deeply for others — but Save Your Tears is about the guilt of hurting someone you actually loved. The relational ENFJ feels that cut the deepest.',
+    line: '"I realized I needed you more than I thought"'
+  },
+  ENFP: {
+    weekndType: '🦋 자유 영혼형', color: 'rgba(0,60,40,0.45)',
+    song: 'Take My Breath', album: 'Dawn FM · 2022',
+    songEn: 'Take My Breath', weekndTypeEn: '🦋 Free Spirit',
+    desc: '에너지 넘치고 새로운 감각을 쫓는 ENFP. Take My Breath는 그 강렬한 순간의 흥분 — 처음 빠져드는 그 느낌을 가장 잘 아는 유형이 ENFP다.',
+    descEn: 'You chase experiences, feelings, peaks. Take My Breath is that rush of falling in — the intoxicating moment you live for.',
+    line: '"You make it look so easy, so easy"'
+  },
+  // ── SJ (관리형) ──────────────────────────────────────────────
+  ISTJ: {
+    weekndType: '🖤 철벽 방어형', color: 'rgba(30,30,30,0.7)',
+    song: 'Faith', album: 'After Hours · 2020',
+    songEn: 'Faith', weekndTypeEn: '🖤 The Ice Wall',
+    desc: '원칙과 책임을 중시하는 ISTJ. 감정을 표현하는 방식이 서툴지만 깊이는 누구보다 깊다. Faith는 모든 게 무너진 밤에도 계속 가는 사람의 이야기.',
+    descEn: 'Principled and reliable. Faith is about continuing to move even when everything has collapsed — a kind of quiet resilience that defines the ISTJ.',
+    line: '"I light a blunt to see the light"'
+  },
+  ISFJ: {
+    weekndType: '💔 상처받은 헌신형', color: 'rgba(120,10,30,0.45)',
+    song: 'Out of Time', album: 'Dawn FM · 2022',
+    songEn: 'Out of Time', weekndTypeEn: '💔 The Devoted',
+    desc: '조용히 헌신하는 ISFJ. 내가 얼마나 줬는지 말 안 하는 유형. Out of Time은 사랑했지만 타이밍이 맞지 않았던 이야기 — 많이 익숙하지 않나요?',
+    descEn: 'Quietly devoted, rarely celebrated. Out of Time is about loving someone genuinely but losing them to circumstance — an ache ISFJs know well.',
+    line: '"Say I love you girl, but I\'m out of time"'
+  },
+  ESTJ: {
+    weekndType: '⭐ 차가운 황제형', color: 'rgba(100,70,0,0.5)',
+    song: "Can't Feel My Face", album: 'Beauty Behind the Madness · 2015',
+    songEn: "Can't Feel My Face", weekndTypeEn: '⭐ The Cold Emperor',
+    desc: '목표 지향적이고 현실적인 ESTJ. 겉으로는 강하고 자신감 있어 보이지만 가끔은 감각이 마비된 것처럼 멍해질 때가 있다. 그 순간이 Can\'t Feel My Face다.',
+    descEn: 'Confident and results-driven on the outside. But Can\'t Feel My Face is about that moment when you\'re numb to everything — and only realizing it later.',
+    line: '"I can\'t feel my face when I\'m with you"'
+  },
+  ESFJ: {
+    weekndType: '🔴 새벽 연결형', color: 'rgba(150,15,35,0.45)',
+    song: 'Blinding Lights', album: 'After Hours · 2020',
+    songEn: 'Blinding Lights', weekndTypeEn: '🔴 The Connector',
+    desc: '사람들을 모으고 분위기를 만드는 ESFJ. Blinding Lights는 새벽에 누군가를 향해 달리는 노래 — 연결되고 싶을 때 가장 먼저 생각나는 그 감각.',
+    descEn: 'You bring people together. Blinding Lights is about that desperate need to reach someone at the worst hour — the feeling ESFJs know the most.',
+    line: '"I\'m running out of time, \'cause I can see the sun light up the sky"'
+  },
+  // ── SP (탐험형) ──────────────────────────────────────────────
+  ISTP: {
+    weekndType: '🌃 밤의 나그네형', color: 'rgba(20,30,80,0.5)',
+    song: 'The Hills', album: 'Beauty Behind the Madness · 2015',
+    songEn: 'The Hills', weekndTypeEn: '🌃 The Night Wanderer',
+    desc: '조용하고 관찰적인 ISTP. 새벽 도시를 혼자 달리는 그 감각 — 말은 없지만 내면에 무언가 끓고 있다. The Hills는 그 침묵의 강렬함을 담은 곡이다.',
+    descEn: 'Quiet observer with a burning interior. The Hills — late night, no explanation needed — is exactly the song an ISTP drives to at 2AM.',
+    line: '"I only call you when it\'s half past five"'
+  },
+  ISFP: {
+    weekndType: '🌊 감성 폭풍형', color: 'rgba(160,50,0,0.4)',
+    song: 'Wicked Games', album: 'Trilogy · 2012',
+    songEn: 'Wicked Games', weekndTypeEn: '🌊 The Emotional Storm',
+    desc: '감각적이고 진심이 깊은 ISFP. 말보다 감정으로 모든 걸 느끼는 유형. Wicked Games는 위켄드의 가장 날 것의 감정 — ISFP는 이 곡의 첫 소절에서 이미 멈춰버린다.',
+    descEn: 'You feel everything before you think it. Wicked Games is The Weeknd at his most raw — an ISFP stops breathing at the first note.',
+    line: '"Tell me you love me, only for tonight"'
+  },
+  ESTP: {
+    weekndType: '🌃 밤의 나그네형', color: 'rgba(20,30,80,0.5)',
+    song: 'Heartless', album: 'After Hours · 2020',
+    songEn: 'Heartless', weekndTypeEn: '🌃 The Night Wanderer',
+    desc: '순간에 충실하고 자극을 쫓는 ESTP. 감정보다 행동이 먼저인 유형. Heartless는 결과를 나중에 생각하는 사람의 솔직한 고백 — 익숙하지 않나요?',
+    descEn: 'Act first, feel later. Heartless is the honest confession of someone who lives for the moment and deals with the consequences after — pure ESTP energy.',
+    line: '"I\'m feeling nothing, I\'m feeling nothing"'
+  },
+  ESFP: {
+    weekndType: '🔴 새벽 연결형', color: 'rgba(150,15,35,0.45)',
+    song: 'Often', album: 'Beauty Behind the Madness · 2015',
+    songEn: 'Often', weekndTypeEn: '🔴 The Connector',
+    desc: '활기차고 매력적인 ESFP. 사람들을 끌어당기고, 그 순간의 에너지를 즐긴다. Often은 그 끌어당김의 자신감 — 당신이 방에 들어올 때의 느낌이 딱 이 곡이다.',
+    descEn: 'Magnetic, spontaneous, alive in the moment. Often is about that pull — when you walk into a room, this is the song playing in your head.',
+    line: '"Girl I want you, often"'
+  }
+};
+
+// MBTI 그리드 렌더
+var mbtiGroups = [
+  { label: 'NT', types: ['INTJ','INTP','ENTJ','ENTP'] },
+  { label: 'NF', types: ['INFJ','INFP','ENFJ','ENFP'] },
+  { label: 'SJ', types: ['ISTJ','ISFJ','ESTJ','ESFJ'] },
+  { label: 'SP', types: ['ISTP','ISFP','ESTP','ESFP'] }
+];
+
+function renderMbtiGrid() {
+  var grid = document.getElementById('mbtiGrid');
+  if (!grid) return;
+  var isEn = currentLang === 'en';
+  var groupLabels = { NT: isEn?'Analysts':'분석형', NF: isEn?'Diplomats':'이상형', SJ: isEn?'Sentinels':'관리형', SP: isEn?'Explorers':'탐험형' };
+  var html = '<div style="display:grid;gap:20px">';
+  mbtiGroups.forEach(function(g) {
+    html += '<div>'
+      + '<div style="font-size:0.6rem;letter-spacing:0.25em;color:var(--neon-red);margin-bottom:10px">' + g.label + ' · ' + groupLabels[g.label] + '</div>'
+      + '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">';
+    g.types.forEach(function(t) {
+      html += '<button onclick="showMbtiResult(\'' + t + '\')"'
+        + ' style="padding:14px 6px;background:var(--dark3);border:1px solid var(--gray);color:var(--white);'
+        + 'font-family:Oswald,sans-serif;font-size:0.9rem;letter-spacing:0.08em;cursor:pointer;transition:all 0.15s"'
+        + ' onmouseover="this.style.borderColor=\'var(--neon-red)\';this.style.background=\'rgba(255,36,66,0.1)\'"'
+        + ' onmouseout="this.style.borderColor=\'var(--gray)\';this.style.background=\'var(--dark3)\'">'
+        + t + '</button>';
+    });
+    html += '</div></div>';
+  });
+  html += '</div>';
+  grid.innerHTML = html;
+}
+
+function showMbtiResult(mbti) {
+  var r = mbtiMap[mbti];
+  if (!r) return;
+  var isEn = currentLang === 'en';
+  var resultDiv = document.getElementById('mbtiResult');
+  if (!resultDiv) return;
+
+  var typeName = isEn ? r.weekndTypeEn : r.weekndType;
+  var song = isEn ? r.songEn : r.song;
+  var desc = isEn ? r.descEn : r.desc;
+
+  resultDiv.style.display = 'block';
+  resultDiv.innerHTML =
+    '<div style="background:var(--dark3);border:1px solid var(--neon-red);overflow:hidden">'
+    // 헤더
+    + '<div id="mbtiResultHeader" style="position:relative;overflow:hidden;padding:36px 28px 28px;text-align:center;min-height:200px">'
+    + '<div id="mbtiArtBg" style="position:absolute;inset:-30px;background:' + r.color + ';background-size:cover;background-position:center;filter:blur(28px);opacity:1;transition:opacity 0.6s"></div>'
+    + '<div style="position:absolute;inset:0;background:rgba(0,0,0,0.52)"></div>'
+    + '<div style="position:relative;z-index:1">'
+    + '<div style="font-size:0.62rem;letter-spacing:0.3em;color:var(--neon-red);margin-bottom:10px">MBTI · ' + mbti + '</div>'
+    + '<div style="font-family:Oswald,sans-serif;font-size:clamp(1.3rem,4vw,1.9rem);letter-spacing:0.04em;margin-bottom:20px">' + typeName + '</div>'
+    + '<div style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap">'
+    + '<img id="mbtiAlbumThumb" src="" alt="" style="width:64px;height:64px;object-fit:cover;display:none;border:2px solid rgba(255,255,255,0.2);flex-shrink:0">'
+    + '<div style="text-align:left">'
+    + '<div style="font-size:0.58rem;letter-spacing:0.28em;color:var(--neon-red);text-transform:uppercase;margin-bottom:4px">' + (isEn?'Your Song':'당신의 노래') + '</div>'
+    + '<div style="font-family:Oswald,sans-serif;font-size:1.2rem">' + song + '</div>'
+    + '<div style="font-size:0.68rem;color:rgba(240,236,230,0.55);margin-top:3px">' + r.album + '</div>'
+    + '</div></div>'
+    + '</div></div>'
+    // 본문
+    + '<div style="padding:26px">'
+    + '<p style="font-size:0.88rem;line-height:1.95;color:rgba(240,236,230,0.85);margin-bottom:20px">' + desc + '</p>'
+    + '<div style="border-left:3px solid var(--neon-red);padding:12px 18px;background:rgba(255,36,66,0.05);font-size:0.85rem;color:var(--light-gray);font-style:italic;line-height:1.7;margin-bottom:24px">' + r.line + '</div>'
+    + '<div style="font-size:0.72rem;color:var(--light-gray);margin-bottom:14px">🔴 ' + (isEn?'Share with friends — what\'s their type?':'친구 결과와 비교해보세요') + '</div>'
+    + '<div style="display:flex;gap:10px;flex-wrap:wrap">'
+    + '<button onclick="renderMbtiGrid();document.getElementById(\'mbtiResult\').style.display=\'none\'" style="padding:10px 20px;background:none;border:1px solid var(--gray);color:var(--white);font-family:Oswald,sans-serif;font-size:0.8rem;letter-spacing:0.08em;cursor:pointer">' + (isEn?'← Back':'← 다시 선택') + '</button>'
+    + '<button onclick="shareTypeTwitter(\'' + typeName + '\',\'' + song + '\',\'mbti_' + mbti + '\')" style="padding:10px 20px;background:#000;border:1px solid #555;color:#fff;font-family:Oswald,sans-serif;font-size:0.8rem;letter-spacing:0.06em;cursor:pointer">𝕏 ' + (isEn?'Post':'트위터 공유') + '</button>'
+    + '<button onclick="copyMbtiResult(\'' + mbti + '\',\'' + typeName + '\',\'' + song + '\')" id="copyMbtiBtn" style="padding:10px 20px;background:var(--neon-red);border:none;color:#000;font-family:Oswald,sans-serif;font-size:0.8rem;letter-spacing:0.06em;cursor:pointer">📋 ' + (isEn?'Copy for Instagram':'인스타 복사') + '</button>'
+    + '</div></div></div>';
+
+  // 앨범 아트 로드
+  fetchAlbumArtFor(song, 'mbtiArtBg', 'mbtiAlbumThumb');
+
+  // 스크롤
+  setTimeout(function() { resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
+}
+
+function fetchAlbumArtFor(song, bgId, thumbId) {
+  fetch('https://itunes.apple.com/search?term=' + encodeURIComponent('the weeknd ' + song) + '&entity=song&limit=3&country=us')
+    .then(function(r){ return r.json(); })
+    .then(function(data) {
+      if (!data.results || !data.results.length) return;
+      var art = data.results[0].artworkUrl100;
+      if (!art) return;
+      var large = art.replace('100x100bb','600x600bb');
+      var bg = document.getElementById(bgId);
+      if (bg) {
+        var img = new Image();
+        img.onload = function() { bg.style.backgroundImage = 'url('+large+')'; };
+        img.src = large;
+      }
+      var thumb = document.getElementById(thumbId);
+      if (thumb) {
+        thumb.src = art.replace('100x100bb','150x150bb');
+        thumb.style.display = 'block';
+      }
+    }).catch(function(){});
+}
+
+function copyMbtiResult(mbti, type, song) {
+  var isEn = currentLang === 'en';
+  var text = isEn
+    ? 'MBTI ' + mbti + ' → My Weeknd song is "' + song + '" 🔴\nWhat\'s yours? → ' + window.location.href + '\n#TheWeekndSeoul'
+    : 'MBTI ' + mbti + '의 위켄드 노래는 "' + song + '" 🔴\n너는? → ' + window.location.href + '\n#TheWeekndSeoul';
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = document.getElementById('copyMbtiBtn');
+    if (btn) {
+      btn.textContent = isEn ? '✓ Copied!' : '✓ 복사됐어요!';
+      setTimeout(function(){ btn.innerHTML = '📋 ' + (isEn?'Copy for Instagram':'인스타 복사'); }, 2000);
+    }
+  });
+}
+
+// 탭 전환
+function switchTypeTab(tab, btn) {
+  document.querySelectorAll('#typeTabs .disco-tab').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('#type-test .disco-panel').forEach(function(p){ p.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('typePanel-' + tab).classList.add('active');
+  if (tab === 'mbti') renderMbtiGrid();
+}
+
+// fetchAlbumArt 기존 함수 → fetchAlbumArtFor 로 위임
+function fetchAlbumArt(song) {
+  fetchAlbumArtFor(song, 'typeArtBg', 'typeAlbumThumb');
+}
+
+renderMbtiGrid();
+
 </script>
+</body>
+</html>

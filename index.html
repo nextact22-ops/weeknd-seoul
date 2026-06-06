@@ -34,6 +34,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;700&display=swap');
 
     :root {
+      --nav-height: 76px;
       --red: #c0392b;
       --neon-red: #ff2442;
       --dark: #0a0a0a;
@@ -194,6 +195,10 @@
       justify-content: space-between;
       padding: 8px 16px 6px;
       border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav-ticker {
+      overflow: hidden;
     }
 
     .nav-brand {
@@ -374,6 +379,71 @@
       color: var(--white);
       margin-top: 20px;
     }
+
+    /* Lyric strip */
+    .lyric-strip {
+      background: rgba(8,8,8,0.95);
+      border-top: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,36,66,0.12);
+      padding: 10px 16px;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+    }
+    .lyric-strip-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .lyric-strip-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      color: var(--neon-red);
+      text-transform: uppercase;
+      padding-top: 3px;
+      flex-shrink: 0;
+      border-right: 1px solid rgba(255,36,66,0.25);
+      padding-right: 16px;
+      margin-right: 0;
+    }
+    .lyric-strip-text { flex: 1; min-width: 0; }
+    .lyric-strip-en {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+      color: var(--white);
+      font-style: italic;
+      letter-spacing: 0.03em;
+      line-height: 1.4;
+      min-height: 1.4em;
+    }
+    .lyric-strip-kr {
+      font-size: 0.78rem;
+      color: rgba(255,36,66,0.7);
+      margin-top: 4px;
+      letter-spacing: 0.05em;
+      min-height: 1.2em;
+      transition: opacity 0.4s;
+    }
+    .hero-lyric-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 0.9em;
+      background: var(--neon-red);
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink 0.75s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    @media (max-width: 600px) {
+      .lyric-strip { padding: 12px 16px; min-height: 60px; }
+      .lyric-strip-label { display: none; }
+      .lyric-strip-en { font-size: 0.88rem; }
+    }
+
 
     /* Section headers — more raw */
     .section-tag {
@@ -669,21 +739,75 @@
     .act-sub { font-size: 0.72rem; color: var(--light-gray); margin-top: 2px; }
     .act-songs { padding: 16px 24px; display: grid; gap: 8px; }
     .act-song {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 0.85rem; padding: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
       border-bottom: 1px solid rgba(42,42,42,0.5);
     }
     .act-song:last-child { border-bottom: none; }
-    .act-song-num { font-family: 'Oswald', sans-serif; color: var(--gray); width: 20px; flex-shrink: 0; font-size: 0.8rem; }
-    .act-song-name { flex: 1; }
-    .act-song-album { font-size: 0.7rem; color: var(--light-gray); }
-    .lyrics-jump-btn {
-      font-size: 0.65rem; color: var(--neon-red); background: none;
-      border: 1px solid rgba(255,36,66,0.4); padding: 2px 7px;
-      cursor: pointer; font-family: 'Oswald', sans-serif; letter-spacing: 0.08em;
-      transition: all 0.2s; white-space: nowrap;
+    .act-song-num {
+      font-family: 'Oswald', sans-serif;
+      color: var(--gray);
+      font-size: 0.78rem;
+      width: 22px;
+      flex-shrink: 0;
     }
-    .lyrics-jump-btn:hover { background: rgba(255,36,66,0.15); border-color: var(--neon-red); }
+    .act-song-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .act-song-name {
+      font-size: 0.88rem;
+      font-weight: 500;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .act-song-album {
+      font-size: 0.68rem;
+      color: var(--light-gray);
+      margin-top: 2px;
+    }
+    .act-song-preview {
+      font-size: 0.72rem;
+      color: rgba(240,236,230,0.32);
+      font-style: italic;
+      margin-top: 4px;
+      line-height: 1.4;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+    .act-song:hover .act-song-preview,
+    .act-song:active .act-song-preview {
+      color: rgba(240,236,230,0.6);
+    }
+    .lyrics-jump-btn-wrap {
+      flex-shrink: 0;
+    }
+    .lyrics-jump-btn {
+      font-size: 0.62rem;
+      color: var(--neon-red);
+      background: rgba(255,36,66,0.06);
+      border: 1px solid rgba(255,36,66,0.3);
+      padding: 4px 10px;
+      cursor: pointer;
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.1em;
+      transition: all 0.15s;
+      white-space: nowrap;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .lyrics-jump-btn:hover {
+      background: rgba(255,36,66,0.18);
+      border-color: var(--neon-red);
+      color: var(--white);
+    }
+    .lyrics-jump-btn:active { background: rgba(255,36,66,0.3); }
     .setlist-notes {
       background: var(--dark3); border: 1px solid var(--gray); padding: 24px 28px;
     }
@@ -945,84 +1069,77 @@
       border-radius: 2px;
     }
 
-    /* lyric section tabs (mobile) */
-    .lc-tabs {
-      display: none;
-      border-bottom: 1px solid var(--gray);
-      background: var(--dark2);
+    /* lyric section — single column flow */
+    .lc-section {
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 24px;
     }
-
-    .lc-tab-btn {
-      flex: 1;
-      padding: 10px 0;
-      background: none;
-      border: none;
-      color: var(--light-gray);
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-      transition: all 0.15s;
-    }
-
-    .lc-tab-btn.active { color: var(--white); border-bottom-color: var(--neon-red); }
-
-    .lc-section { border: 1px solid var(--gray); border-top: none; margin-bottom: 20px; }
+    .lc-section:last-of-type { border-bottom: none; }
 
     .lc-section-label {
       font-family: 'Oswald', sans-serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.25em;
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--neon-red);
-      padding: 14px 24px 0;
+      margin-bottom: 14px;
     }
 
-    .lc-cols {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    .lc-en {
+      font-size: 1rem;
+      line-height: 2;
+      color: var(--white);
+      white-space: pre-wrap;
+      font-family: inherit;
+      margin-bottom: 16px;
     }
 
-    .lc-col {
-      padding: 16px 24px 20px;
-    }
-
-    .lc-col:first-child { border-right: 1px solid var(--gray); }
-
-    .lc-col-label {
-      font-size: 0.58rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
+    .lc-kr {
+      font-size: 0.88rem;
+      line-height: 1.95;
+      color: rgba(240,236,230,0.55);
+      white-space: pre-wrap;
+      font-family: inherit;
+      border-left: 2px solid rgba(255,255,255,0.08);
+      padding-left: 14px;
+      margin-bottom: 0;
     }
 
     .lc-nuance-box {
-      border-top: 1px solid var(--gray);
-      padding: 14px 24px;
-      background: rgba(201,168,76,0.03);
+      margin-top: 14px;
+      padding: 12px 16px;
+      background: rgba(201,168,76,0.05);
+      border-left: 2px solid rgba(201,168,76,0.4);
+    }
+
+    .lc-nuance-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .lc-nuance-text {
+      font-size: 0.8rem;
+      line-height: 1.85;
+      color: rgba(240,236,230,0.65);
     }
 
     .lc-footer {
-      border: 1px solid var(--gray);
-      border-top: none;
       padding: 12px 24px;
-      font-size: 0.68rem;
-      color: rgba(255,255,255,0.2);
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.18);
+      border-top: 1px solid rgba(255,255,255,0.06);
     }
 
     @media (max-width: 600px) {
-      .lc-tabs { display: flex; }
-      .lc-cols { grid-template-columns: 1fr; }
-      .lc-col:first-child { border-right: none; border-bottom: 1px solid var(--gray); }
-      .lc-mobile-hidden { display: none; }
-      .lc-mobile-visible { display: block !important; }
-      .lc-col { padding: 14px 16px 18px; }
-      .lc-section-label { padding: 12px 16px 0; }
-      .lc-nuance-box { padding: 12px 16px; }
-      .lc-footer { padding: 10px 16px; }
       .lc-header { padding: 16px; }
-      .lc-title { font-size: 1.25rem; }
+      .lc-title { font-size: 1.2rem; }
+      .lc-section { padding: 16px 16px; }
+      .lc-en { font-size: 0.92rem; line-height: 1.95; }
+      .lc-kr { font-size: 0.82rem; }
+      .lc-footer { padding: 10px 16px; }
     }
 
     .lyric-header {
@@ -1132,7 +1249,11 @@
       }
       .nav-btn { font-size: 0.72rem; padding: 8px 11px; }
       .nav-topbar { padding: 6px 12px 5px; }
-      .nav-brand { font-size: 0.62rem; letter-spacing: 0.18em; }
+      .nav-ticker {
+      overflow: hidden;
+    }
+
+    .nav-brand { font-size: 0.62rem; letter-spacing: 0.18em; }
 
       /* Hero */
       .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; }
@@ -1166,9 +1287,6 @@
       .act-num { font-size: 1.6rem; }
       .act-title { font-size: 0.9rem; }
       .act-sub { font-size: 0.68rem; }
-      .act-song { padding: 8px 0; }
-      .act-song-name { font-size: 0.8rem; }
-      .act-song-album { font-size: 0.65rem; }
       .act-songs { padding: 12px 16px; }
       .lyrics-jump-btn { font-size: 0.6rem; padding: 2px 6px; }
       .setlist-notes { padding: 18px 16px; }
@@ -1222,8 +1340,7 @@
 
       /* Setlist */
       .setlist-notes-title { font-size: 0.9rem; }
-      .act-song { flex-wrap: wrap; gap: 4px; }
-      .act-song-album { width: 100%; padding-left: 26px; }
+
 
       /* Quiz */
       .quiz-card { padding: 18px 14px; }
@@ -1381,16 +1498,17 @@ var currentLang = localStorage.getItem('lang') || 'ko';
 
 var i18n = {
   ko: {
-    heroEyebrow: '현대카드 슈퍼콘서트 28 · 고양종합운동장',
+    heroEyebrow: '2026.10.07–08 · 고양종합운동장 · SEOUL',
     heroSub: 'After Hours Til Dawn Tour · Korea Exclusive',
     scrollHint: 'SCROLL',
-    tagDday: '🔴 Countdown', titleDday: '공연까지<br>D-<span style="color:var(--neon-red)" id="dday-main">???</span>',
+    tagDday: '🔴 XO · COUNTDOWN', titleDday: '위켄드가 온다<br>D-<span style="color:var(--neon-red)" id="dday-main">???</span>',
     tagChecklist: '체크리스트', titleChecklist: '공연 전<br>준비물',
     tagDisco: '💿 Discography', titleDisco: '위켄드의<br>필모그래피',
     tagSetlist: '🎭 Setlist', titleSetlist: '2026 투어<br>셋리스트',
     tagLyrics: '🎵 Lyrics', titleLyrics: '가사 &<br>한국어 해석',
     tagQuiz: '🎤 Quiz', titleQuiz: '당신은 진짜<br>위켄드 팬?',
     tagLcard: '🎴 Lyrics Card', titleLcard: '오늘의<br>위켄드 가사', descLcard: '랜덤으로 뽑은 가사 한 구절.<br>공연 전 감성을 올려보세요.',
+    tagVote: '🗳️ Wishlist Vote', titleVote: '서울 공연에서<br>꼭 듣고 싶은 곡은?',
     tagGuide: '🎪 Tour Guide', titleGuide: '공연장 가이드<br>& XO 문화',
     tagSetcheck: '✅ Live Check', titleSetcheck: '셋리스트<br>실시간 체크', descSetcheck: '공연 당일 곡이 나올 때마다 체크해보세요.<br>몇 곡이나 예측했나요?',
     tagType: '🎭 Weeknd Type Test', titleType: '나는 어떤<br>위켄드 유형?', descType: '8가지 질문으로 알아보는 나의 위켄드 노래 유형.<br>공유하고 친구와 비교해보세요.',
@@ -1404,16 +1522,17 @@ var i18n = {
     guideTabs: ['공식 굿즈','현장 팁','XO 문화','소식 & 루머','좌석 뷰','교통편','PixMob','떼창 가이드','2018 vs 2026'],
   },
   en: {
-    heroEyebrow: 'Hyundai Card Super Concert 28 · Goyang Sports Complex',
+    heroEyebrow: 'Oct 7–8, 2026 · Goyang Sports Complex · Seoul',
     heroSub: 'After Hours Til Dawn Tour · Korea Exclusive',
     scrollHint: 'SCROLL',
-    tagDday: '🔴 Countdown', titleDday: 'Concert in<br>D-<span style="color:var(--neon-red)" id="dday-main">???</span>',
+    tagDday: '🔴 XO · COUNTDOWN', titleDday: 'The Weeknd comes to Seoul<br>D-<span style="color:var(--neon-red)" id="dday-main">???</span>',
     tagChecklist: 'Checklist', titleChecklist: 'Pre-Concert<br>Checklist',
     tagDisco: '💿 Discography', titleDisco: "The Weeknd's<br>Discography",
     tagSetlist: '🎭 Setlist', titleSetlist: '2026 Tour<br>Setlist',
     tagLyrics: '🎵 Lyrics', titleLyrics: 'Lyrics &<br>Deep Dives',
     tagQuiz: '🎤 Quiz', titleQuiz: 'Are You a True<br>Weeknd Fan?',
     tagLcard: '🎴 Lyrics Card', titleLcard: "Today's<br>Lyric", descLcard: 'A random lyric from the setlist.<br>Feel the vibe before the show.',
+    tagVote: '🗳️ Wishlist Vote', titleVote: 'Which songs do<br>you want to hear?',
     tagGuide: '🎪 Concert Guide', titleGuide: 'International Fan<br>Guide',
     tagSetcheck: '✅ Live Check', titleSetcheck: 'Live Setlist<br>Tracker', descSetcheck: 'Check off songs as they play.<br>How many did you predict?',
     tagType: '🎭 Weeknd Type Test', titleType: 'Which Weeknd<br>Type Are You?', descType: '8 questions to find your Weeknd song match.<br>Share and compare with friends.',
@@ -1444,11 +1563,11 @@ function applyI18n() {
   set('tag-checklist', t.tagChecklist); set('title-checklist', t.titleChecklist);
   set('tag-disco', t.tagDisco); set('title-disco', t.titleDisco);
   set('tag-setlist', t.tagSetlist); set('title-setlist', t.titleSetlist);
-  set('tag-lyrics', t.tagLyrics); set('title-lyrics', t.titleLyrics);
+  // lyrics section removed — merged into setlist
   set('tag-quiz', t.tagQuiz); set('title-quiz', t.titleQuiz);
   set('tag-lcard', t.tagLcard); set('title-lcard', t.titleLcard); set('desc-lcard', t.descLcard);
+  set('tag-vote', t.tagVote); set('title-vote', t.titleVote);
   set('tag-guide', t.tagGuide); set('title-guide', t.titleGuide);
-  set('tag-setcheck', t.tagSetcheck); set('title-setcheck', t.titleSetcheck); set('desc-setcheck', t.descSetcheck);
   set('tag-type', t.tagType); set('title-type', t.titleType); set('desc-type', t.descType);
   // Nav buttons
   document.querySelectorAll('#mainNav .nav-btn').forEach(function(btn) {
@@ -1496,6 +1615,8 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="lyric-modal-box" id="lyricModalBox">
       <div id="lyricCard"></div>
     </div>
+    <!-- hidden picker for JS to render into -->
+    <div id="lyricsPicker" style="display:none"></div>
   </div>
 </div>
 
@@ -1504,7 +1625,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="hero-bg"></div>
   <div class="particles" id="particles"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow" id="hero-eyebrow">현대카드 슈퍼콘서트 28 · 고양종합운동장</p>
+    <p class="hero-eyebrow" id="hero-eyebrow">2026.10.07–08 · 고양종합운동장 · SEOUL</p>
     <h1 class="hero-title">
       <span class="outline">THE</span><br>
       <span class="red">WEEKND</span><br>
@@ -1512,9 +1633,11 @@ document.addEventListener('DOMContentLoaded', function() {
     </h1>
     <p class="hero-sub" id="hero-sub">After Hours Til Dawn Tour · Korea Exclusive</p>
     <div class="hero-date-badge">2026 · 10 · 07–08</div>
+
   </div>
   <div class="scroll-hint" id="scroll-hint">SCROLL</div>
 </div>
+
 
 <!-- NAV -->
 <nav id="mainNav">
@@ -1529,47 +1652,60 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="nav-items">
       <button class="nav-btn active" onclick="goTo('dday', this)" data-ko="D-DAY" data-en="D-DAY">D-DAY</button>
       <button class="nav-btn" onclick="goTo('disco', this)" data-ko="필모그래피" data-en="Discography">필모그래피</button>
-      <button class="nav-btn" onclick="goTo('setlist-combined', this)" data-ko="셋리스트" data-en="Setlist">셋리스트</button>
-      <button class="nav-btn" onclick="goTo('lyrics', this)" data-ko="가사 해석" data-en="Lyrics">가사 해석</button>
+      <button class="nav-btn" onclick="goTo('setlist-combined', this)" data-ko="셋리스트 · 가사" data-en="Setlist & Lyrics">셋리스트</button>
+      <button class="nav-btn" onclick="goTo('vote', this)" data-ko="위시리스트" data-en="Wishlist">위시리스트</button>
+
       <button class="nav-btn" onclick="goTo('quiz', this)" data-ko="퀴즈" data-en="Quiz">퀴즈</button>
       <button class="nav-btn" onclick="goTo('lyrics-card', this)" data-ko="가사 뽑기" data-en="Lyric Card">가사 뽑기</button>
       <button class="nav-btn" onclick="goTo('guide', this)" data-ko="공연 가이드" data-en="Concert Guide">공연 가이드</button>
       <button class="nav-btn" onclick="goTo('type-test', this)" data-ko="유형 테스트" data-en="Type Test">유형 테스트</button>
-      <button class="nav-btn" onclick="goTo('setcheck', this)" data-ko="셋리스트 체크" data-en="Live Check">셋리스트 체크</button>
+
     </div>
   </div>
-</nav>
+<div class="lyric-strip" id="lyricStrip">
+  <div class="lyric-strip-inner">
+    <span class="lyric-strip-label ko-only">가사</span>
+    <span class="lyric-strip-label en-only">Lyrics</span>
+    <div class="lyric-strip-text">
+      <div class="lyric-strip-en" id="heroLyricEn"><span class="hero-lyric-cursor"></span></div>
+      <div class="lyric-strip-kr" id="heroLyricKr"></div>
+    </div>
+  </div>
+</div>
 
-<!-- TICKER -->
+  <div class="nav-ticker">
 <div class="ticker-wrap ko-only">
   <div class="ticker">
     <span class="ticker-item">위켄드 서울 2026</span>
-    <span class="ticker-item">10월 7-8일 고양종합운동장</span>
-    <span class="ticker-item">현대카드 슈퍼콘서트 28</span>
-    <span class="ticker-item">After Hours Til Dawn</span>
+    <span class="ticker-item">10.07–08 · 고양종합운동장</span>
+    <span class="ticker-item">Blinding Lights · Die For You</span>
     <span class="ticker-item">XO Until The End</span>
+    <span class="ticker-item">After Hours Til Dawn Tour</span>
     <span class="ticker-item">위켄드 서울 2026</span>
-    <span class="ticker-item">10월 7-8일 고양종합운동장</span>
-    <span class="ticker-item">현대카드 슈퍼콘서트 28</span>
-    <span class="ticker-item">After Hours Til Dawn</span>
+    <span class="ticker-item">10.07–08 · 고양종합운동장</span>
+    <span class="ticker-item">Blinding Lights · Die For You</span>
     <span class="ticker-item">XO Until The End</span>
+    <span class="ticker-item">After Hours Til Dawn Tour</span>
   </div>
 </div>
 <div class="ticker-wrap en-only">
   <div class="ticker">
     <span class="ticker-item">The Weeknd Seoul 2026</span>
-    <span class="ticker-item">Oct 7-8 · Goyang Stadium</span>
-    <span class="ticker-item">Hyundai Card Super Concert 28</span>
-    <span class="ticker-item">After Hours Til Dawn Tour</span>
+    <span class="ticker-item">Oct 7–8 · Goyang Sports Complex</span>
+    <span class="ticker-item">Blinding Lights · Die For You</span>
     <span class="ticker-item">XO Until The End</span>
+    <span class="ticker-item">After Hours Til Dawn Tour</span>
     <span class="ticker-item">The Weeknd Seoul 2026</span>
-    <span class="ticker-item">Oct 7-8 · Goyang Stadium</span>
-    <span class="ticker-item">Hyundai Card Super Concert 28</span>
-    <span class="ticker-item">After Hours Til Dawn Tour</span>
+    <span class="ticker-item">Oct 7–8 · Goyang Sports Complex</span>
+    <span class="ticker-item">Blinding Lights · Die For You</span>
     <span class="ticker-item">XO Until The End</span>
+    <span class="ticker-item">After Hours Til Dawn Tour</span>
   </div>
 </div>
+  </div>
+</nav>
 
+<!-- TICKER -->
 <div class="ad-slot" id="adSlot1" style="display:none">
   <ins class="adsbygoogle"
     style="display:block;min-height:0"
@@ -1583,8 +1719,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <section id="dday">
   <div class="section-header">
-    <span class="section-tag" id="tag-dday">🔴 Countdown</span>
-    <h2 class="section-title" id="title-dday">공연까지<br>D-<span style="color:var(--neon-red)" id="dday-main">???</span></h2>
+    <span class="section-tag" id="tag-dday">🔴 XO · COUNTDOWN</span>
+    <h2 class="section-title" id="title-dday">위켄드가 온다<br>D-<span style="color:var(--neon-red)" id="dday-main">???</span></h2>
   </div>
 
   <div class="dday-grid">
@@ -1593,6 +1729,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="dday-card"><div class="dday-num" id="cnt-m">00</div><div class="dday-label">Minutes</div></div>
     <div class="dday-card"><div class="dday-num" id="cnt-s">00</div><div class="dday-label">Seconds</div></div>
   </div>
+
 
   <div class="section-header" style="margin-top:60px">
     <span class="section-tag" id="tag-checklist">체크리스트</span>
@@ -1605,8 +1742,25 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="divider"></div>
 
 <!-- SETLIST VOTE -->
+<section id="vote">
+  <div class="section-header">
+    <span class="section-tag" id="tag-vote">🗳️ Wishlist Vote</span>
+    <h2 class="section-title" id="title-vote">서울 공연에서<br>꼭 듣고 싶은 곡은?</h2>
+    <p id="desc-vote" style="color:var(--light-gray);font-size:0.88rem;margin-top:16px;line-height:1.7">원하는 곡에 투표하세요. 결과는 내 브라우저에 저장됩니다.</p>
+  </div>
 
-<div class="divider"></div>
+  <div style="display:grid;gap:28px">
+    <!-- 투표 영역 -->
+    <div id="voteGrid" style="display:grid;gap:8px"></div>
+
+    <!-- 내 위시리스트 요약 -->
+    <div id="voteSummary" style="display:none;background:var(--dark3);border:1px solid var(--neon-red);padding:24px 28px">
+      <div style="font-size:0.65rem;letter-spacing:0.25em;color:var(--neon-red);margin-bottom:14px">🔴 <span id="vote-summary-label">내 위시리스트</span></div>
+      <div id="voteSummaryList" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+      <button onclick="resetVotes()" style="margin-top:18px;padding:7px 18px;background:none;border:1px solid var(--gray);color:var(--light-gray);font-family:Oswald,sans-serif;font-size:0.72rem;letter-spacing:0.1em;cursor:pointer" id="vote-reset-btn">초기화</button>
+    </div>
+  </div>
+</section>
 
 <div class="divider"></div>
 
@@ -1661,18 +1815,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </section>
 
-<div class="divider"></div>
-
-<!-- LYRICS -->
-<section id="lyrics">
-  <div class="section-header">
-    <span class="section-tag" id="tag-lyrics">🎵 Lyrics</span>
-    <h2 class="section-title" id="title-lyrics">가사 &<br>한국어 해석</h2>
-    <p class="lyrics-intro ko-only" style="margin-top:16px;font-size:0.88rem;color:var(--light-gray);line-height:1.8">공연 셋리스트에 실제로 등장하는 곡들을 ACT 순서로 정리했습니다.<br>공연 전 미리 가사를 익혀두면 떼창 구간에서 다르게 느껴집니다.</p>
-    <p class="lyrics-intro en-only" style="margin-top:16px;font-size:0.88rem;color:var(--light-gray);line-height:1.8">Every song below appears in the live setlist — organized by ACT.<br>Learn the lyrics before the show. You'll feel the difference when 100,000 people sing together.</p>
-  </div>
-  <div id="lyricsPicker"></div>
-</section>
 
 <div class="divider"></div>
 
@@ -1716,6 +1858,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <button class="disco-tab" onclick="switchGuideTab('pixmob', this)" data-ko="PixMob" data-en="PixMob">PixMob</button>
     <button class="disco-tab" onclick="switchGuideTab('singalong', this)" data-ko="떼창 가이드" data-en="Sing-Along">떼창 가이드</button>
     <button class="disco-tab" onclick="switchGuideTab('compare', this)" data-ko="2018 vs 2026" data-en="2018 vs 2026">2018 vs 2026</button>
+    <button class="disco-tab" onclick="switchGuideTab('checklist', this)" data-ko="✅ 준비물" data-en="✅ Checklist">✅ 준비물</button>
   </div>
 
   <div class="disco-panel active" id="guide-goods">
@@ -1976,6 +2119,11 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
   </div>
+
+  <div class="disco-panel" id="guide-checklist">
+    <div id="guideChecklistArea"></div>
+  </div>
+
 </section>
 
 <div class="divider"></div>
@@ -1995,17 +2143,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <div class="divider"></div>
 
-<div class="divider"></div>
 
-<!-- SETLIST CHECK -->
-<section id="setcheck">
-  <div class="section-header">
-    <span class="section-tag" id="tag-setcheck">✅ Live Check</span>
-    <h2 class="section-title" id="title-setcheck">셋리스트<br>실시간 체크</h2>
-    <p id="desc-setcheck" style="color:var(--light-gray);font-size:0.88rem;margin-top:16px;line-height:1.7">공연 당일 곡이 나올 때마다 체크해보세요.<br>몇 곡이나 예측했나요?</p>
-  </div>
-  <div id="setcheckArea"></div>
-</section>
 
 <div class="divider"></div>
 
@@ -2060,7 +2198,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ─── SCROLL NAV ──────────────────────────────────────────────
 function goTo(id, btn) {
-  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  var el = document.getElementById(id);
+  if (!el) return;
+  var nav = document.getElementById('mainNav');
+  var navH = nav ? nav.offsetHeight : 0;
+  var top = el.getBoundingClientRect().top + window.pageYOffset - navH - 12;
+  window.scrollTo({ top: top, behavior: 'smooth' });
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 }
@@ -2367,7 +2510,7 @@ function openAlbumModal(idx, type) {
     return `<div class="modal-track">
       <div class="track-num">${i+1}<\/div>
       <div class="track-name">${t}<\/div>
-      ${hasLyrics ? `<button class="track-link-btn" onclick="jumpToLyrics('${clean}')">${currentLang==="en"?"Lyrics ↓":"가사 ↓"}<\/button>` : ''}
+      ${hasLyrics ? `<button class="track-link-btn" onclick="jumpToLyrics('${clean}')">${currentLang==="en"?"🎵 Lyrics":"🎵 가사"}<\/button>` : ''}
     <\/div>`;
   }).join('');
   document.getElementById('albumModalBox').innerHTML = `
@@ -2391,11 +2534,8 @@ function closeModal(e) {
 
 function jumpToLyrics(title) {
   document.getElementById('albumModal').classList.remove('open');
-  const idx = lyricsData.findIndex(l => l.title === title);
-  if (idx > -1) {
-    selectLyric(idx, document.querySelectorAll('.lyric-pick-btn')[idx]);
-    setTimeout(() => document.getElementById('lyrics').scrollIntoView({ behavior:'smooth' }), 100);
-  }
+  var idx = lyricsData.findIndex(function(l){ return l.title === title; });
+  if (idx > -1) { selectLyric(idx, null); }
 }
 
 function renderDiscography() {
@@ -2539,6 +2679,47 @@ var setlistData = {
   ]
 };
 
+var setlistLyricPreview = {
+  'The Abyss': {en: 'I don\'t like the view from halfway down', kr: '반쯤 내려갔을 때 보이는 풍경이 싫어'},
+  'Wake Me Up': {en: 'All I have is my legacy', kr: '내게 남은 건 유산뿐이야'},
+  'Baptized in Fear': {en: 'I\'ve been baptized in fear, my dear', kr: '두려움 속에서 세례받았어'},
+  'Cry for Me': {en: 'I hope you cry for me like I cry for you', kr: '내가 너를 위해 우는 것처럼 날 위해 울어줘'},
+  'Sao Paulo': {en: 'Every time I try to run, you put your curse all over me', kr: '도망치려 할 때마다, 넌 내게 저주를 걸어'},
+  'Without a Warning': {en: 'Take me to a time when I was young', kr: '내가 어렸던 시절로 데려가줘'},
+  'Take My Breath': {en: 'Take my breath away, bring me close to heaven', kr: '내 숨을 앗아가줘, 천국에 가까이 데려다줘'},
+  'Sacrifice': {en: 'I sacrificed your love for more of the night', kr: '더 많은 밤을 위해 네 사랑을 희생했어'},
+  'How Do I Make You Love Me?': {en: 'How do I make you love me?', kr: '어떻게 하면 날 사랑하게 만들 수 있을까?'},
+  'Out of Time': {en: 'Say I love you, girl, but I\'m out of time', kr: '사랑한다고 말해, 하지만 시간이 다 됐어'},
+  'Is There Someone Else?': {en: 'I swear I changed my ways for the better', kr: '더 나은 쪽으로 바뀌었다고 맹세해'},
+  'Less Than Zero': {en: 'I know I\'ll always be less than zero', kr: '나는 항상 제로 이하일 거라는 걸 알아'},
+  'One of the Girls': {en: 'Lock me up and throw away the key', kr: '날 가둬놓고 열쇠를 버려'},
+  'Heartless': {en: 'Tryna be a better man, but I\'m heartless', kr: '더 나은 사람이 되려 하지만 냉정해'},
+  'Faith': {en: 'I light a blunt up with the flame', kr: '그 불꽃으로 불을 피워'},
+  'After Hours': {en: 'Baby, where are you now when I need you most?', kr: '자기야, 가장 필요할 때 넌 어디 있어?'},
+  'Save Your Tears': {en: 'Save your tears for another day', kr: '다른 날을 위해 눈물을 아껴줘'},
+  'Hurricane': {en: 'Finally free, found the God in me', kr: '마침내 자유로워져, 내 안에서 신을 찾았어'},
+  'Lost in the Fire': {en: 'We lost a lot in the fire', kr: '불 속에서 많은 걸 잃었어'},
+  'Open Hearts': {en: 'Where do I start when I open my heart?', kr: '마음을 열 때 어디서부터 시작해야 할까?'},
+  'Often': {en: 'I know she\'ll be the death of me', kr: '그녀가 나를 죽게 할 거라는 걸 알아'},
+  "Can't Feel My Face": {en: 'I can\'t feel my face when I\'m with you', kr: '너와 함께일 때 얼굴이 느껴지지 않아'},
+  'The Hills': {en: 'I only call you when it\'s half past five', kr: '새벽 다섯 시 반에만 전화해'},
+  'Party Monster': {en: 'Woke up by a girl, I don\'t even know her name', kr: '이름도 모르는 여자 옆에서 깨어났어'},
+  'Starboy': {en: 'Look what you\'ve done', kr: '네가 무슨 짓을 한 건지 봐'},
+  'I Feel It Coming': {en: 'You\'ve been scared of love and what it did to you', kr: '사랑과 그게 네게 한 짓이 두려웠던 거지'},
+  'Die For You': {en: 'I would die for you', kr: '너를 위해서라면 죽을 수도 있어'},
+  'Stargirl Interlude': {en: 'I just wanna see you shine', kr: '네가 빛나는 걸 보고 싶어'},
+  'Call Out My Name': {en: 'I want you to stay even though you don\'t want me', kr: '날 원하지 않아도 있어달라고'},
+  'I Was Never There': {en: 'What makes a grown man wanna cry?', kr: '무엇이 다 큰 남자를 울게 만드는 걸까?'},
+  "Creepin'": {en: 'If you\'re creepin\', please don\'t let it show', kr: '몰래 움직이는 거라면, 드러내지 마줘'},
+  'Crew Love': {en: 'They loving the crew', kr: '그들은 크루를 사랑해'},
+  'Kiss Land': {en: 'This ain\'t nothing to relate to', kr: '공감할 게 없어'},
+  'House of Balloons': {en: 'This is a happy house, we\'re happy here', kr: '이곳은 행복한 집, 우리는 여기서 행복해'},
+  'Wicked Games': {en: 'Tell me you love me, only for tonight', kr: '오늘 밤만이라도 사랑한다고 말해줘'},
+  'The Morning': {en: 'All that money, the money is the motive', kr: '그 모든 돈, 돈이 동기야'},
+  'Blinding Lights': {en: 'I\'m running out of time, \'cause I can see the sun light up the sky', kr: '시간이 없어, 하늘에 해가 밝아오고 있으니까'},
+  'Moth to a Flame': {en: 'Right here with me, babe', kr: '바로 여기, 내 곁에'},
+};
+
 function renderSetlistAnalysis() {
   var lyricsIds = lyricsData.map(function(l){ return l.title; });
   var actsHtml = '';
@@ -2549,13 +2730,21 @@ function renderSetlistAnalysis() {
       var song = act.songs[s];
       var hasLyrics = lyricsIds.indexOf(song.title) > -1;
       var btn = hasLyrics
-        ? '<button class="lyrics-jump-btn" onclick="jumpToLyricsSection(\'' + song.title.replace(/'/g, "\\'") + '\')">'+(currentLang==="en"?"Lyrics":"가사 보기")+'<\/button>'
+        ? '<button class="lyrics-jump-btn" onclick="jumpToLyricsSection(\'' + song.title.replace(/'/g, "\\'") + '\')">'+(currentLang==="en"?"🎵 Lyrics":"🎵 가사")+'<\/button>'
         : '<span style="font-size:0.65rem;color:var(--gray)">'+(currentLang==="en"?"No lyrics":"가사 준비중")+'<\/span>';
+      var preview = setlistLyricPreview[song.title];
+      var previewHtml = preview
+        ? '<div class="act-song-preview ko-only">' + preview.kr + '<\/div>'
+          + '<div class="act-song-preview en-only">' + preview.en + '<\/div>'
+        : '';
       songsHtml += '<div class="act-song">'
         + '<div class="act-song-num">' + (s+1) + '<\/div>'
+        + '<div class="act-song-info">'
         + '<div class="act-song-name">' + song.title + '<\/div>'
-        + '<div class="act-song-album">' + song.album + '<\/div>'
-        + btn + '<\/div>';
+        + previewHtml
+        + '<\/div>'
+        + '<div class="lyrics-jump-btn-wrap">' + btn + '<\/div>'
+        + '<\/div>';
     }
     actsHtml += '<div class="act-card">'
       + '<div class="act-header"><div class="act-num">' + act.num + '<\/div>'
@@ -2578,8 +2767,7 @@ function jumpToLyricsSection(title) {
     if (lyricsData[i].title === title) { idx = i; break; }
   }
   if (idx > -1) {
-    selectLyric(idx, document.querySelectorAll('.lyric-pick-btn')[idx]);
-    setTimeout(function(){ document.getElementById('lyrics').scrollIntoView({ behavior:'smooth' }); }, 100);
+    selectLyric(idx, null);
   }
 }
 
@@ -3318,8 +3506,6 @@ var lyricsData = [
 ]
 
 var currentLyric = 0;
-var currentLcTab = 'lyrics'; // 'lyrics' | 'kr' | 'analysis'
-
 // ACT grouping for lyrics picker
 var lyricsActMap = {
   'The Abyss': {act:'ACT I', actEn:'ACT I · HURRY UP TOMORROW'},
@@ -3402,7 +3588,8 @@ function renderLyricsPicker() {
     html += '<\/div><\/div>';
   });
   html += '<\/div>';
-  document.getElementById('lyricsPicker').innerHTML = html;
+  var picker = document.getElementById('lyricsPicker');
+  if (picker) picker.innerHTML = html;
 }
 
 function selectLyric(i, btn) {
@@ -3410,8 +3597,10 @@ function selectLyric(i, btn) {
   document.querySelectorAll('.lyric-pick-btn').forEach(function(b){ b.classList.remove('active'); });
   if (btn) btn.classList.add('active');
   renderLyricCard();
-  document.getElementById('lyricModal').classList.add('open');
-  document.getElementById('lyricModalBox').scrollTop = 0;
+  var modal = document.getElementById('lyricModal');
+  var box = document.getElementById('lyricModalBox');
+  if (modal) modal.classList.add('open');
+  if (box) box.scrollTop = 0;
   document.body.style.overflow = 'hidden';
 }
 
@@ -3419,29 +3608,6 @@ function closeLyricModal(e) {
   if (e && e.target !== document.getElementById('lyricModal')) return;
   document.getElementById('lyricModal').classList.remove('open');
   document.body.style.overflow = '';
-}
-
-function setLcTab(tab) {
-  currentLcTab = tab;
-  document.querySelectorAll('.lc-tab-btn').forEach(function(b){ b.classList.remove('active'); });
-  var activeBtn = document.querySelector('.lc-tab-btn[data-tab="' + tab + '"]');
-  if (activeBtn) activeBtn.classList.add('active');
-  document.querySelectorAll('.lc-col-lyrics').forEach(function(el){ el.style.display = (tab === 'lyrics' || tab === 'kr') ? 'block' : 'none'; });
-  document.querySelectorAll('.lc-col-right').forEach(function(el){ el.style.display = (tab === 'kr' || tab === 'analysis') ? 'block' : 'none'; });
-  document.querySelectorAll('.lc-nuance-box').forEach(function(el){ el.style.display = (tab === 'analysis') ? 'block' : 'none'; });
-  if (tab === 'lyrics') {
-    document.querySelectorAll('.lc-col-lyrics').forEach(function(el){ el.style.display = 'block'; });
-    document.querySelectorAll('.lc-col-right').forEach(function(el){ el.style.display = 'none'; });
-    document.querySelectorAll('.lc-nuance-box').forEach(function(el){ el.style.display = 'none'; });
-  } else if (tab === 'kr') {
-    document.querySelectorAll('.lc-col-lyrics').forEach(function(el){ el.style.display = 'none'; });
-    document.querySelectorAll('.lc-col-right').forEach(function(el){ el.style.display = 'block'; });
-    document.querySelectorAll('.lc-nuance-box').forEach(function(el){ el.style.display = 'none'; });
-  } else {
-    document.querySelectorAll('.lc-col-lyrics').forEach(function(el){ el.style.display = 'none'; });
-    document.querySelectorAll('.lc-col-right').forEach(function(el){ el.style.display = 'none'; });
-    document.querySelectorAll('.lc-nuance-box').forEach(function(el){ el.style.display = 'block'; });
-  }
 }
 
 function renderLyricCard() {
@@ -3453,29 +3619,30 @@ function renderLyricCard() {
   var sections = '';
   for (var s = 0; s < l.sections.length; s++) {
     var sec = l.sections[s];
-    var rightColLabel = isEn ? '💡 ANALYSIS' : '한국어';
-    var rightContent = isEn
-      ? (sec.nuanceEn ? '<p style="font-size:0.82rem;line-height:1.9;color:rgba(240,236,230,0.82)">' + sec.nuanceEn + '<\/p>' : '<p style="font-size:0.8rem;color:var(--gray)">—<\/p>')
-      : '<pre style="font-family:inherit;font-size:0.85rem;line-height:1.9;white-space:pre-wrap;color:rgba(240,236,230,0.78)">' + sec.kr + '<\/pre>';
-    var nuanceKo = (!isEn && sec.nuance)
-      ? '<div class="lc-nuance-box"><div style="font-size:0.58rem;letter-spacing:0.25em;color:var(--gold);margin-bottom:8px">💡 뉘앙스<\/div><p style="font-size:0.8rem;line-height:1.85;color:rgba(240,236,230,0.7)">' + sec.nuance + '<\/p><\/div>'
+
+    // Korean translation block
+    var krBlock = !isEn
+      ? '<pre class="lc-kr">' + sec.kr + '<\/pre>'
+      : '';
+
+    // Analysis block
+    var nuanceContent = isEn ? sec.nuanceEn : sec.nuance;
+    var nuanceLabel = isEn ? '💡 Analysis' : '💡 뉘앙스';
+    var nuanceBlock = nuanceContent
+      ? '<div class="lc-nuance-box"><div class="lc-nuance-label">' + nuanceLabel + '<\/div><div class="lc-nuance-text">' + nuanceContent + '<\/div><\/div>'
       : '';
 
     sections += '<div class="lc-section">'
       + '<div class="lc-section-label">' + sec.label + '<\/div>'
-      + '<div class="lc-cols">'
-      + '<div class="lc-col lc-col-lyrics"><div class="lc-col-label" style="color:var(--light-gray)">LYRICS<\/div><pre style="font-family:inherit;font-size:0.85rem;line-height:1.95;white-space:pre-wrap;color:var(--white)">' + sec.en + '<\/pre><\/div>'
-      + '<div class="lc-col lc-col-right"><div class="lc-col-label" style="color:var(--gold)">' + rightColLabel + '<\/div>' + rightContent + '<\/div>'
-      + '<\/div>'
-      + nuanceKo
+      + '<pre class="lc-en">' + sec.en + '<\/pre>'
+      + krBlock
+      + nuanceBlock
       + '<\/div>';
   }
 
-  var tabLyrics = isEn ? 'LYRICS' : '가사';
-  var tabKr = isEn ? 'TRANSLATION' : '번역';
-  var tabAnalysis = isEn ? 'ANALYSIS' : '해석';
-
-  document.getElementById('lyricCard').innerHTML =
+  var lcEl = document.getElementById('lyricCard');
+  if (!lcEl) return;
+  lcEl.innerHTML =
     '<div class="lc-header">'
     + '<div>'
     + (actLabel ? '<div class="lc-act-badge">' + actLabel + '<\/div>' : '')
@@ -3487,29 +3654,160 @@ function renderLyricCard() {
     + '<a href="' + l.spotify + '" target="_blank" class="lc-link-btn" style="background:#1db954;color:#000">♫ Spotify<\/a>'
     + '<\/div>'
     + '<\/div>'
-    + '<div class="lc-tabs">'
-    + '<button class="lc-tab-btn' + (currentLcTab==='lyrics'?' active':'') + '" data-tab="lyrics" onclick="setLcTab(\'lyrics\')">' + tabLyrics + '<\/button>'
-    + '<button class="lc-tab-btn' + (currentLcTab==='kr'?' active':'') + '" data-tab="kr" onclick="setLcTab(\'kr\')">' + tabKr + '<\/button>'
-    + '<button class="lc-tab-btn' + (currentLcTab==='analysis'?' active':'') + '" data-tab="analysis" onclick="setLcTab(\'analysis\')">' + tabAnalysis + '<\/button>'
-    + '<\/div>'
     + sections
     + '<div class="lc-footer">* Translations and nuance notes are interpretive.</div>';
-
-  // Apply current tab on mobile
-  if (window.innerWidth <= 600) { setLcTab(currentLcTab); }
 }
+
+// ─── HERO TYPEWRITER ──────────────────────────────────────────
+var heroLyrics = [
+  { en: "I can't feel my face when I'm with you", kr: "너와 함께일 때 얼굴이 느껴지지 않아", song: "Can't Feel My Face" },
+  { en: "I would die for you", kr: "너를 위해서라면 죽을 수도 있어", song: "Die For You" },
+  { en: "I've been tryna call — I need your faith", kr: "계속 전화하고 있어 — 네 믿음이 필요해", song: "Blinding Lights" },
+  { en: "Save your tears for another day", kr: "다른 날을 위해 눈물을 아껴둬", song: "Save Your Tears" },
+  { en: "What makes a grown man wanna cry?", kr: "무엇이 다 큰 남자를 울게 만드는 걸까?", song: "I Was Never There" },
+  { en: "Starboy — look what you've done", kr: "스타보이 — 네가 무슨 짓을 한 건지 봐", song: "Starboy" },
+  { en: "I've been baptized in fear, my dear", kr: "두려움 속에서 세례받았어, 자기야", song: "Baptized in Fear" },
+  { en: "Where do I start when I open my heart?", kr: "마음을 열 때 어디서부터 시작해야 할까?", song: "Open Hearts" },
+];
+
+var twIdx = 0, twPos = 0, twDeleting = false, twTimer = null;
+
+function runTypewriter() {
+  var el = document.getElementById('heroLyricEn');
+  var krEl = document.getElementById('heroLyricKr');
+  if (!el || !krEl) return;
+  var item = heroLyrics[twIdx % heroLyrics.length];
+  var txt = item.en;
+
+  if (!twDeleting) {
+    twPos++;
+    el.innerHTML = txt.slice(0, twPos) + '<span class="hero-lyric-cursor"></span>';
+    if (twPos >= txt.length) {
+      krEl.style.opacity = '1';
+      krEl.textContent = item.kr;
+      twDeleting = true;
+      twTimer = setTimeout(runTypewriter, 2800);
+    } else {
+      twTimer = setTimeout(runTypewriter, 55);
+    }
+  } else {
+    twPos--;
+    el.innerHTML = txt.slice(0, twPos) + '<span class="hero-lyric-cursor"></span>';
+    if (twPos === 0) {
+      krEl.style.opacity = '0';
+      twDeleting = false;
+      twIdx++;
+      twTimer = setTimeout(runTypewriter, 400);
+    } else {
+      twTimer = setTimeout(runTypewriter, 28);
+    }
+  }
+}
+
+setTimeout(runTypewriter, 1200);
+
 
 renderLyricsPicker();
 renderLyricCard();
 renderSetlistAnalysis();
 
 // ─── GUIDE TABS ───────────────────────────────────────────────
+var checklistItems = {
+  ko: [
+    { id:'id',    emoji:'🪪', text:'실물 신분증 챙겼나? (만 19세 이상, 여권도 OK)', required:true },
+    { id:'ticket',emoji:'📱', text:'NOL 앱 티켓 확인 & 스크린샷 저장', required:true },
+    { id:'batt',  emoji:'🔋', text:'보조배터리 100% 충전 (공연 2.5시간 논스톱)', required:true },
+    { id:'shoes', emoji:'👟', text:'운동화 신기 (스탠딩이면 필수)', required:false },
+    { id:'jacket',emoji:'🧥', text:'겉옷 챙기기 (10월 밤 고양 야외 쌀쌀)', required:false },
+    { id:'cash',  emoji:'💳', text:'굿즈 살 거면 카드 + 여유 현금 준비', required:false },
+    { id:'early', emoji:'⏰', text:'굿즈 구매 예정이면 3~4시간 전 도착', required:false },
+    { id:'pixmob',emoji:'💡', text:'입장 시 PixMob 팔찌 받기 — 절대 버리지 말 것', required:true },
+    { id:'camera',emoji:'📷', text:'렌즈 교환식 카메라 · 삼각대 반입 금지 확인', required:false },
+    { id:'lyrics',emoji:'🎵', text:'Blinding Lights, Die For You 떼창 가사 외우기', required:false },
+    { id:'ear',   emoji:'🎧', text:'귀마개 (선택 — 스피커 바로 앞 구역이면 고려)', required:false },
+  ],
+  en: [
+    { id:'id',    emoji:'🪪', text:'Bring physical photo ID (19+ event · passport OK)', required:true },
+    { id:'ticket',emoji:'📱', text:'Check NOL app ticket & save screenshot', required:true },
+    { id:'batt',  emoji:'🔋', text:'Charge power bank to 100% (2.5hr non-stop show)', required:true },
+    { id:'shoes', emoji:'👟', text:'Wear sneakers (essential if you\'re in the pit)', required:false },
+    { id:'jacket',emoji:'🧥', text:'Bring a jacket (October nights in Goyang get cold)', required:false },
+    { id:'cash',  emoji:'💳', text:'Card + cash ready if buying merch', required:false },
+    { id:'early', emoji:'⏰', text:'Arrive 3–4 hrs early if buying merch', required:false },
+    { id:'pixmob',emoji:'💡', text:'Pick up PixMob wristband at entry — do NOT throw it away', required:true },
+    { id:'camera',emoji:'📷', text:'No interchangeable-lens cameras or tripods', required:false },
+    { id:'lyrics',emoji:'🎵', text:'Memorize Blinding Lights & Die For You for the singalong', required:false },
+    { id:'ear',   emoji:'🎧', text:'Earplugs (optional — consider if near front speakers)', required:false },
+  ]
+};
+
+var checklistSaved = JSON.parse(localStorage.getItem('concertChecklist') || '{}');
+
+function renderGuideChecklist() {
+  var area = document.getElementById('guideChecklistArea');
+  if (!area) return;
+  var items = checklistItems[currentLang] || checklistItems.ko;
+  var checked = items.filter(function(i){ return checklistSaved[i.id]; }).length;
+  var total = items.length;
+  var pct = total > 0 ? Math.round(checked/total*100) : 0;
+  var isEn = currentLang === 'en';
+
+  var html = '<div style="margin-bottom:20px">'
+    + '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'
+    + '<div style="font-size:0.72rem;letter-spacing:0.15em;color:var(--neon-red)">' + checked + ' / ' + total + (isEn?' items':' 항목') + '</div>'
+    + '<button onclick="resetGuideChecklist()" style="font-size:0.68rem;background:none;border:1px solid var(--gray);color:var(--light-gray);padding:3px 10px;cursor:pointer;font-family:Oswald,sans-serif">' + (isEn?'Reset':'초기화') + '</button>'
+    + '</div>'
+    + '<div style="height:4px;background:var(--gray);border-radius:2px">'
+    + '<div style="height:100%;background:var(--neon-red);width:' + pct + '%;transition:width 0.3s;border-radius:2px"></div>'
+    + '</div>'
+    + '</div>';
+
+  // Required items first
+  var required = items.filter(function(i){ return i.required; });
+  var optional = items.filter(function(i){ return !i.required; });
+
+  html += '<div style="font-size:0.6rem;letter-spacing:0.25em;color:var(--neon-red);margin-bottom:10px;text-transform:uppercase">' + (isEn?'Must-have':'필수 항목') + '</div>';
+  html += renderChecklistGroup(required);
+  html += '<div style="font-size:0.6rem;letter-spacing:0.25em;color:var(--light-gray);margin:16px 0 10px;text-transform:uppercase">' + (isEn?'Nice to have':'추천 항목') + '</div>';
+  html += renderChecklistGroup(optional);
+
+  if (checked === total) {
+    html += '<div style="text-align:center;padding:20px;font-family:Oswald,sans-serif;color:var(--neon-red);font-size:1rem">🔴 ' + (isEn?'All set. XO':'준비 완료. XO') + '</div>';
+  }
+
+  area.innerHTML = html;
+}
+
+function renderChecklistGroup(items) {
+  return '<div style="display:grid;gap:6px">' + items.map(function(item) {
+    var done = !!checklistSaved[item.id];
+    return '<div onclick="toggleChecklistItem(\'' + item.id + '\')" style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--dark3);border:1px solid '
+      + (done?'var(--neon-red)':'var(--gray)') + ';cursor:pointer;transition:all 0.15s;'
+      + (done?'background:rgba(255,36,66,0.07)':'') + '">'
+      + '<div style="width:18px;height:18px;border:1px solid ' + (done?'var(--neon-red)':'var(--gray)') + ';display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;color:var(--neon-red)">' + (done?'✓':'') + '</div>'
+      + '<div style="font-size:0.72rem;' + (done?'text-decoration:line-through;opacity:0.45':'') + '">' + item.emoji + '  ' + item.text + '</div>'
+      + '</div>';
+  }).join('') + '</div>';
+}
+
+function toggleChecklistItem(id) {
+  checklistSaved[id] = !checklistSaved[id];
+  localStorage.setItem('concertChecklist', JSON.stringify(checklistSaved));
+  renderGuideChecklist();
+}
+
+function resetGuideChecklist() {
+  checklistSaved = {};
+  localStorage.removeItem('concertChecklist');
+  renderGuideChecklist();
+}
+
 function renderGuide() {
-  // Update guide tab labels based on lang
   document.querySelectorAll('#guide .disco-tab').forEach(function(b) {
     var key = currentLang === 'en' ? b.dataset.en : b.dataset.ko;
     if (key) b.textContent = key;
   });
+  renderGuideChecklist();
 }
 
 function switchGuideTab(panel, btn) {
@@ -3517,6 +3815,7 @@ function switchGuideTab(panel, btn) {
   document.querySelectorAll('#guide .disco-panel').forEach(function(p){ p.classList.remove('active'); });
   btn.classList.add('active');
   document.getElementById('guide-' + panel).classList.add('active');
+  if (panel === 'checklist') renderGuideChecklist();
 }
 
 
@@ -3902,6 +4201,124 @@ function shareLyricsCard() {
 pickLyricsCard();
 
 
+// ─── SETLIST VOTE ──────────────────────────────────────────────
+var voteSongs = [
+  { id:'blinding_lights',   title:'Blinding Lights',        act:'FINALE' },
+  { id:'die_for_you',       title:'Die For You',             act:'ACT IV' },
+  { id:'starboy',           title:'Starboy',                 act:'ACT IV' },
+  { id:'the_hills',         title:'The Hills',               act:'ACT IV' },
+  { id:'call_out_my_name',  title:'Call Out My Name',        act:'ACT V'  },
+  { id:'save_your_tears',   title:'Save Your Tears',         act:'ACT III'},
+  { id:'cant_feel_face',    title:"Can't Feel My Face",      act:'ACT IV' },
+  { id:'wicked_games',      title:'Wicked Games',            act:'ACT V'  },
+  { id:'i_feel_it_coming',  title:'I Feel It Coming',        act:'ACT IV' },
+  { id:'after_hours',       title:'After Hours',             act:'ACT III'},
+  { id:'moth_to_a_flame',   title:'Moth to a Flame',         act:'FINALE' },
+  { id:'sacrifice',         title:'Sacrifice',               act:'ACT II' },
+  { id:'take_my_breath',    title:'Take My Breath',          act:'ACT II' },
+  { id:'heartless',         title:'Heartless',               act:'ACT III'},
+  { id:'out_of_time',       title:'Out of Time',             act:'ACT II' },
+  { id:'the_abyss',         title:'The Abyss',               act:'ACT I'  },
+  { id:'kiss_land',         title:'Kiss Land',               act:'ACT V'  },
+  { id:'house_of_balloons', title:'House of Balloons',       act:'ACT V'  },
+  { id:'faith',             title:'Faith',                   act:'ACT III'},
+  { id:'crew_love',         title:'Crew Love',               act:'ACT V'  },
+  { id:'less_than_zero',    title:'Less Than Zero',          act:'ACT II' },
+  { id:'stargirl',          title:'Stargirl Interlude',      act:'ACT IV' },
+  { id:'party_monster',     title:'Party Monster',           act:'ACT IV' },
+  { id:'often',             title:'Often',                   act:'ACT IV' },
+  { id:'i_was_never_there', title:'I Was Never There',       act:'ACT V'  },
+];
+
+var MAX_VOTES = 5;
+var votesSaved = {};
+try { votesSaved = JSON.parse(localStorage.getItem('setlistVotes') || '{}'); } catch(e) {}
+
+function renderVoteSection() {
+  var grid = document.getElementById('voteGrid');
+  var summary = document.getElementById('voteSummary');
+  var summaryList = document.getElementById('voteSummaryList');
+  var label = document.getElementById('vote-summary-label');
+  var resetBtn = document.getElementById('vote-reset-btn');
+  var descEl = document.getElementById('desc-vote');
+  if (!grid) return;
+
+  var isEn = currentLang === 'en';
+  var totalVoted = Object.keys(votesSaved).filter(function(k){ return votesSaved[k]; }).length;
+  var remaining = MAX_VOTES - totalVoted;
+
+  if (descEl) {
+    descEl.textContent = isEn
+      ? 'Pick up to 5 songs you want to hear in Seoul. Saved locally in your browser.'
+      : '서울에서 꼭 듣고 싶은 곡 최대 5곡을 골라보세요. 내 브라우저에 저장됩니다.';
+  }
+  if (label) label.textContent = isEn ? 'My Wishlist' : '내 위시리스트';
+  if (resetBtn) resetBtn.textContent = isEn ? 'Reset' : '초기화';
+
+  // Counter badge
+  var counterHtml = '<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">'
+    + '<div style="font-size:0.68rem;letter-spacing:0.15em;color:' + (remaining===0?'var(--neon-red)':'var(--light-gray)') + '">'
+    + (isEn
+      ? (remaining > 0 ? remaining + ' picks remaining' : '✓ 5/5 selected')
+      : (remaining > 0 ? '남은 선택 ' + remaining + '곡' : '✓ 5곡 선택 완료'))
+    + '</div>'
+    + '<div style="flex:1;height:3px;background:var(--gray);border-radius:2px">'
+    + '<div style="height:100%;background:var(--neon-red);width:' + (totalVoted/MAX_VOTES*100) + '%;transition:width 0.3s;border-radius:2px"></div>'
+    + '</div></div>';
+
+  // Song grid
+  var songsHtml = voteSongs.map(function(s) {
+    var voted = !!votesSaved[s.id];
+    var disabled = !voted && totalVoted >= MAX_VOTES;
+    return '<div onclick="' + (disabled ? '' : 'toggleVote(\'' + s.id + '\')') + '" '
+      + 'style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:' + (voted?'rgba(255,36,66,0.09)':'var(--dark3)') + ';'
+      + 'border:1px solid ' + (voted?'var(--neon-red)':'var(--gray)') + ';'
+      + (disabled?'opacity:0.35;':'cursor:pointer;') + 'transition:all 0.15s"'
+      + (disabled?'':' onmouseover="if(!this.style.cursor.includes(\'default\')){this.style.borderColor=\'' + (voted?'var(--neon-red)':'rgba(255,36,66,0.5)') + '\'}" onmouseout="this.style.borderColor=\'' + (voted?'var(--neon-red)':'var(--gray)') + '\'"')
+      + '>'
+      + '<div style="width:20px;height:20px;border:1px solid ' + (voted?'var(--neon-red)':'var(--gray)') + ';display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;color:var(--neon-red)">' + (voted?'✓':'') + '</div>'
+      + '<div style="flex:1;min-width:0">'
+      + '<div style="font-size:0.82rem;font-family:Oswald,sans-serif;letter-spacing:0.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + s.title + '</div>'
+      + '<div style="font-size:0.58rem;letter-spacing:0.15em;color:var(--light-gray);margin-top:2px">' + s.act + '</div>'
+      + '</div>'
+      + '<div style="font-size:0.95rem;opacity:' + (voted?'1':'0.2') + ';transition:opacity 0.2s">' + (voted?'🔴':'○') + '</div>'
+      + '</div>';
+  }).join('');
+
+  grid.innerHTML = counterHtml + '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px">' + songsHtml + '</div>';
+
+  // Summary
+  var picked = voteSongs.filter(function(s){ return votesSaved[s.id]; });
+  if (picked.length > 0) {
+    summary.style.display = 'block';
+    summaryList.innerHTML = picked.map(function(s){
+      return '<span style="padding:5px 12px;background:rgba(255,36,66,0.12);border:1px solid var(--neon-red);font-size:0.72rem;font-family:Oswald,sans-serif;letter-spacing:0.05em">' + s.title + '</span>';
+    }).join('');
+  } else {
+    summary.style.display = 'none';
+  }
+}
+
+function toggleVote(id) {
+  var totalVoted = Object.keys(votesSaved).filter(function(k){ return votesSaved[k]; }).length;
+  if (votesSaved[id]) {
+    votesSaved[id] = false;
+  } else if (totalVoted < MAX_VOTES) {
+    votesSaved[id] = true;
+  }
+  localStorage.setItem('setlistVotes', JSON.stringify(votesSaved));
+  renderVoteSection();
+}
+
+function resetVotes() {
+  votesSaved = {};
+  localStorage.removeItem('setlistVotes');
+  renderVoteSection();
+}
+
+renderVoteSection();
+
+
 // ─── AD SLOT CLEANUP ──────────────────────────────────────────
 // 승인 전: 슬롯1 숨김. 승인 후 id="adSlot1" display:none 제거하세요.
 window.addEventListener('load', function() {
@@ -3957,78 +4374,6 @@ var checkSongs = [
   {title:'Blinding Lights', act:'FINALE', checked:false},
   {title:'Moth to a Flame', act:'FINALE', checked:false},
 ];
-
-var checkSaved = JSON.parse(localStorage.getItem('setcheck') || '{}');
-checkSongs.forEach(function(s) {
-  if (checkSaved[s.title]) s.checked = true;
-});
-
-function renderSetcheck() {
-  var area = document.getElementById('setcheckArea');
-  var total = checkSongs.length;
-  var checked = checkSongs.filter(function(s){ return s.checked; }).length;
-  var pct = Math.round(checked / total * 100);
-
-  // 액트별 그룹화
-  var acts = {};
-  checkSongs.forEach(function(s) {
-    if (!acts[s.act]) acts[s.act] = [];
-    acts[s.act].push(s);
-  });
-
-  var html = '<div style="margin-bottom:24px">'
-    + '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'
-    + '<div style="font-size:0.75rem;letter-spacing:0.2em;color:var(--neon-red)">' + checked + ' / ' + total + (currentLang==="en"?' songs':' 곡') + '</div>'
-    + '<button onclick="resetSetcheck()" style="font-size:0.7rem;background:none;border:1px solid var(--gray);color:var(--light-gray);padding:4px 12px;cursor:pointer;font-family:Oswald,sans-serif">초기화</button>'
-    + '</div>'
-    + '<div style="height:4px;background:var(--gray);border-radius:2px">'
-    + '<div style="height:100%;background:var(--neon-red);width:' + pct + '%;transition:width 0.4s;border-radius:2px"></div>'
-    + '</div>'
-    + '</div>';
-
-  Object.keys(acts).forEach(function(act) {
-    html += '<div style="margin-bottom:20px">'
-      + '<div style="font-family:Oswald,sans-serif;font-size:0.75rem;letter-spacing:0.2em;color:var(--gold);margin-bottom:10px">' + act + '</div>'
-      + '<div style="display:grid;gap:6px">';
-    acts[act].forEach(function(song) {
-      html += '<div onclick="toggleSetcheckSong(\'' + song.title.replace(/'/g, "\\'") + '\')" '
-        + 'style="display:flex;align-items:center;gap:14px;padding:10px 16px;background:var(--dark3);border:1px solid '
-        + (song.checked ? 'var(--neon-red)' : 'var(--gray)') + ';cursor:pointer;transition:all 0.2s;'
-        + (song.checked ? 'background:rgba(255,36,66,0.1)' : '') + '">'
-        + '<div style="width:20px;height:20px;border:1px solid '
-        + (song.checked ? 'var(--neon-red)' : 'var(--gray)') + ';display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;color:var(--neon-red)">'
-        + (song.checked ? '✓' : '') + '</div>'
-        + '<div style="font-size:0.88rem;' + (song.checked ? 'text-decoration:line-through;color:var(--light-gray)' : '') + '">' + song.title + '</div>'
-        + '</div>';
-    });
-    html += '</div></div>';
-  });
-
-  if (checked === total) {
-    html += '<div style="text-align:center;padding:24px;font-family:Oswald,sans-serif;font-size:1.2rem;color:var(--neon-red)">🔴 '+(currentLang==="en"?"All checked! XO":"전 곡 체크 완료! XO")+'</div></div>';
-  }
-
-  area.innerHTML = html;
-}
-
-function toggleSetcheckSong(title) {
-  var song = checkSongs.find(function(s){ return s.title === title; });
-  if (song) {
-    song.checked = !song.checked;
-    checkSaved[title] = song.checked;
-    localStorage.setItem('setcheck', JSON.stringify(checkSaved));
-    renderSetcheck();
-  }
-}
-
-function resetSetcheck() {
-  checkSongs.forEach(function(s){ s.checked = false; });
-  localStorage.removeItem('setcheck');
-  renderSetcheck();
-}
-
-renderSetcheck();
-
 
 initTypeTest();
 
